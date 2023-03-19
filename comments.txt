@@ -1,0 +1,5 @@
+
+
+connection string for mongodb:
+mongodb+srv://lts:2erhBLjGRAyaslRD@cluster0.am6lyty.mongodb.net/lts
+pass: 2erhBLjGRAyaslRD
