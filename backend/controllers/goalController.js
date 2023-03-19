@@ -75,6 +75,39 @@ const loginUser = (async(req, res)=>{
     // res.status(200).json(getUserByEmail)
 })
 
+const registerUser = (async (req, res)=>{
+    // console.log("call", req.body)
+    let newUser;
+    const {name, email, password} = req.body
+    const getUser = await User.findOne({
+        email: email
+    })
+
+    if(getUser){
+        
+        res.send({message: "Email already exists!"})
+        
+    }else {
+        newUser = new User({
+            name: name,
+            email: email,
+            password: password,
+            created_date: Date(),
+            flags: 0
+        })
+        // User.insertMany(newUser)
+        newUser.save(err => {
+            if(err) {
+                
+                res.send(err)
+            } else {
+                res.send( { message: "Successfully Registered, Please login now." })
+            }
+        })
+    }
+
+    // res.status(200)
+})
 
 const setGoal = (async (req, res)=>{
     const goal = await Goal.create({
@@ -106,5 +139,6 @@ module.exports = {
     updateUserProfile,
     deleteAllUsers,
     loginUser,
+    registerUser,
     getUser
 }
