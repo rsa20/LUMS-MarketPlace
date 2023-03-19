@@ -46,7 +46,34 @@ const updateUserProfile = (async (req, res) => {
 
 })
 
+const loginUser = (async(req, res)=>{
+    
+    const {email ,password} = req.body
+    const getUserByEmail = await User.findOne({
+        email: email
+    })
+    // console.log(getUserByEmail)
+    // console.log(req.body)
+    if(getUserByEmail){
+        
+        const hash = getUserByEmail.password
+        // console.log(password)
+        const validPass = await bcrypt.compare(password, hash)
 
+        if(validPass){
+            res.send({message:"Succesfully logged in!"})
+            console.log("Logged in: ", email)
+
+        }else{
+            res.send({message: "invalid pass!"})
+            console.log("invalid pass!")
+        }
+    }else{
+        res.send({message:"email does not exist"})
+        console.log("email does not exist")
+    }
+    // res.status(200).json(getUserByEmail)
+})
 
 
 const setGoal = (async (req, res)=>{
@@ -78,5 +105,6 @@ module.exports = {
     deleteGoal,
     updateUserProfile,
     deleteAllUsers,
+    loginUser,
     getUser
 }
