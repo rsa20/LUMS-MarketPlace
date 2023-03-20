@@ -1,12 +1,22 @@
 const express = require('express')
 const router = express.Router()
-const {getUser, getGoals, setGoal, updateGoal, deleteGoal, updateUserProfile, loginUser,deleteAllUsers} = require('../controllers/goalController')
+const { 
+    getUser, 
+    updateUserProfile,
+    loginUser,
+    registerUser,
+    verifyUser,
+    deleteAllUsers} = require('../controllers/goalController')
 
-router.route('/').get(getGoals).post(setGoal)
-router.route('/rem:id').delete(deleteGoal).put(updateGoal)
+// router.route('/').get(getGoals).post(setGoal)
+// router.route('/rem:id').delete(deleteGoal).put(updateGoal)
 
-router.route('/updateProfile').put(updateUserProfile)
+
 router.route('/login').post(loginUser)
+router.route('/updateProfile').put(updateUserProfile)
+router.route('/register').post(registerUser)
+
+router.route('/verify:token').get(verifyUser)
 
 router.route('/viewProfile').post(getUser)
 // router.get('/', getGoals)

@@ -1,16 +1,11 @@
-
-
-const Goal = require('../models/goalModel')
-const User = require('../models/userModel')
+// const Goal = require('../models/goalModel')
+const User = require('../models/user')
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const nodemailer = require('../config/nodemailer')
 
 // get all goals
 // 
-const getGoals = (async (req, res)=>{
-    const goals = await Goal.find()
-
-    res.status(200).json(goals)
-})
 
 const getUser = (async(req, res)=>{
     const user = await User.findOne({email: req.body.email})
@@ -54,8 +49,11 @@ const loginUser = (async(req, res)=>{
     })
     // console.log(getUserByEmail)
     // console.log(req.body)
+    
     if(getUserByEmail){
-        
+        if(!getUserByEmail.email_verification){
+            return res.status(401).send({message: "Un-verified email. You must verify your email before proceeding further"})
+        }
         const hash = getUserByEmail.password
         // console.log(password)
         const validPass = await bcrypt.compare(password, hash)
@@ -75,70 +73,83 @@ const loginUser = (async(req, res)=>{
     // res.status(200).json(getUserByEmail)
 })
 
-const registerUser = (async (req, res)=>{
-    // console.log("call", req.body)
-    let newUser;
-    const {name, email, password} = req.body
-    const getUser = await User.findOne({
-        email: email
-    })
-
-    if(getUser){
+const verifyUser = (req, res, next) =>{
+    User.findOne({
+        token: req.params.token
+    }).then((user)=>{
         
-        res.send({message: "Email already exists!"})
-        
-    }else {
-        newUser = new User({
-            name: name,
-            email: email,
-            password: password,
-            created_date: Date(),
-            flags: 0
-        })
-        // User.insertMany(newUser)
-        newUser.save(err => {
-            if(err) {
-                
-                res.send(err)
-            } else {
-                res.send( { message: "Successfully Registered, Please login now." })
+        if(!user){
+            return res.status(404).send({message: "Token not found"})
+        }
+        user.email_verification = true
+        user.save((err)=>{
+            if(err){
+                res.status(500).send({message: err})
+                return
             }
         })
-    }
+        res.json({message:'Email verified. You can now login'})
+    }).catch((err)=>console.log("verification error", err))
+}
+
+const registerUser = (async (req, res)=>{
+    // console.log("call", req.body)
+    try{
+    
+        const {name, email, password} = req.body
+        const token = jwt.sign({email: email}, process.env.EMAIL_SECRET)
+    
+        const getUser = await User.findOne({
+            email: email
+        })
+    
+        if(getUser){
+            
+            res.send({message: "Email already exists!"})
+            
+        }else {
+            
+            newUser = new User({
+                name: name,
+                email: email,
+                password: password,
+                created_date: Date(),
+                user_name: name,
+                token: token,
+                flags: 0
+            })
+            // User.insertMany(newUser)
+            newUser.save((err) => {
+                if(err) {
+                    console.log("here")
+                    res.send(err)
+                    return
+                } 
+                res.send( { message: "Successfully Registered, Please verify your email." })
+                nodemailer.sendVerificationEmail(name, email, token)
+                
+            })
+        }}
+        catch(err){
+            
+            res.json({message:'register error'})
+        }
 
     // res.status(200)
 })
 
-const setGoal = (async (req, res)=>{
-    const goal = await Goal.create({
-        newCollec: req.body.hmm
-    })
-
-    res.status(200).json(goal)
-
-})
 
 const deleteAllUsers = (async(req, res)=>{
     User.deleteMany({email: {$ne :""}})
     res.status(200).json({message:"DELETED USERS"})
 })
 
-const updateGoal = (req, res)=>{
-    res.status(200).json({message:`Update goal ${req.params.id}`})
-}
-
-const deleteGoal = (req, res)=>{
-    res.status(200).json({message:`Delete goal ${req.params.id}`})
-}
 
 module.exports = {
-    getGoals,
-    setGoal,
-    updateGoal,
-    deleteGoal,
     updateUserProfile,
     deleteAllUsers,
     loginUser,
     registerUser,
+    verifyUser,
     getUser
 }
