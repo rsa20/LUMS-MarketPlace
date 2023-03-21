@@ -1,0 +1,73 @@
+
+.login {
+    width: 45%;
+    /* background: #fff;
+    border: 1px solid #dddfe2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%); */
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #FAFAF7;
+    /* align-items: center;
+    text-align: center;
+    align-self: center; */
+    /* margin: 20%; */
+    margin: 13% 10% 10% 30%;
+    /* align-items:flex-start !important;
+    align-content: start !important;
+    align-self: flex-end !important;
+      align-self: flex-start;
+    align-items: start;
+    align-items: flex-start; */
+    display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.h{
+    /* align-items:flex-start !important;
+    align-content: start !important;
+    align-self: self-start!important;
+    align-self: flex-start;
+    align-items: start;
+    align-items: flex-start; */
+    /* margin-left: -60% !important; */
+    font-size: larger;
+
+}
+.login > input {
+    border-radius: 8px;
+    border: 2px solid #dddfe2;
+    outline: none;
+    color: #1d2129;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
+    width: 45%;
+    font-size: 1rem;
+    margin-left: 0%;
+}
+
+/* .login > .button {
+    background: #1877f2;
+    border: 1px solid #1877f2;
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+} */
+.login > .button {
+    width: 40%;
+    background: #1C0040;
+    border: 1px solid #1C0040;
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
+.login button:hover {
+    background-color: #7136bd;
+  }

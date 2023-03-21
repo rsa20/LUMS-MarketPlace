@@ -59,7 +59,7 @@ const loginUser = (async(req, res)=>{
         const validPass = await bcrypt.compare(password, hash)
 
         if(validPass){
-            res.send({message:"Succesfully logged in!"})
+            res.send(getUserByEmail)
             console.log("Logged in: ", email)
 
         }else{
