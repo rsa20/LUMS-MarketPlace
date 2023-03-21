@@ -34,7 +34,7 @@ const Header = () => {
         <Link to ="/hello">
         <img className="im" src = {l1} alt="fuck of"/>
         </Link>
-        <Link to ="/hello">
+        <Link to ="/Login">
         <img className="im" src = {l7} alt="fuck of"/>
         </Link>
 

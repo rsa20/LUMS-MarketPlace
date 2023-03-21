@@ -70,15 +70,18 @@ const cancle = ()=>{
       setErrors(errors);
       return;
     }
-
+   
     axios
-      .post("http://localhost:9001/edit", user)
+      .put("api/goals/updateProfile", user)
       .then((res) => {
-        alert(res.data.message);
+        alert("Details changed");
+        
         // navigate("/login");
       })
       .catch((error) => {
         alert(error.response.data.message);
+        
+
       });
   };
   const handleImageChange = (e) => {
