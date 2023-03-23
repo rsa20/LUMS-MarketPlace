@@ -36,7 +36,7 @@ const Login = (props) => {
 
   return (
     <div className='login' style={{ alignItems: 'start' }}>
-      <img src={img1} alt='logo Marketplace' />
+      <img src={img1} alt='logo LUMS Marketplace' />
 
       <h1 className='lh1'>Login</h1>
 
