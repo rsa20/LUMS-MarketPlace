@@ -1,8 +1,8 @@
 import './App.css';
-import Header from './Components/header/Header1'
+import Header from './Components/header/Header1';
 import Hello from './Hello';
 import { Viewp } from './Pages/ViewProfile/Viewp';
-import  Edit  from './Pages/EditProfile/Edit.jsx';
+import Edit from './Pages/EditProfile/Edit.jsx';
 import Homepage from './Pages/login/login';
 import Login from './Pages/login/login';
 import Register from './Pages/register/register';
@@ -15,35 +15,40 @@ function App() {
   const [user, setLoginUser] = useState({ _id: null });
 
   return (
-    <div className="App">
+    <div className='App'>
+      {/* <h1>Landing Page</h1> */}
       <Router>
         <Routes>
-        <Route exact path="/">
-              {user && user._id !== null ? (
-                <Route index element = {<Homepage setLoginUser={setLoginUser} />}/>
-                
-              ) : (
-                <Route path = "login" element = {<Login setLoginUser={setLoginUser} />}/>
-              )}
-              {console.log(setLoginUser)}
-        </Route>
+          <Route exact path='/'>
+            {user && user._id !== null ? (
+              <Route index element={<Homepage setLoginUser={setLoginUser} />} />
+            ) : (
+              <Route
+                path='login'
+                element={
+                  <Login
+                    style={{ background: '#FAFAF7' }}
+                    setLoginUser={setLoginUser}
+                  />
+                }
+              />
+            )}
+            {console.log(setLoginUser)}
+          </Route>
 
-              
-          < Route exact path="/login" element ={ <Login setLoginUser={setLoginUser}/>} />
-          < Route exact path="/register" element = {<Register />}/>
+          <Route
+            exact
+            path='/login'
+            element={<Login setLoginUser={setLoginUser} />}
+          />
+          <Route exact path='/register' element={<Register />} />
 
-        <Route exact path ="/" element={<Header/>}/>
-        <Route exact path ="/hello" element={<Hello/>}/>
-        <Route exact path ="/viewp" element={<Viewp/>}/>
-        <Route exact path ="/edit" element={<Edit/>}/>
-        <Route exact path ="/footer" element={<Footer/>}/>
-        <Route exact path ="/navbar" element={<Navbar/>}/>
-
-
-        
-
-
-
+          <Route exact path='/' element={<Header />} />
+          <Route exact path='/hello' element={<Hello />} />
+          <Route exact path='/viewp' element={<Viewp />} />
+          <Route exact path='/edit' element={<Edit />} />
+          <Route exact path='/footer' element={<Footer />} />
+          <Route exact path='/navbar' element={<Navbar />} />
         </Routes>
       </Router>
       {/* <Header/> */}
