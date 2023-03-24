@@ -84,6 +84,20 @@ const cancle = ()=>{
 
       });
   };
+  
+    const [showConfirmation, setShowConfirmation] = useState(false);
+  
+    const handleDelete = () => {
+      axios
+        .put("api/goals/delProfile", user)
+        .then((res) => {
+          alert("Deleted profile");
+          // navigate("/login");
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    };
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
@@ -206,16 +220,29 @@ const cancle = ()=>{
                 
                 </div>
                 </div>
-                <div className="de">
                 <div className="del">
-                  
-                <h1 style={{fontSize:"300%", color:"#1C0040"}}> delete Profile</h1>
-                  <h2>Delete my account permanently</h2>
-                  <h2 style={{color:"#CC0000"}}> Deleting acount can not undone</h2>
-                  <button style={{background:"#CC0000" ,color:"white"}} onClick={edit}>Delete Account</button>
-
-                </div>
-                </div>
+      <h1 style={{ fontSize: "300%", color: "#1C0040" }}>Delete Profile</h1>
+      <h2>Delete my account permanently</h2>
+      <h2 style={{ color: "#CC0000" }}>Deleting account cannot be undone</h2>
+      <button
+        style={{ background: "#CC0000", color: "white", width: "30%" }}
+        onClick={() => setShowConfirmation(true)}
+      >
+        Delete Account
+      </button>
+      {showConfirmation && (
+        <div className="confirmation">
+          <p>Are you sure you want to delete your account?</p>
+          <button
+            style={{ background: "#CC0000", color: "white" }}
+            onClick={handleDelete}
+          >
+            Yes
+          </button>
+          <button onClick={() => setShowConfirmation(false)}>No</button>
+        </div>
+      )}
+    </div>
                 <Footer/>
                 </>
                 );

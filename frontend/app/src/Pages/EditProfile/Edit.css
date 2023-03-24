@@ -184,37 +184,82 @@
     /* border-width: 500%; */
     width: 150%;
 }
-.del{
-    background: white;
-    border: 1px solid #dddfe2;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    border-radius: 8px;
-    padding: 1rem;
-    width: 40%;
-    margin-left: 28%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 2%;
+.del {
+  background: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 40%;
+  margin-left: 28%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
 
-}
-.de{
-  background-color: white;
-}
 .del button {
-    width: 50%;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: #CC0000;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .del button:hover {
-    background-color: #e34242;
-  }
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #cc0000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del button:hover {
+  background-color: #e34242;
+}
+
+.confirmation {
+  background-color: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 40%;
+  margin-left: 28%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.confirmation p {
+  margin-bottom: 1rem;
+}
+
+.confirmation button {
+  margin: 0 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirmation button:first-child {
+  background-color: #cc0000;
+  color: white;
+}
+
+.confirmation button:first-child:hover {
+  background-color: #e34242;
+}
+
+.confirmation button:last-child {
+  background-color: white;
+  color: #1c0040;
+  border: 1px solid #dddfe2;
+}
+
+.confirmation button:last-child:hover {
+  background-color: #dddfe2;
+}
+
   .custom-file{
     background-color: #1C0040;
     color: #dddfe2;
