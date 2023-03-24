@@ -1,128 +1,111 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
 
-.footer{
+.footer {
+  background-color: #1c0040;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: #fffffa;
+  padding: 1.8vw 7vw;
+}
+.footer-inside {
+  /* background-color: grey; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-imcont {
+  /* background-color: red; */
+  width: 20vw;
+}
+.footerLogo {
+  width: 100%;
+}
 
-    /* position: fixed; */
-    /* bottom: 0; */
-    width: 100%;
-    /* height: 200px; */
-    background-color: #1C0040;
-    display:inline-flex;
-    text-align: left;
-    font-family: 'Poppins';
-    font-weight: 600;
-    color: #fffffa;
-    align-items: center;
-    padding: 4% 0;
+.footer-text {
+  /* background-color: rgb(255, 94, 0); */
+  border-left: 0.3vw solid #fffffa;
+  padding-left: 1vw;
+  text-align: left;
+  align-items: center;
 }
-.footer-inside{
-    /* background-color: grey; */
-    display: flex;
-    height:fit-content;
-    align-items: center;
-    margin: auto;
+.footer-text-p {
+  /* background-color: #5e0ec7; */
+  font-size: 2vw;
+  font-weight: 600;
+  line-height: 1.07em;
+  margin: -0vw auto;
+  margin: 0.5vw auto;
 }
-.footer-text{
-    /* background-color: rgb(255, 0, 234);  */
-    /* width: 269px; */
-    height: 80px;
-    border-left: 5px solid #fffffa;
-    margin-left: 82px;
+.footer-contrb {
+  /* background-color: rgb(175, 20, 85); */
+  font-size: 1.1vw;
+  width: 35vw;
 }
-.footer-text-p{
-    font-size: 26px;
-    line-height: 1.07em;
-    font-weight: 600;
-    margin: 10px 35px;
+.footer-contrb-p {
+  /* background-color: rgb(38, 175, 20); */
+  margin-top: -0vw;
+  margin-bottom: -0vw;
 }
-.footer-contrb{
-    /* background-color: rgb(175, 20, 85); */
-    font-size: 13.33px;
-    font-weight: 300;
-    line-height: 1.07rem;
-    margin-left:82px;
-    width: 428px;
+.footer-contrb-names {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+  border-top: 0.12vw solid #fffffa;
+  margin-top: 0.2vw;
+  padding-top: 0.4vw;
 }
-.footer-contrb-p{
+.tag {
+  /* background-color: #a5c70e; */
+  font-size: 0.9vw;
+  text-decoration: none;
+  font-weight: 500;
+  color: #fffffa;
+}
+.tag:hover {
+  color: #c500f7;
+}
+.sec2 {
+  margin-left: 8%;
+}
+.third3 {
+  margin-left: 8%;
+}
+
+@media all and (max-width: 900px) {
+  .footer-inside {
+    flex-direction: column;
+  }
+  .footer-imcont {
+    width: 30vw;
+  }
+  .footer-text {
+    border-left: none;
     text-align: center;
-    font-weight: 600;
+    padding: 1vw 1vw;
+    margin: 1vw auto;
+    border-top: 0.5vw solid #fffffa;
+  }
+  .footer-text-p {
+    font-size: 4vw;
+  }
+  .footer-contrb {
+    width: 60vw;
+    font-size: 3vw;
+  }
+  .footer-contrb-names {
+    margin-top: 0vw;
+    padding-top: 0vw;
+    line-height: 1.5vw;
+  }
+  .tag {
+    font-size: 1.5vw;
+  }
 }
-.footer-contrb-names{
-    /* background-color: aqua; */
-    display: flex;
-    border-top: 2px solid #fffffa;
-    padding-top: 10px;
-    margin-top: 7px;
-}
-.tag{
-    color: #fffffa;
-    text-decoration: none;
-    /* font-weight: 200; */
-}
-.tag:hover{
-    color: #c500f7;
-}
-.sec2{
-    margin-left: 8%;
-}
-.third3{
-    margin-left: 8%;
-}
-
-@media all and (max-width:1200px){
-    .footer-inside{
-        display:block;
-    }
-    .footerLogo{
-        margin-left: 15%;
-    }
-    .footer-text{
-        height: 80px;
-        border-left: 0px solid #fffffa;
-        border-top: 3px solid #fffffa;
-        margin: 10% 0px;
-    }
-    .footer-text-p{
-        padding-top: 5%;
-        margin:auto;
-        text-align: center;
-    }
-    .footer-contrb{
-        margin-left:0px;
-        margin-top: 2.3%;
-    }
-}
-@media all and (max-width:600px){
-    .footer-inside{
-        margin: 10% 0%;
-    }
-    .footer-imcont{
-        width:50%;
-        margin-left: 10%;
-    }
-    .footerLogo{
-        width: 100%;
-        margin-left: 0px;
-    }
-    .footer-text{
-        display: none;
-    }
-    .sec2{
-        margin-left: 0%;
-    }
-    .third3{
-        margin-left: 0%;
-    }
-    .footer-contrb{
-        display: inline-block;
-        margin-top: 5%;
-        margin-left: 10%;
-    }
-    .footer-contrb-p{
-        text-align: left;
-    }
-    .footer-contrb-names{
-        display: inline-block;
-    }
+@media all and (max-width: 600px) {
+  .footer-contrb {
+    width: 70vw;
+  }
 }
