@@ -12,6 +12,7 @@ const user = new Schema({
     token: {type: String, unique:true},
     password : {type:String, required: true},
     user_name: {type: String, required:false, unique:true},
+    posts: {type: [Schema.Types.ObjectId], required:false, default:[]},
     name: {type: String, required:true},
     profile_picture: {type: String , required:false},
     flag: {type:Boolean,  default:false},

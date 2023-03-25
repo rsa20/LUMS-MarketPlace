@@ -11,7 +11,7 @@ const posts = new Schema({
     sold_date: {type:Date},
     img_URL: {type:[String], required:true},
     date_created: {type:Date ,required:true, default:Date.now},
-    tags: {type:[String] ,  required:true},
+    tags: {type:String ,  required:false},
     flag: {type:Boolean, default:false}
 
 
