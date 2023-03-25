@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Footer from './Components/Footer/Footer';
 
 export const Hello = () => {
   return (
-    <div>Hello</div>
-  )
-}
+    <div>
+      <div>Hello</div>
+      <Footer />
+    </div>
+  );
+};
 export default Hello;
