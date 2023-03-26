@@ -31,10 +31,10 @@ const Header = () => {
             <img className='im' src={l2} alt='fuck of' />
           </Link>
           <Link to='/hello'>
-            <img className='im' src={l1} alt='fuck of' />
+            <img className='im' src={l1} alt='' />
           </Link>
           <Link to='/Login'>
-            <img className='im' src={l7} alt='fuck of' />
+            <img className='im' src={l7} alt='Log out button' />
           </Link>
         </div>
       </div>

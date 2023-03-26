@@ -8,8 +8,8 @@ import ProfileHeader from "../../Components/Phead/Fh";
 
 
 const Add = () => {
-  const [user, setUser] = useState({
-    name: "",
+  const [Post, setPost] = useState({
+    title: "",
     description: "",
     price: "",
     tags:"",
@@ -22,14 +22,14 @@ const Add = () => {
   const [imagePreview, setImagePreview] = useState(img);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setPost({
+      ...Post,
       [name]: value,
     });
   };
 const cancle = ()=>{
-  setUser({
-    name: "",
+  setPost({
+    title: "",
     description: "",
     price: "",
     tags:"",
@@ -38,11 +38,11 @@ const cancle = ()=>{
   const validate = () => {
     const errors = {};
 
-    if (!user.name || user.name.trim().length < 3) {
-      errors.name = "Name should be at least 3 characters long";
+    if (!Post.title || Post.title.trim().length < 3) {
+      errors.name = "Title should be at least 3 characters long";
     }
 
-    if (!user.description || user.description.trim().split(/\s+/).length < 3 || user.description.trim().split(/\s+/).length > 250) {
+    if (!Post.description || Post.description.trim().split(/\s+/).length < 3 || Post.description.trim().split(/\s+/).length > 250) {
         errors.description = "Description must be between 3 and 250 words long";
       }
       
@@ -55,16 +55,18 @@ const cancle = ()=>{
       return;
     } 
     const formData = new FormData();
-    formData.append("name", user.name);
-    formData.append("description", user.description);
-    formData.append("price", user.price);
-    formData.append("tags", user.tags.trim().replace(/\s+/g, " "));
+    formData.append("title", Post.title);
+    formData.append("description", Post.description);
+    formData.append("price", Post.price);
+    formData.append("tags", Post.tags.trim().replace(/\s+/g, " "));
     images.forEach((image) => formData.append("images", image));
-    
+    console.log(Post)
     axios
-      .put("api/goals/updateProfile", formData)
+      .post("api/posts/createPost", Post)
       .then((res) => {
         alert("post Added");
+        navigate('/viewPost')
+        console.log(res)
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -91,7 +93,7 @@ const cancle = ()=>{
         <span className="reg">
           <div className="r">
             <span className="edit">
-              {console.log("User", user)}
+              {console.log("Post", Post)}
               <h1 style={{fontSize:"280%", color:"#1C0040"}}> Add Post</h1>
               <h2 style={{color:"#1C0040"}}>upload Product Images</h2>
               
@@ -133,9 +135,9 @@ const cancle = ()=>{
               <input
                 
                 type="text"
-                name="name"
-                value={user.name}
-                placeholder="Enter Product Name"
+                name="title"
+                value={Post.title}
+                placeholder="Enter Product Title"
                 required="true"
                 pattern="^[A-Za-z0-9]{4,}$"
                 onChange={handleChange}
@@ -148,7 +150,7 @@ const cancle = ()=>{
               <input
                 type="text"
                 name="description"
-                value={user.description}
+                value={Post.description}
                 placeholder=" Enter profile description"
                 onChange={handleChange}
               />
@@ -161,7 +163,7 @@ const cancle = ()=>{
               <input
                 type="Text"
                 name="price"
-                value={user.price}
+                value={Post.price}
                 placeholder=" Enter product status"
                 onChange={handleChange}
               />
@@ -170,7 +172,7 @@ const cancle = ()=>{
               <input
                 type="string"
                 name="tags"
-                value={user.tags}
+                value={Post.tags}
                 placeholder="Enter Products Tags"
                 onChange={handleChange}
               /> 

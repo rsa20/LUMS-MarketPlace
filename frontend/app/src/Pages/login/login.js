@@ -26,7 +26,7 @@ const Login = (props) => {
       .post('api/goals/login', user)
       .then((res) => {
         // console.log(res.data, "thi")
-        alert(res.data.message);
+        // alert(res.data.message);
         props.setLoginUser(res.data.user);
         console.log(res.data.user, 'th');
         navigate(`/viewP`, { state: { user: res.data } });

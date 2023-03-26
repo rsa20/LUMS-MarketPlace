@@ -9,6 +9,8 @@ import Register from './Pages/register/register';
 import { useState } from 'react';
 import Footer from './Components/Footer/Footer';
 import Navbar from './Components/Phead/Fh';
+import Home2 from './Pages/H2/Home2'
+import CreatePost from './Pages/AddPost/Addpost'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
           <Route exact path='/edit' element={<Edit />} />
           <Route exact path='/footer' element={<Footer />} />
           <Route exact path='/navbar' element={<Navbar />} />
+          <Route exact path='/home' element={<Home2 />} />
+          <Route exact path='/createPost' element={<CreatePost />} />
         </Routes>
       </Router>
       {/* <Header/> */}
