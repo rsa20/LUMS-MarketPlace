@@ -11,6 +11,10 @@ import Footer from './Components/Footer/Footer';
 import Navbar from './Components/Phead/Fh';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// Moez extra
+import Viewpost from './Pages/Viewpost/Viewpost';
+import Addpost from './Pages/AddPost/Addpost';
+
 function App() {
   const [user, setLoginUser] = useState({ _id: null });
 
@@ -49,6 +53,10 @@ function App() {
           <Route exact path='/edit' element={<Edit />} />
           <Route exact path='/footer' element={<Footer />} />
           <Route exact path='/navbar' element={<Navbar />} />
+
+          {/* Moez extras */}
+          <Route exact path='/Viewpost' element={<Viewpost />} />
+          <Route exact path='/Addpost' element={<Addpost />} />
         </Routes>
       </Router>
       {/* <Header/> */}

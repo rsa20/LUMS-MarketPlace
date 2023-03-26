@@ -10,6 +10,9 @@ export const Hello = () => {
       <Header />
       <div>Hello</div>
       <Carousel></Carousel>
+      {/*<Carousel></Carousel>
+      <Carousel></Carousel>
+      <Carousel></Carousel> */}
       <Footer />
     </div>
   );
