@@ -17,15 +17,19 @@ const ImageCarousel = ({ images }) => {
     autoplay: true,
     autoplaySpeed: 2000,
     fade: true,
-    cssEase: 'linear'
+    cssEase: 'linear',
   };
 
   return (
-    <div className="carousel-container">
+    <div className='carousel-container'>
       <Slider {...settings}>
-        {images.map(image => (
+        {images.map((image) => (
           <div key={image.id}>
-            <img style={{width:"100%", height:"100%s"}} src={image.src} alt={image.alt} />
+            <img
+              style={{ width: '100%', height: '100%s' }}
+              src={image.src}
+              alt={image.alt}
+            />
           </div>
         ))}
       </Slider>
@@ -36,12 +40,12 @@ const ImageCarousel = ({ images }) => {
 const images = [
   { id: 1, src: he1, alt: 'Image 1' },
   { id: 2, src: he2, alt: 'Image 2' },
-  { id: 3, src: he3, alt: 'Image 3' }
+  { id: 3, src: he3, alt: 'Image 3' },
 ];
 
 function Carousel() {
   return (
-    <div className="App">
+    <div className='App'>
       <ImageCarousel images={images} />
     </div>
   );
