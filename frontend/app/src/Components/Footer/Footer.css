@@ -5,7 +5,12 @@
   font-family: 'Poppins';
   font-weight: 600;
   color: #fffffa;
-  padding: 1.8vw 7vw;
+  padding: 2vw 7vw;
+  width: 86vw;
+  /* height: 150px; */
+  position: relative;
+  /* position: fixed; */
+  bottom: 0;
 }
 .footer-inside {
   /* background-color: grey; */
@@ -13,6 +18,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  /* margin: auto 7vw; */
 }
 .footer-imcont {
   /* background-color: red; */

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import './Edit.css';
-import axios from "axios";
-import img from "./img.jpg";
-import Header from "../../Components/header/Header1";
-import Footer from "../../Components/Footer/Footer";
-import ProfileHeader from "../../Components/Phead/Fh";
-
+import React, { useState } from 'react';
+import './Addpost.css';
+import axios from 'axios';
+import img from './img.jpg';
+import Header from '../../Components/header/Header1';
+import Footer from '../../Components/Footer/Footer';
+import ProfileHeader from '../../Components/Phead/Fh';
 
 const Add = () => {
   const [Post, setPost] = useState({
@@ -53,7 +52,7 @@ const cancle = ()=>{
     if (Object.keys(errors).length) {
       setErrors(errors);
       return;
-    } 
+    }
     const formData = new FormData();
     formData.append("title", Post.title);
     formData.append("description", Post.description);
@@ -71,9 +70,7 @@ const cancle = ()=>{
       .catch((error) => {
         alert(error.response.data.message);
       });
-    
   };
-
 
   const handleImageChange = (e) => {
     const newImages = [...images, ...e.target.files];
@@ -81,8 +78,6 @@ const cancle = ()=>{
     setSelectedImage(URL.createObjectURL(newImages[0]));
     setImagePreview(URL.createObjectURL(newImages[0]));
   };
-  
-  
 
   return (
     <>
@@ -128,6 +123,18 @@ const cancle = ()=>{
   ))}
 </div>
 
+          <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Title</h1>
+          <input
+            type='text'
+            name='name'
+            value={user.name}
+            placeholder='Enter Product Name'
+            required='true'
+            pattern='^[A-Za-z0-9]{4,}$'
+            onChange={handleChange}
+          />
+          {errors.name && <span className='error'>{errors.name}</span>}
+          <h1 style={{ marginLeft: '-75%', fontSize: '110%' }}>Description</h1>
 
               </span>
  
