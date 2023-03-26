@@ -1,5 +1,51 @@
 const Post = require('../models/posts')
 
+
+const createPost = (async (req, res)=>{
+    let newPost;
+    const {email, title, desc, tags, price} = req.body
+
+
+        newPost = new Post({ 
+            title: title, 
+            description: desc, 
+            tags: tags, 
+            price: price, 
+            sold_date: null,
+        })
+    try{
+        await Post.insertMany(newPost)
+    }catch (error) {
+        return res.status(500).send(error.message);
+    }
+
+    return res.status(200).json(newPost)
+})
+
+
+const createPost = (async (req, res)=>{
+    let newPost;
+    const {email, title, desc, tags, price} = req.body
+
+
+        newPost = new Post({ 
+            title: title, 
+            description: desc, 
+            tags: tags, 
+            price: price, 
+            sold_date: null,
+        })
+    try{
+        await Post.insertMany(newPost)
+    }catch (error) {
+        return res.status(500).send(error.message);
+    }
+
+    return res.status(200).json(newPost)
+})
+
+
+
 const editPost = async (req, res) => {
 
     const post = await Post.findById(req.body.ObjectId);
