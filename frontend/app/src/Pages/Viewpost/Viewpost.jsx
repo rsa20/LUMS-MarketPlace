@@ -14,7 +14,6 @@ const Viewpost = () => {
           setValue(location.state.value);
         }
       }, [location.state]);
-      console.log(value, 'thewa');
 
   return (
     <div className="pmain">

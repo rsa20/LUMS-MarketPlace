@@ -6,6 +6,7 @@ import './product.css';
 import { useNavigate } from 'react-router-dom';
 
 const Product = ({ id, image, title, price, status }) => {
+  // console.log("asdjfbajksdfbsajdfk")
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
@@ -15,11 +16,12 @@ const Product = ({ id, image, title, price, status }) => {
 
   const handleClick = async () => {
     try {
-      const response = await fetch(`/api/products/${id}`);
+      const response = await fetch(`/api/posts/product${id}`);
       const data = await response.json();
-      const { title, description, sellerId, price, status, images } = data;
-      const imageUrls = images.map((image) => image.url);
-      const productDetails = { title, description, sellerId, price, status, images: imageUrls };
+      const {_id, title, description , price } = data;
+      // const imageUrls = images.map((image) => image.url);
+      const productDetails = { title, description, _id, price};
+      console.log(productDetails)
       navigate({
         pathname: '/viewpost',
         state: { productDetails }

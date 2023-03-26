@@ -2,7 +2,7 @@
 // import Product from './Products';
 // import he from './he.jpg';
 import he1 from './he1.jpg';
-import blank from './f3.png'
+// import blank from './f3.png'
 // import he2 from './he2.jpg';
 // import he3 from './he3.jpg';
 // import './product.css';
@@ -126,7 +126,7 @@ const Home = () => {
           key={product.id}
           title={product.title}
           
-           image={he1}
+          image={he1}
           price={product.price}
           // status={product.status}
         />
