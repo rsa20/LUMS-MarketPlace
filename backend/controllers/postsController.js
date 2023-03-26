@@ -41,6 +41,18 @@ const editPost = async (req, res) => {
         status: updatedPost.status
     });
 
+    const deletePost = async (req, res) => {
+
+    try{
+    const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+    res.status(200).json({
+        message: `Post deleted successfully`
+    });
+    }catch(error){
+        res.status(500).json({message: 'Server Error'});
+    }
 };
 
-module.exports = {editPost}
+};
+
+module.exports = {editPost, deletePost}

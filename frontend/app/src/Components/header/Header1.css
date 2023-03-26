@@ -39,7 +39,8 @@
 
 .search-box-con {
   /* background-color: aqua; */
-  padding-bottom: 0.27vw;
+  padding: 0vw;
+  padding-bottom: 0.1vw;
   width: 30%;
   height: 100%;
   margin: 0 0;
