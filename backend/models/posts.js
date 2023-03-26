@@ -8,22 +8,28 @@ const posts = new Schema({
     description: {type:String, required:true},
     price: {type:Number, required:true},
     status: {type:Boolean, required:true,default:false},
-    sold_date: {type:Date},
+    sold_date: {type:Date, default:null},
     img_URL: {type:[String], required:true},
     date_created: {type:Date ,required:true, default:Date.now},
-    tags: {type:String ,  required:false},
+    tags: {type:[String] ,  required:true, default: []},
     flag: {type:Boolean, default:false}
 
 
 });
 
-posts.pre('save', function (next) {
-    if (this.isModified('status') && this.status === true) {
-        this.sold_date= new Date();
-    }
-    next();
-});
+// posts.pre('save', function (next) {
+//     if (this.isModified('status') && this.status === true) {
+//         this.sold_date= new Date();
+//     }
+//     next();
+// });
 
-
+// posts.pre('updateOne', function (next) {
+//     const update = this.getUpdate();
+//     if (update.status && update.status === true) {
+//         update.sold_date = new Date();
+//     }
+//     next();
+// });
 
 module.exports = mongoose.model('Post', posts);

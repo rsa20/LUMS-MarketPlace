@@ -15,9 +15,23 @@ const editPost = async (req, res) => {
     if (post.status != req.body.status){    
         post.status = req.body.status;
     }
-    // post.tags = post.tags.append(req.body.status)||post.tags;
+    
+    let tags = req.body.tags
+    tags = tags.split(' ')
 
-    const updatedpost = await Post.findByIdAndUpdate({ _id: post.ObjectId }, post, { new: true });
+    if (tags!==req.body.title){
+        post.tags = tags
+    }
+
+    if (req.body.img_URL!=post.img_URL){
+        post.img_URL = req.body.img_URL
+    }
+    if(req.body.status==true){
+        post.sold_date = Date.now();
+        post.status = true; 
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate({ _id: post.ObjectId }, post, { new: true });
 
     res.status(200).json({
         _id: updatedPost._id,
