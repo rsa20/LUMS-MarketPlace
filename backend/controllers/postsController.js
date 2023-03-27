@@ -1,17 +1,33 @@
 const Post = require("../models/posts");
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = (async (req, res) => {
   try {
     const posts = await Post.find({});
     if (!posts) {
       return res.status(404).send({ message: "No posts found" });
     }
-    console.log(posts)
+    // console.log(posts)
     return res.status(200).send(posts);
   } catch (error) {
     return res.status(500).send({ message: "DB Error" });
   }
-};
+})
+
+const getPostbyID = (async(req, res)=>{
+    
+    id = req.params.id
+    console.log(id)
+    try{
+        const post = await Post.findById(id)
+        if(!post){
+            return res.status(404).send({ message: "Post not found" });
+        }
+        return res.status(200).send(post)
+    }catch(error){
+        return res.status(500).send({ message: "DB Error" });
+    }
+
+})
 
 const createPost = async (req, res) => {
   if (!req.body) {
@@ -102,4 +118,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { editPost, deletePost, createPost, getAllPosts };
+module.exports = { editPost, deletePost, createPost, getAllPosts, getPostbyID };

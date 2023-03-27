@@ -2,7 +2,7 @@
 // import Product from './Products';
 // import he from './he.jpg';
 import he1 from './he1.jpg';
-import blank from './f3.png'
+// import blank from './f3.png'
 // import he2 from './he2.jpg';
 // import he3 from './he3.jpg';
 // import './product.css';
@@ -112,7 +112,7 @@ const Home = () => {
       .then((response) => response.json()
       )
       .then((data) => {
-        console.log(data)
+        // console.log(data, "test")
         setProducts(data)})
       .catch((error) => console.log(error));
   }, []);
@@ -120,13 +120,14 @@ const Home = () => {
 
   return (
     <div className="products">
+
       {products.map((product) => (
-        
         <Product
-          key={product.id}
+
+          id={product._id}
           title={product.title}
           
-           image={he1}
+          image={he1}
           price={product.price}
           // status={product.status}
         />

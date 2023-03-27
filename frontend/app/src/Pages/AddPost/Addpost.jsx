@@ -64,7 +64,6 @@ const cancle = ()=>{
       .post("api/posts/createPost", Post)
       .then((res) => {
         alert("post Added");
-        navigate('/viewPost')
         console.log(res)
       })
       .catch((error) => {
@@ -127,7 +126,7 @@ const cancle = ()=>{
           <input
             type='text'
             name='name'
-            value={user.name}
+            value={Post.name}
             placeholder='Enter Product Name'
             required='true'
             pattern='^[A-Za-z0-9]{4,}$'
