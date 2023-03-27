@@ -112,7 +112,7 @@ const Home = () => {
       .then((response) => response.json()
       )
       .then((data) => {
-        console.log(data)
+        // console.log(data, "test")
         setProducts(data)})
       .catch((error) => console.log(error));
   }, []);
@@ -120,10 +120,11 @@ const Home = () => {
 
   return (
     <div className="products">
+
       {products.map((product) => (
-        
         <Product
-          key={product.id}
+
+          id={product._id}
           title={product.title}
           
           image={he1}

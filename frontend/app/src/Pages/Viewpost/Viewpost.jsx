@@ -7,11 +7,11 @@ import { useLocation } from 'react-router-dom';
 
 const Viewpost = () => {
     const location = useLocation();
-    const [value, setValue] = useState('');
+    const [productDetails, setProduct] = useState('');
     useEffect(() => {
-        console.log(location.state);
+        console.log(location.state, "test");
         if (location.state) {
-          setValue(location.state.value);
+          setProduct(location.state.productDetails);
         }
       }, [location.state]);
 
@@ -25,18 +25,18 @@ const Viewpost = () => {
             </div>
             <div className="postcm">
                 <div className="postc">
-                    <h1 style={{marginLeft:'-5%'}}>{value.name} </h1>
-                    <h1 style={{marginLeft:'-65%'}}>{value.price}</h1>
+                    <h1 style={{marginLeft:'-5%'}}>{productDetails.name} </h1>
+                    <h1 style={{marginLeft:'-65%'}}>{productDetails.price}</h1>
                     <div className="end" style={{display:'flex', justifyContent:"space-between"}}>
                         <div>
                             <h2>Posted By</h2>
-                            <h1>{value.sellerId}</h1>
+                            <h1>{productDetails.id}</h1>
                         </div>
                         <div>
                             <button>Contact</button>
                         </div>
                     <div>
-                        <p1>{value.description}</p1>
+                        <p>{productDetails.description}</p>
                     </div>
                     </div>
                 </div>

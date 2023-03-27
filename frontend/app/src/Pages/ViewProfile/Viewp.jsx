@@ -7,14 +7,14 @@ import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from "../../Components/Phead/Fh";
 export const Viewp = () => {
   const location = useLocation();
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     if (location.state) {
-      setEmail(location.state.email);
+      setUser(location.state.user);
     }
   }, [location.state]);
-console.log(email)
+console.log(user, "hello")
   return (
     <>
     <Header/>
@@ -27,9 +27,9 @@ console.log(email)
         </div>
         <div className="co">
           <p>Name</p>
-          <h2>Talha Husnain</h2>
+          <h2>{user.name}</h2>
           <p>Email</p>
-          <h2>talha@gmail.com</h2>
+          <h2>{user.email}</h2>
           <p>Account</p>
           <h2>Users</h2>
           {/* <span className="rev"> */}

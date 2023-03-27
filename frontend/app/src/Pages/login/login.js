@@ -28,7 +28,7 @@ const Login = (props) => {
         // console.log(res.data, "thi")
         // alert(res.data.message);
         props.setLoginUser(res.data.user);
-        console.log(res.data.user, 'th');
+        console.log(res.data, 'th');
         navigate(`/viewP`, { state: { user: res.data } });
       })
       .catch((error) => console.error('Login Error: ', error));
