@@ -16,12 +16,22 @@
   /* background-color: aqua; */
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   padding: 0 7vw;
 }
+.header-logo-con2 {
+  display: none;
+}
 .header-logo-con {
   /* background-color: #5311aa; */
+  width: 178.37px;
   margin: 0.4vw 0;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 100%;
 }
 .icon-container {
   /* background-color: blue; */
@@ -67,8 +77,24 @@
   color: #1c0040;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 500px) {
+  .header-logo-con {
+    display: none;
+  }
+  .header-logo-con2 {
+    display: flex;
+    width: 50px;
+    margin: 2vw 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
   .header-navbar {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-logo-con2 {
+    display: none;
   }
 }

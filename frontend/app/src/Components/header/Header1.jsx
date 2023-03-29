@@ -7,6 +7,7 @@ import l4 from './l4.png';
 import l5 from './l5.png';
 import l7 from './l7.png';
 import logo from './logo.png';
+import logo2 from './logo2.png';
 
 import './Header1.css';
 
@@ -16,6 +17,9 @@ const Header = () => {
       <div className='header-navbar'>
         <div className='header-logo-con'>
           <img className='logo' src={logo} alt='logo' />
+        </div>
+        <div className='header-logo-con2'>
+          <img className='logo' src={logo2} alt='logo2' />
         </div>
         <div className='icon-container'>
           <Link to='/hello'>
