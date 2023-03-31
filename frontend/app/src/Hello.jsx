@@ -1,19 +1,18 @@
 import React from 'react';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/header/Header1';
-import Carousel from './Components/Carousel/Carousel';
+import Review from './Components/Review/Review';
 // import Header from './Header';
 
 export const Hello = () => {
   return (
     <div>
-      <Header />
-      <div>Hello</div>
-      <Carousel></Carousel>
-      {/*<Carousel></Carousel>
-      <Carousel></Carousel>
-      <Carousel></Carousel> */}
-      <Footer />
+      <Review
+        reviwerName='Abdul'
+        reviewText='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, aliquid nesciunt a '
+        reviewScore={2}
+        reviewerImg={false}
+      />
     </div>
   );
 };

@@ -1,66 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import img from "./img.jpg";
-import "./Viewp.css";
-import Header from "../../Components/header/Header1";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import img from './img.jpg';
+import './Viewp.css';
+import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
-import ProfileHeader from "../../Components/Phead/Fh";
+import ProfileHeader from '../../Components/Phead/Fh';
+
 export const Viewp = () => {
   const location = useLocation();
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     if (location.state) {
       setUser(location.state.user);
     }
   }, [location.state]);
-console.log(user, "hello")
+  console.log(user, 'hello');
   return (
     <>
-    <Header/>
-    <ProfileHeader/>
+      <Header />
+      <ProfileHeader />
 
-    <div className="profile">
-      <div className="pro">
-        <div className="pic">
-          <img className="im" style={{ borderRadius: "10%" }} src={img} alt="user-pic" />
-        </div>
-        <div className="co">
-          <p>Name</p>
-          <h2>{user.name}</h2>
-          <p>Email</p>
-          <h2>{user.email}</h2>
-          <p>Account</p>
-          <h2>Users</h2>
-          {/* <span className="rev"> */}
+      <div className='profile'>
+        <div className='pro'>
+          <div className='pic'>
+            <img
+              className='im'
+              style={{ borderRadius: '10%' }}
+              src={img}
+              alt='user-pic'
+            />
+          </div>
+          <div className='co'>
+            <p>Name</p>
+            <h2>{user.name}</h2>
+            <p>Email</p>
+            <h2>{user.email}</h2>
+            <p>Account</p>
+            <h2>Users</h2>
+            {/* <span className="rev"> */}
             <span>
-              <span style={{fontSize:"130%"}}>Post</span>
+              <span style={{ fontSize: '130%' }}>Post</span>
             </span>
             <span>
-              <span style={{fontSize:"130%", marginLeft:"8%"}}>Review</span>
+              <span style={{ fontSize: '130%', marginLeft: '8%' }}>Review</span>
             </span>
             <div>
               <span>
-                <span style={{fontSize:"130%", fontWeight:"bold"}}>60</span>
+                <span style={{ fontSize: '130%', fontWeight: 'bold' }}>60</span>
               </span>
               <span>
-                <span style={{fontSize:"130%", marginLeft:"8%", fontWeight:"bold"}}>100</span>
+                <span
+                  style={{
+                    fontSize: '130%',
+                    marginLeft: '8%',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  100
+                </span>
               </span>
             </div>
-          {/* </span> */}
+            {/* </span> */}
+          </div>
         </div>
       </div>
-    </div>
-    <div className="foot">
-    < Footer/>
-    </div>
+      <div className='foot'>
+        <Footer />
+      </div>
     </>
   );
 };
-
-
-
-
 
 // import axios from 'axios';
 
@@ -73,7 +83,7 @@ console.log(user, "hello")
 // import ProfileHeader from "../../Components/Phead/Fh";
 
 // export const Viewp = () => {
-  
+
 //     const location = useLocation();
 //     const [emai, setEmail] = useState("");
 //     const[user, setUser] = useState("");
