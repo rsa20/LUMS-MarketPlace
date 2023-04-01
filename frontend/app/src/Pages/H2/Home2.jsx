@@ -58,7 +58,7 @@ import he1 from './he1.jpg';
 //     status:"sold",
 
 //   },
-  
+
 // ];
 
 // const Home = () => {
@@ -83,8 +83,6 @@ import he1 from './he1.jpg';
 
 // export default Home;
 
-
-
 import React, { useEffect, useState } from 'react';
 import Product from './Products';
 import './product.css';
@@ -103,30 +101,25 @@ const Home = () => {
   //     })
   //     .then((data) => setProducts(data))
   //     .catch((error) => console.log(error));
-      
-      
+
   // }
   // , []);
   useEffect(() => {
     fetch('/api/posts/getAllProducts')
-      .then((response) => response.json()
-      )
+      .then((response) => response.json())
       .then((data) => {
         // console.log(data, "test")
-        setProducts(data)})
+        setProducts(data);
+      })
       .catch((error) => console.log(error));
   }, []);
-  
 
   return (
-    <div className="products">
-
+    <div className='products'>
       {products.map((product) => (
         <Product
-
           id={product._id}
           title={product.title}
-          
           image={he1}
           price={product.price}
           // status={product.status}
@@ -137,4 +130,3 @@ const Home = () => {
 };
 
 export default Home;
- 
