@@ -22,10 +22,10 @@ const Header = () => {
           <img className='logo' src={logo2} alt='logo2' />
         </div>
         <div className='icon-container'>
-          <Link to='/hello'>
+          <Link to='/add'>
             <img className='im' src={l5} alt='fuck of' />
           </Link>
-          <Link to='/hello'>
+          <Link to='/home2'>
             <img className='im' src={l4} alt='fuck of' />
           </Link>
           <Link to='/hello'>
@@ -34,7 +34,7 @@ const Header = () => {
           <Link to='/hello'>
             <img className='im' src={l2} alt='fuck of' />
           </Link>
-          <Link to='/hello'>
+          <Link to='/viewp'>
             <img className='im' src={l1} alt='' />
           </Link>
           <Link to='/Login'>
