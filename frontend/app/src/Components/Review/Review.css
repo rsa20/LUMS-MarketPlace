@@ -8,19 +8,31 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  margin-bottom: 3vw;
   padding: 1.8rem;
   border-radius: 30px;
   font-family: 'Poppins';
-  box-shadow: 0px 0.1vw 5vw -2vw black;
+  box-shadow: 0px 0.1vw 5vw -3vw black;
 }
 .reviewer-imCon {
   /* background-color: aqua; */
   width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .reviewer-img {
   border-radius: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
 }
 .reviewer-name {
   /* background-color: blueviolet; */
@@ -37,6 +49,11 @@
   display: flex;
   flex-direction: row;
   margin: 0 0 0.5rem 0;
+}
+.icon-star {
+  color: #ffc800;
+  margin: 0 0.07rem;
+  font-size: 0.8rem;
 }
 .review-text {
   /* background-color: blueviolet; */
