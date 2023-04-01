@@ -3,9 +3,12 @@ import './login.css';
 import axios from 'axios';
 import img1 from './img1.png';
 import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUserEmail } from "../Redux/Store.jsx"
 
 const Login = (props) => {
-  const space = ' ';
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -27,6 +30,7 @@ const Login = (props) => {
       .then((res) => {
         // console.log(res.data, "thi")
         // alert(res.data.message);
+        dispatch(setUserEmail(user.email));
         props.setLoginUser(res.data.user);
         console.log(res.data, 'th');
         navigate(`/viewP`, { state: { user: res.data } });
@@ -75,7 +79,7 @@ const Login = (props) => {
       </button>
       <span className='signuplinebtn'>
         <h4 className='signupline' style={{ fontWeight: '500' }}>
-          Don't have an account? {space}.
+          Don't have an account?
         </h4>
         <h4 className='signupbtn' onClick={() => navigate('/register')}>
           Sign up
