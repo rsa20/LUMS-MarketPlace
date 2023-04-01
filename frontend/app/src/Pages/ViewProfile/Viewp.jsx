@@ -5,7 +5,12 @@ import "./Viewp.css";
 import Header from "../../Components/header/Header1";
 import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from "../../Components/Phead/Fh";
+import { useSelector } from 'react-redux';
 export const Viewp = () => {
+
+  
+  const userEmail = useSelector((state) => state.userEmail.userEmail);
+  console.log(userEmail, "user");
   const location = useLocation();
   const [user, setUser] = useState("");
 

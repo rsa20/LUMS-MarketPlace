@@ -39,12 +39,12 @@ const Header = () => {
   }
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    axios.post('api/goals/login', { selectedFilters, priceRange, search })
+    axios.post('api/search/filterSearch', {params:{ selectedFilters, priceRange, search }})
     console.log("Selected filters:", selectedFilters);
-    console.log("Price range:", priceRange);
+    console.log("Price range:",  priceRange);
   };
   const handlC = ()=>{
-    axios.post('api/goals/login', { selectedFilters, priceRange, search })
+    axios.post('api/search/simpleSearch', {params:{search}} )
   }
   return (
     <>

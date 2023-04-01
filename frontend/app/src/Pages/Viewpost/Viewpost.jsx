@@ -5,12 +5,15 @@ import Footer from '../../Components/Footer/Footer';
 import './Viewpost.css';
 import he1 from './he1.jpg';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useLocation } from 'react-router-dom';
 
 const Viewpost = () => {
   const location = useLocation();
   const [productDetails, setProduct] = useState('');
+  const userEmail = useSelector((state) => state.userEmail.userEmail);
+  console.log(userEmail, "user");
   useEffect(() => {
     console.log(location.state, 'test');
     if (location.state) {
