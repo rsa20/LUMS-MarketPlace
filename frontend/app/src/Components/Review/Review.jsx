@@ -7,11 +7,12 @@ import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
 
 const Review = memo(
   ({
-    reviwerName = 'username',
+    reviewerName = 'username',
     reviewText = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, aliquid nesciunt a ',
     reviewScore = 2,
     reviewerImg = plimg,
   }) => {
+    // const { reviewerName, reviewText, reviewScore, reviewerImg } = props;
     reviewScore = reviewScore > 5 ? 5 : reviewScore;
     return (
       <div className='single-review'>
@@ -23,7 +24,7 @@ const Review = memo(
             alt=''
           />
         </div>
-        <h4 className='reviewer-name'>{reviwerName}</h4>
+        <h4 className='reviewer-name'>{reviewerName}</h4>
         {/* <div className='review-score'>{reviewScore}</div> */}
         <div className='review-stars'>
           {new Array(reviewScore).fill(null).map(() => (

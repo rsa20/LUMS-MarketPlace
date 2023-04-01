@@ -62,7 +62,7 @@ function App() {
           <Route exact path='/Viewpost' element={<Viewpost />} />
           <Route exact path='/Addpost' element={<Addpost />} />
 
-          <Route exact path='/ReviewsProfile' element={<ReviewsProfile />} />
+          <Route exact path='/ReviewsP' element={<ReviewsProfile />} />
         </Routes>
       </Router>
       {/* <Header/> */}
