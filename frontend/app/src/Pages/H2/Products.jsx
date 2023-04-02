@@ -19,17 +19,14 @@ const handleHeart= async (newID, email) =>  {
 
   console.log({newID, email});
   if(!isFavorite){
-  const response = await fetch(`/api/posts/product${newID}${email}`);
+  const response = await fetch(`/api/wishlist/addtowishlist/product/${newID}/user/${email}`);
   const data = await response.json();
   console.log(data);}
   else if (isFavorite){
-    const response = await fetch(`/api/posts/product${newID}${email}?action=remove`);
+    const response = await fetch(`/api/wishlist/removefromwishlist/product/${newID}/user/${email}`);
     const data = await response.json();
     console.log(data);
   }
-
-
-
 };
   const handleClick = async (newID, email) => {
     console.log(newID, 'asdasdm');

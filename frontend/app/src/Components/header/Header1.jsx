@@ -55,7 +55,7 @@ const Header = () => {
         <Link to ="/addPost">
         <img className="im" style={{width:"50%"}} src = {l5} alt="fuck of"/>
         </Link>
-        <Link to ="/home2">
+        <Link to ="/home">
         <img className="im" src = {l4} alt="fuck of"/>
         </Link>
         <Link to ="/hello">

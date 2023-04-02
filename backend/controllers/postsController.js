@@ -68,7 +68,7 @@ const createPost = async (req, res) => {
   const useremail = req.body.params.userEmail
   console.log(useremail)
   const user = await User.findOne(
-    {
+  {
     email: useremail
   });
 
