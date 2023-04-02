@@ -13,7 +13,7 @@ const Viewpost = () => {
   const location = useLocation();
   const [productDetails, setProduct] = useState('');
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  console.log(userEmail, "user");
+  console.log(userEmail, 'user');
   useEffect(() => {
     console.log(location.state, 'test');
     if (location.state) {

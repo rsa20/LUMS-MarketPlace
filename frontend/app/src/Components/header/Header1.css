@@ -1,203 +1,124 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #1C0040;
-    height: 100px;
-    box-sizing: border-box;
-  }
-  
-  .header h1 {
-    font-family: sans-serif;
-    color: white;
-    margin: 0;
-  }
-  
-  .icon {
-    display: flex;
-    align-items: center;
-  }
-  
-  .im {
-    margin-right: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .header {
-      height: auto;
-      flex-direction: column;
-      justify-content: center;
-    }
-  
-    .icon {
-      margin-top: 10px;
-      margin-bottom: 10px;
-      margin-top: -1%;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
 
-    }
-  
-    .im {
-      margin-right: 10px;
-      /* width: 10%;
-      height: 10%; */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .im {
-      /* width: 24px;
-      height: 24px; */
-      margin-right: 5px;
-    }
-  }
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-  }
-  
-  .search-container {
-    border-radius: 50px;
-    background-color: #f5f5f5;
-    padding: 0.5rem 1rem;
-    border-color: #1C0040;
-    color: #1C0040;
-    outline: solid;
-    width: 30%;
-  
-  }
-  
-  .search-box {
-    border: none;
-    background-color: transparent;
-    width: 100%;
-    outline: none;
-    text-align: center;
-    font-size: larger;
-    color: #1C0040;
-  
-  }
-  
-  /* .filter-text {
-    display: none;
-  } */
-  
-  .button-container {
+.header {
+  display: flex;
+  flex-direction: column;
+  background-color: #1c0040;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: #1c0040;
+  box-shadow: 0px 0.1vw 3vw -20px black;
+  width: 100vw;
+  position: relative;
+  z-index: 999;
+  /* padding: 0 7.32%; */
+}
+.header-navbar {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7vw;
+}
+.header-logo-con2 {
+  display: none;
+}
+.header-logo-con {
+  /* background-color: #5311aa; */
+  width: 178.37px;
+  margin: 0.4vw 0;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  width: 100%;
+}
+.icon-container {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.icon-container .im {
+  margin-top: 15%;
+}
+@media screen and (max-width: 500px) {
+  .header-logo-con {
     display: none;
   }
-  
-  .button {
-    border-radius: 50px;
-    background-color: #1C0040;
-    color: whitesmoke;
-    padding: 0.5rem 1rem;
-    margin-left: 1rem;
-    text-decoration: none;
-    border: none;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .button:hover {
-    background-color: #008000;
-  }
-  .filter-text {
-    display: block;
-    font-size: x-large;
-    color: #013221;
-    font-family: popins;
-  }
-  
-  @media only screen and (min-width: 768px) {
-    /* .filter-text {
-      display: block;
-      font-size: x-large;
-      color: #013221;
-      font-family: popins;
-    } */
-    .im {
-        width: 80%;
-        height: 80%;
-        margin-right: 5px;
-      }
-    .button-container {
-      margin-left: 2rem;
-      display: flex;
-    }
-  }
-  
-  .search-bar {
+  .header-logo-con2 {
     display: flex;
+    width: 50px;
+    margin: 2vw 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .header-navbar {
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 70%;
-    max-width: 350px;
-    margin: 0 auto 0 0;
-    position: relative;
   }
-  
-  .search-input {
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    border: none;
-    border-radius: 25px;
-    color: #f5f5f5;
-    background-color: #1C0040;
+  .header-logo-con2 {
+    display: none;
   }
-  
-  .search-btn {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  
-  
+}
 
- 
+/* talha navbar - search  */
+.navbar {
+  background-color: #fffffa;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.15vw 7vw;
+}
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  width: 70%;
+  max-width: 320px;
+  position: relative;
+  /* background-color: #0cdf3a; */
+}
+.search-input {
+  padding: 8px;
+  padding-left: 20px;
+  border: none;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 16px;
+  width: 130%;
+  border: none;
+  border-radius: 25px;
+  background-color: #1c0040;
+  color: #fffffa;
+}
 
+.search-btn {
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
 
+.button-container {
+  position: relative;
+}
 
-
-
-
-  .search-bar {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-input {
-    padding: 10px;
-    /* margin-right: 10px; */
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 120%;
-    border: none;
-    border-radius: 25px;
-
-  }
-  
-  .search-btn {
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: transparent;
-    color: white;
-    font-size: 16px;
-  }
-  
-  .button-container {
-    position: relative;
-  }
-  
-  /* .filter-options {
+/* .filter-options {
     position: absolute;
     top: 40px;
     right: 0;
@@ -255,7 +176,7 @@
     outline: none;
     border-color: #4caf50;
   } */
-  /* .filter-options {
+/* .filter-options {
   position: absolute;
   top: 60px;
   right: 20px;
@@ -314,11 +235,7 @@
 }
  */
 
-
-
- 
- 
- .filter-options {
+.filter-options {
   position: absolute;
   top: 40px;
   right: 0;
@@ -335,7 +252,7 @@
   top: 5px;
   right: 5px;
   border: none;
-  background-color: #1C0040;
+  background-color: #1c0040;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -366,7 +283,7 @@
 }
 
 .filter-options li:hover {
-  background-color: #1C0040;
+  background-color: #1c0040;
   color: white;
 }
 
@@ -396,13 +313,13 @@
 
 .price-range input:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: #1c0040;
   box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
 }
 
 .price-range input:hover {
   transform: scale(1.05);
-  border-color: #4caf50;
+  border-color: #1c0040;
 }
 
 .gradient-button {
