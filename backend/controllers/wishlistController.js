@@ -2,8 +2,8 @@ const Post = require("../models/posts");
 const Wishlist = require("../models/wishlist");
 
 const addToWishlist = async (req, res) => {
-    const postId = req.body.postId;
-    const userId = req.body.userId;
+    const postId = req.body.params.postId;
+    const userId = req.body.params.userId;
 
     try {
         const post = await Post.findById(postId);
