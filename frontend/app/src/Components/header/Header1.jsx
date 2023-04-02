@@ -52,7 +52,7 @@ const Header = () => {
       {/* <h1 style={{fontFamily:"sans-serif", color:"white"}}> Thrift.Lums</h1> */}
       <img className = "lo" src={logo} alt="fuck"/>
       <div className="icon">
-        <Link to ="/add">
+        <Link to ="/addPost">
         <img className="im" style={{width:"50%"}} src = {l5} alt="fuck of"/>
         </Link>
         <Link to ="/home2">

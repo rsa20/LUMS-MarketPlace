@@ -71,9 +71,9 @@ const cancle = ()=>{
     images.forEach((image) => formData.append("images", image));
     
     axios
-      .put("api/goals/updateProfile", formData)
+      .put("api/posts/editpost", formData)
       .then((res) => {
-        alert("post Added");
+        alert("post updated");
       })
       .catch((error) => {
         alert(error.response.data.message);
