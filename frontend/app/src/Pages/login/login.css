@@ -29,6 +29,9 @@
   margin-bottom: 6%;
   width: 100%;
 }
+.inp_top {
+  padding-top: 10%;
+}
 
 .h {
   color: #1c0040;
@@ -61,14 +64,14 @@
   font-weight: 700;
   font-size: 110%;
   border: 2px solid #1c0040;
-  color: #1c0040;
+  color:  #fffffa;
   border-radius: 10px;
-  background-color: transparent;
+  background-color:  #1c0040;
 }
 
 .button:hover {
-  color: #fffffa;
-  background-color: #1c0040;
+  color: #1c0040;
+  background-color: transparent;
   font-weight: 600;
 }
 
@@ -86,10 +89,12 @@
 }
 
 .signupbtn:hover {
-  color: #fffffa;
+  /* color: #1b013b;
   font-weight: 400;
-  background-color: #1c0040;
-  border-radius: 5px;
+  background-color:transparent ;
+  border-radius: 5px; */
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media all and (max-width: 855px) {

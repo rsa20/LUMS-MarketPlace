@@ -22,13 +22,14 @@ const ProfileHeader = ()=>{
                     </Link>
                 </div>
 
-                <div className="profile-header-btn">
-                    <a className='linkk' href='www.google.com' target='blank'>Reviews</a>
-                </div>
-
-            </div>
+        <div className='profile-header-btn'>
+          <a className='linkk' href='www.google.com' target='blank'>
+            Reviews
+          </a>
         </div>
-    )
+      </div>
+    </div>
+  );
 };
 
 export default ProfileHeader;
