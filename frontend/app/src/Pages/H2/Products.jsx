@@ -22,20 +22,25 @@ const handleHeart= async (newID, email) =>  {
   const response = await fetch(`/api/posts/product${newID}${email}`);
   const data = await response.json();
   console.log(data);}
+  else if (isFavorite){
+    const response = await fetch(`/api/posts/product${newID}${email}?action=remove`);
+    const data = await response.json();
+    console.log(data);
+  }
 
 
 
 };
-  const handleClick = async (newID) => {
+  const handleClick = async (newID, email) => {
     console.log(newID, 'asdasdm');
     // console.log(test, "safsafd")
-    const response = await fetch(`/api/posts/product${newID}`);
+    const response = await fetch(`/api/posts/product${newID} ${email}`);
 
     const data = await response.json();
-    const { id, title, description, price } = data;
+    const { id, title, description, price,state } = data;
 
     // const imageUrls = images.map((image) => image.url);
-    const productDetails = { title, description, id, price };
+    const productDetails = { title, description, id, price,state };
     console.log(productDetails);
     navigate('/viewpost', { state: { productDetails } });
     // navigate({
