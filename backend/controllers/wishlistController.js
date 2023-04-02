@@ -38,7 +38,8 @@ const addToWishlist = async (req, res) => {
     
 };
 
-const removefromwishlist = (async (req, res)=>{
+
+const removeFromWishlist = (async (req, res)=>{
     const postId = req.params.postId;
     const userEmail = req.params.email
     const user = await User.findOne({
@@ -57,8 +58,6 @@ const removefromwishlist = (async (req, res)=>{
         } else {
             return res.status(200).json({message:"Post removed from wishlist!"})
         }
-        });
+        });
 })
-
-
-module.exports = {addToWishlist, removefromwishlist}
+module.exports = {addToWishlist, removeFromWishlist}
