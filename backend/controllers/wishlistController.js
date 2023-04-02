@@ -28,18 +28,25 @@ const addToWishlist = async (req, res) => {
 };
 
 
-const removeFromWishlist = (async (req, res)=>{
-    const {user_id, post_id} = req.body
-    const goal = await wishlist.updateOne({ user: user_id },
-        { $pull: { posts: post_id } },
+const removefromwishlist = (async (req, res)=>{
+    const postId = req.params.postId;
+    const userEmail = req.params.email
+    const user = await User.findOne({
+        email : userEmail
+    })
+    const userId = user._id;
+    
+    // const {user_id, post_id} = req.body
+
+    
+    const goal = Wishlist.updateOne({ user: userId },
+        { $pull: { posts: postId } },
         function (err) {
             if (err) {
             return res.status(500).send({message:"Error!"});
         } else {
             return res.status(200).json({message:"Post removed from wishlist!"})
         }
-        }
-        );
+        });
 })
-
 module.exports = {addToWishlist, removeFromWishlist}
