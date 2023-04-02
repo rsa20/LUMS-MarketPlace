@@ -13,6 +13,7 @@ import Home2 from './Pages/H2/Home2';
 import ReviewsProfile from './Pages/ReviewsProfile/ReviewsProfile';
 import CreatePost from './Pages/AddPost/Addpost';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import EditPost from './Pages/EditPost/Editpost'
 
 // Moez extra
 import Viewpost from './Pages/Viewpost/Viewpost';
@@ -61,6 +62,7 @@ function App() {
 
           <Route exact path='/Viewpost' element={<Viewpost />} />
           <Route exact path='/Addpost' element={<Addpost />} />
+          <Route exact path='/Editpost' element={<EditPost />} />
 
           <Route exact path='/ReviewsP' element={<ReviewsProfile />} />
         </Routes>

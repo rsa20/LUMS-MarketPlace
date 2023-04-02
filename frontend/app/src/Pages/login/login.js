@@ -42,9 +42,9 @@ const Login = (props) => {
     <div className='login' style={{ alignItems: 'start' }}>
       <img src={img1} alt='logo LUMS Marketplace' />
 
-      <h1 className='lh1'>Login</h1>
+      {/* <h1 className='lh1'>Login</h1> */}
 
-      <div className='inp'>
+      <div className='inp inp_top'>
         <h1 className='h'>
           {/* Enter your Email{' '} */}
           Email{' '}

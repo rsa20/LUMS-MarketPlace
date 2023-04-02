@@ -5,6 +5,7 @@ import img from './img.jpg';
 import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from '../../Components/Phead/Fh';
+import { useSelector } from 'react-redux';
 
 const Add = () => {
   const [Post, setPost] = useState({
@@ -13,7 +14,8 @@ const Add = () => {
     price: '',
     tags: '',
   });
-
+  const userEmail = useSelector((state) => state.userEmail.userEmail);
+  console.log(userEmail, "idhr");
   const [errors, setErrors] = useState({});
   const [images, setImages] = useState([]);
 
@@ -58,14 +60,14 @@ const Add = () => {
       return;
     }
     const formData = new FormData();
-    formData.append('title', Post.title);
-    formData.append('description', Post.description);
-    formData.append('price', Post.price);
-    formData.append('tags', Post.tags.trim().replace(/\s+/g, ' '));
-    images.forEach((image) => formData.append('images', image));
-    console.log(Post);
+    formData.append("title", Post.title);
+    formData.append("description", Post.description);
+    formData.append("price", Post.price);
+    formData.append("tags", Post.tags.trim().replace(/\s+/g, " "));
+    images.forEach((image) => formData.append("images", image));
+    console.log(Post)
     axios
-      .post('api/posts/createPost', Post)
+      .post("api/posts/createPost", Post)
       .then((res) => {
         alert('post Added');
         console.log(res);

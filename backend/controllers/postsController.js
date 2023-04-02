@@ -1,4 +1,5 @@
 const Post = require("../models/posts");
+const User = require("../models/user")
 
 const getAllPosts = (async (req, res) => {
   try {
@@ -30,10 +31,13 @@ const getPostbyID = (async(req, res)=>{
 })
 
 const createPost = async (req, res) => {
+  console.log(req.body.params)
   if (!req.body) {
     return res.status(404).json({ message: "Missing post fields" });
   }
-  const { title, description, price, tags } = req.body;
+  const { title, description, price, tags } = req.body.params.Post;
+
+  
 
   const findSame = await Post.findOne({
     $or: [{ title: title }, { description: description }],
@@ -60,6 +64,23 @@ const createPost = async (req, res) => {
     console.log(title, " added");
     res.status(200).send(newPost);
   });
+
+  const useremail = req.body.params.userEmail
+  console.log(useremail)
+  const user = await User.findOne(
+    {
+    email: useremail
+  });
+
+  let postArr = user.posts
+  postArr.push(newPost._id)
+
+  const updateUser = await User.findOneAndUpdate({
+    email:useremail
+  },{
+    posts :postArr
+  })
+  console.log(user._id)
 };
 
 const editPost = async (req, res) => {
