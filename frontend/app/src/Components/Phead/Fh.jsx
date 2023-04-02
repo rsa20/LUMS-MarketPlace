@@ -1,16 +1,18 @@
 import './Fh.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ProfileHeader = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
+  const navigateTo = useNavigate();
 
   const toProfileReviews = async (userEmailFR) => {
-    console.log(userEmailFR, 'user eail to fetch reviews list');
+    console.log(userEmailFR, 'user :fetch reviews list');
     const response = await fetch(`/api/reviews/${userEmailFR}`);
     const data = await response.json();
-    const { reviewsArray } = data;
-    console.log(reviewsArray);
+    // const { reviewsArray } = data;
+    // console.log(reviewsArray);
+    navigateTo('/ReviewsP', { state: data });
   };
 
   return (
