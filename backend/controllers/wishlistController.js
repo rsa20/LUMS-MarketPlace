@@ -28,7 +28,7 @@ const addToWishlist = async (req, res) => {
 };
 
 
-const removefromwishlist = (async (req, res)=>{
+const removeFromWishlist = (async (req, res)=>{
     const postId = req.params.postId;
     const userEmail = req.params.email
     const user = await User.findOne({
