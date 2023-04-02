@@ -1,4 +1,5 @@
 const Post = require("../models/posts");
+const Wishlist = require("../models/wishlist");
 
 const addToWishlist = async (req, res) => {
     const postId = req.body.postId;
@@ -6,20 +7,22 @@ const addToWishlist = async (req, res) => {
 
     try {
         const post = await Post.findById(postId);
-        const wishlist = await Wishlist.findOne({ userId: userId });
+        const wishlist = await Wishlist.findOne({ user: userId });
 
-        if (wishlist){
-            wishlist.items.push(post);
+        if (wishlist) {
+            wishlist.posts.push(postId);
             await wishlist.save();
         } else {
             const newWishlist = new Wishlist({
-                userId: userId,
-                items: [post]
+                user: userId,
+                posts: [postId]
             });
             await newWishlist.save();
         }
-        res.status(200).send("Added to Wishlist Successfully");
-    }catch(err){
+
+        res.status(200).send("Added to wishlist successfully");
+    } catch (err) {
+        console.error(err);
         res.status(500).send("Error");
     }
 };
