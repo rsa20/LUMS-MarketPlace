@@ -3,7 +3,6 @@ import Footer from './Components/Footer/Footer';
 import Header from './Components/header/Header1';
 import AddReview from './Components/AddReview/AddReview';
 // import Review from './Components/Review/Review';
-// import Header from './Header';
 
 export const Hello = () => {
   return (
@@ -16,6 +15,7 @@ export const Hello = () => {
       /> */}
       <Header></Header>
       <AddReview></AddReview>
+
       <Footer></Footer>
     </div>
   );
