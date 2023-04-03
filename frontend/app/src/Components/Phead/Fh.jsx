@@ -19,29 +19,32 @@ const ProfileHeader = () => {
     <div className='profile-header'>
       <div className='container'>
         <div className='profile-header-btn'>
-          <Link to='/viewp'>
-            <a className='linkk'>Profile</a>
+          <Link to='/viewp' className='linkk'>
+            Profile
+            {/* <a className='linkk'>Profile</a> */}
           </Link>
         </div>
 
         <div className='profile-header-btn'>
-          <Link to='/edit'>
-            <a className='linkk'>Edit & delete</a>
+          <Link to='/edit' className='linkk'>
+            Edit & delete
+            {/* <a className='linkk'>Edit & delete</a> */}
           </Link>
         </div>
 
         <div className='profile-header-btn'>
-          <Link to='/Viewpost'>
-            <a className='linkk'>My Ads</a>
+          <Link to='/Viewpost' className='linkk'>
+            My Ads
+            {/* <a className='linkk'>My Ads</a> */}
           </Link>
         </div>
 
         <div
           className='profile-header-btn'
-          onClick={toProfileReviews(userEmail)}
+          onClick={() => toProfileReviews(userEmail)}
         >
-          <Link to='/ReviewsP'>
-            <a className='linkk'>Reviews</a>
+          <Link to='/ReviewsP' className='linkk'>
+            Reviews
           </Link>
         </div>
       </div>

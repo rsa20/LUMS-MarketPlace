@@ -5,9 +5,10 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './product.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 const Product = ({ id, title, image, price }) => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  console.log(userEmail, "user");
+  console.log(userEmail, 'user');
   console.log(title, 'asdjfbajksdfbsajdfk');
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
@@ -15,32 +16,30 @@ const Product = ({ id, title, image, price }) => {
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
-const handleHeart= async (newID, email) =>  {
-
-  console.log({newID, email});
-  if(!isFavorite){
-  const response = await fetch(`/api/posts/product${newID}${email}`);
-  const data = await response.json();
-  console.log(data);}
-  else if (isFavorite){
-    const response = await fetch(`/api/posts/product${newID}${email}?action=remove`);
-    const data = await response.json();
-    console.log(data);
-  }
-
-
-
-};
+  const handleHeart = async (newID, email) => {
+    console.log({ newID, email });
+    if (!isFavorite) {
+      const response = await fetch(`/api/posts/product${newID}${email}`);
+      const data = await response.json();
+      console.log(data);
+    } else if (isFavorite) {
+      const response = await fetch(
+        `/api/posts/product${newID}${email}?action=remove`
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+  };
   const handleClick = async (newID, email) => {
     console.log(newID, 'asdasdm');
     // console.log(test, "safsafd")
     const response = await fetch(`/api/posts/product${newID} ${email}`);
 
     const data = await response.json();
-    const { id, title, description, price,state } = data;
+    const { id, title, description, price, state } = data;
 
     // const imageUrls = images.map((image) => image.url);
-    const productDetails = { title, description, id, price,state };
+    const productDetails = { title, description, id, price, state };
     console.log(productDetails);
     navigate('/viewpost', { state: { productDetails } });
     // navigate({
@@ -50,8 +49,9 @@ const handleHeart= async (newID, email) =>  {
   };
 
   return (
-    <div className='product' >
-      <img onClick={() => handleClick(id)}
+    <div className='product'>
+      <img
+        onClick={() => handleClick(id)}
         style={{ maxWidth: '100%', marginBottom: '2%', borderRadius: '5%' }}
         src={image}
         alt={title}
@@ -76,7 +76,6 @@ const handleHeart= async (newID, email) =>  {
         </span>
       </div>
     </div>
-    
   );
 };
 

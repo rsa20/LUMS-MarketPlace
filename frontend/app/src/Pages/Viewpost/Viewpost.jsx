@@ -20,8 +20,8 @@ const Viewpost = () => {
       setProduct(location.state.productDetails);
     }
   }, [location.state]);
- const flag = productDetails.state;
- console.log(flag);
+  const flag = productDetails.state;
+  console.log(flag);
   return (
     <>
       <Header />
@@ -66,9 +66,7 @@ const Viewpost = () => {
 
 
                 }} */}
-                {flag === true &&(
-                  <button>Edit Profile</button>
-                ) }
+                {flag === true && <button>Edit Profile</button>}
               </div>
             </div>
           </div>

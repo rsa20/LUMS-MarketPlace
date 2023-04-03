@@ -15,12 +15,13 @@ const Add = () => {
     tags: '',
   });
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  console.log(userEmail, "idhr");
+  console.log(userEmail, 'idhr');
   const [errors, setErrors] = useState({});
   const [images, setImages] = useState([]);
 
   const [selectedImage, setSelectedImage] = useState(img);
   const [imagePreview, setImagePreview] = useState(img);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPost({
@@ -60,14 +61,14 @@ const Add = () => {
       return;
     }
     const formData = new FormData();
-    formData.append("title", Post.title);
-    formData.append("description", Post.description);
-    formData.append("price", Post.price);
-    formData.append("tags", Post.tags.trim().replace(/\s+/g, " "));
-    images.forEach((image) => formData.append("images", image));
-    console.log(Post)
+    formData.append('title', Post.title);
+    formData.append('description', Post.description);
+    formData.append('price', Post.price);
+    formData.append('tags', Post.tags.trim().replace(/\s+/g, ' '));
+    images.forEach((image) => formData.append('images', image));
+    console.log(Post);
     axios
-      .post("api/posts/createPost", Post)
+      .post('api/posts/createPost', Post)
       .then((res) => {
         alert('post Added');
         console.log(res);
