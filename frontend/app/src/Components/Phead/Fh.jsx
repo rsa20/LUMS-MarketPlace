@@ -1,6 +1,7 @@
 import './Fh.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const ProfileHeader = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
@@ -15,10 +16,23 @@ const ProfileHeader = () => {
     navigateTo('/ReviewsP', { state: data });
   };
 
+  const toViewProfile = async (userEmailFR) => {
+    const id = userEmailFR;
+    axios
+      .get(`api/goals/viewProfile/${id}`)
+      .then((res) => {
+        navigateTo(`/viewP`, { state: { user: res.data } });
+      })
+      .catch((error) => console.error('Profile showing error : ', error));
+  };
+
   return (
     <div className='profile-header'>
       <div className='container'>
-        <div className='profile-header-btn'>
+        <div
+          className='profile-header-btn'
+          onClick={() => toViewProfile(userEmail)}
+        >
           <Link to='/viewp' className='linkk'>
             Profile
             {/* <a className='linkk'>Profile</a> */}
