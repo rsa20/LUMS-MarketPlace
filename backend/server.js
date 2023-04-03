@@ -13,6 +13,8 @@ app.use(express.urlencoded({extended: false}))
 app.use('/api/goals', require('./routes/goalRoutes'))
 app.use('/api/posts', require('./routes/postsRoutes'))
 app.use('/api/search', require('./routes/searchRoutes'))
+app.use('/api/wishlist', require('./routes/wishlistRoutes'))
+
 
 
 app.listen(port, ()=> console.log(`Server started on port ${port}`))

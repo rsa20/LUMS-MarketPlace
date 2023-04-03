@@ -1,10 +1,20 @@
 const Post = require("../models/posts");
 const Wishlist = require("../models/wishlist");
+const User = require("../models/user");
 
 const addToWishlist = async (req, res) => {
-    const postId = req.body.params.postId;
-    const userId = req.body.params.userId;
+    // const postId = req.body.params.postId;
+    // const userId = req.body.params.userId;
+    const action = req.params.action
+    const postId = req.params.postId;
+    const userEmail = req.params.email
+    const user = await User.findOne({
+        email : userEmail
+    })
+    const userId = user._id;
 
+        // const userId = req.params.userId;
+    console.log("Adding to wishlist: ", postId, userId)
     try {
         const post = await Post.findById(postId);
         const wishlist = await Wishlist.findOne({ user: userId });
@@ -25,21 +35,29 @@ const addToWishlist = async (req, res) => {
         console.error(err);
         res.status(500).send("Error");
     }
+    
 };
 
 
 const removeFromWishlist = (async (req, res)=>{
-    const {user_id, post_id} = req.body
-    const goal = await wishlist.updateOne({ user: user_id },
-        { $pull: { posts: post_id } },
+    const postId = req.params.postId;
+    const userEmail = req.params.email
+    const user = await User.findOne({
+        email : userEmail
+    })
+    const userId = user._id;
+    
+    // const {user_id, post_id} = req.body
+
+    
+    const goal = Wishlist.updateOne({ user: userId },
+        { $pull: { posts: postId } },
         function (err) {
             if (err) {
             return res.status(500).send({message:"Error!"});
         } else {
             return res.status(200).json({message:"Post removed from wishlist!"})
         }
-        }
-        );
+        });
 })
-
 module.exports = {addToWishlist, removeFromWishlist}
