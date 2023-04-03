@@ -1,6 +1,7 @@
 import React from 'react';
-// import Carousel from '../../Components/Carousel/Carousel';
+import Carousel from '../../Components/Carousel/Carousel';
 import Header from '../../Components/header/Header1';
+import ProfileHeader from '../../Components/Phead/Fh';
 import Footer from '../../Components/Footer/Footer';
 import './Viewpost.css';
 import he1 from './he1.jpg';
@@ -22,25 +23,30 @@ const Viewpost = () => {
   }, [location.state]);
   const flag = productDetails.state;
   console.log(flag);
+
+  const onSellerClick = (sellerId) => {
+    console.log('hello il get you to the seller profile page');
+  };
   return (
     <>
       <Header />
+      <ProfileHeader />
       <div className='pmain'>
         <div className='postmain'>
           <div className='carm'>
             <div
               className='carousel-container'
-              style={{
-                backgroundImage: `url(${he1})`,
-                height: '300px',
-                width: '300px',
-                borderRadius: '20px',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
+              // style={{
+              //   backgroundImage: `url(${he1})`,
+              //   height: '300px',
+              //   width: '300px',
+              //   borderRadius: '20px',
+              //   backgroundRepeat: 'no-repeat',
+              //   backgroundSize: 'cover',
+              //   backgroundPosition: 'center',
+              // }}
             >
-              {/* <Carousel style={{ with: '100%', height: '100%' }} /> */}
+              <Carousel style={{ with: '100%', height: '100%' }} />
             </div>
           </div>
           <div className='postcm'>
@@ -54,6 +60,9 @@ const Viewpost = () => {
                 <div>
                   <h2>Posted By</h2>
                   <h1>{productDetails.id}</h1>
+                  <h1 onClick={() => onSellerClick(productDetails.id)}>
+                    Seller user
+                  </h1>
                 </div>
                 <div>
                   <button>Contact</button>
