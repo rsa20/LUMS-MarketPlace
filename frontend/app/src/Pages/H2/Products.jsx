@@ -40,18 +40,26 @@ const Product = ({ id, title, image, price }) => {
     const response = await fetch(`/api/posts/product${newID}/${user_id}`);
 
     const data = await response.json();
-    const { _id, title, description, price, user} = data.post;
-    const state = data.myPost
+    const { _id, title, description, price, user } = data.post;
+    const state = data.myPost;
     // console.log(data, 'tester')
     // const imageUrls = images.map((image) => image.url);
-    const seller = await fetch(`/api/goals/viewProfile/user${user}`)
-    const sellerName = (await seller.json()).name
-  
+    const seller = await fetch(`/api/goals/viewProfile/user${user}`);
+    const sellerName = (await seller.json()).name;
+
     // console.log(seller_name, "seller")
 
-    const productDetails = { title, description, _id, price, state, user, sellerName};
+    const productDetails = {
+      title,
+      description,
+      _id,
+      price,
+      state,
+      user,
+      sellerName,
+    };
     console.log(productDetails, 'prod details');
-    navigate('/viewpost', { state: { productDetails} });
+    navigate('/viewpost', { state: { productDetails } });
     // navigate({
     //   pathname: '/viewpost',
     //   state: { productDetails }
@@ -61,7 +69,7 @@ const Product = ({ id, title, image, price }) => {
   return (
     <div className='product'>
       <img
-        onClick={() => handleClick(id,loggedInUser._id)}
+        onClick={() => handleClick(id, loggedInUser._id)}
         style={{ maxWidth: '100%', marginBottom: '2%', borderRadius: '5%' }}
         src={image}
         alt={title}
