@@ -15,6 +15,9 @@ import CreatePost from './Pages/AddPost/Addpost';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditPost from './Pages/EditPost/Editpost';
 import SellerViewP from './Pages/SellerViewP/SellerViewP';
+import Wishlist from './Pages/wishlist/Wishlist'
+// import WishItem from './Pages/wishlist/Wishlist'
+
 
 // Moez extra
 import Viewpost from './Pages/Viewpost/Viewpost';
@@ -68,6 +71,7 @@ function App() {
           <Route exact path='/ReviewsP' element={<ReviewsProfile />} />
           {/* extras */}
           <Route exact path='/SellerViewP' element={<SellerViewP />} />
+          <Route exact path='/wish' element={<Wishlist />} />
         </Routes>
       </Router>
       {/* <Header/> */}

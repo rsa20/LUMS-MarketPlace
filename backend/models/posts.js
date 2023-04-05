@@ -12,7 +12,10 @@ const posts = new Schema({
     img_URL: {type:[String], required:true},
     date_created: {type:Date ,required:true, default:Date.now},
     tags: {type:[String] ,  required:true, default: []},
-    flags: {type:Number, default:0}
+    flags: {type:Number, default:0},
+    user: {type: Schema.Types.ObjectId, required:true },
+
+    
 
 
 });

@@ -55,14 +55,17 @@ const navigate = useNavigate([]);
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
+    let mywish
      await fetch('/api/posts/getAllProducts')
     .then((response) => response.json())
     .then((data) => {
       console.log(data, "test")
+      mywish = data
       setwish(data);
     })
     .catch((error) => console.log(error));
-    navigate('/wish', { state: { wish } });
+    console.log(wish, "hmmm")
+    navigate('/wish', { state: { mywish } });
 
   };
   return (

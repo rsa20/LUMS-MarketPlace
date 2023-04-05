@@ -10,7 +10,9 @@ import { useSelector } from 'react-redux';
 
 export const Viewp = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
+  const loggedInUser = useSelector((state) => state.userObj.userObj);
   console.log(userEmail, 'user');
+  console.log(loggedInUser, 'user2');
   const location = useLocation();
   const [user, setUser] = useState('');
 
@@ -37,9 +39,9 @@ export const Viewp = () => {
           </div>
           <div className='co'>
             <p>Name</p>
-            <h2>{user.name}</h2>
+            <h2>{loggedInUser.name}</h2>
             <p>Email</p>
-            <h2>{user.email}</h2>
+            <h2>{loggedInUser.email}</h2>
             <p>Account</p>
             <h2>Users</h2>
             {/* <span className="rev"> */}

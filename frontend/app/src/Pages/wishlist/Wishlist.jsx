@@ -12,7 +12,7 @@ const Wishlist = () => {
     useEffect(() => {
         console.log(location.state, 'test');
         if (location.state) {
-          setwishlist(location.state.wish);
+          setwishlist(location.state.mywish);
           console.log(wishlist);
         }
       }, [location.state]);

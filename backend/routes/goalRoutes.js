@@ -20,7 +20,7 @@ router.route('/register').post(registerUser);
 router.route('/verify:token').get(verifyUser);
 
 router.route('/viewProfile').post(getUser);
-router.route('/viewProfile/:id').get(getUserbyId);
+router.route('/viewProfile/user:id').get(getUserbyId);
 
 // router.get('/', getGoals)
 

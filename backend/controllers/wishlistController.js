@@ -60,4 +60,16 @@ const removeFromWishlist = (async (req, res)=>{
         }
         });
 })
-module.exports = {addToWishlist, removeFromWishlist}
+
+const getUserWishlist = (async(req, res)=>{
+    const loggedInUserId = req.params.u_id
+    const wishlist = await Wishlist.find({
+        user:loggedInUserId
+    })
+    if(!wishlist){
+        return res.status(404).send({message:"User has no wishlist"})
+    }
+    console.log(getUserWishlist)
+})
+
+module.exports = {addToWishlist, removeFromWishlist, getUserWishlist}

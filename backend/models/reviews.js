@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const reviews = new Schema({
     reviewer: {type: Schema.Types.ObjectId, required:true },
     reviewed: {type: Schema.Types.ObjectId, required:true },
+    reviewtext: {type:String, required:true, default: ""},
     score: {type:Number, required:true, min:1,max:5},
 
 });

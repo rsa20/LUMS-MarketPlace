@@ -4,17 +4,21 @@ import Header from '../../Components/header/Header1';
 import ProfileHeader from '../../Components/Phead/Fh';
 import Footer from '../../Components/Footer/Footer';
 import './Viewpost.css';
-import he1 from './he1.jpg';
+// import he1 from './he1.jpg';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Viewpost = () => {
   const location = useLocation();
   const [productDetails, setProduct] = useState('');
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  console.log(userEmail, 'user');
+  console.log(userEmail, 'logged in user');
+
+  const navigate = useNavigate()
+
   useEffect(() => {
     console.log(location.state, 'test');
     if (location.state) {
@@ -22,11 +26,27 @@ const Viewpost = () => {
     }
   }, [location.state]);
   const flag = productDetails.state;
-  console.log(flag);
+  console.log("flag: ",flag);
 
+  // '/viewProfile/:id'
+  console.log(productDetails, "checking")
+  const sellerName = productDetails.sellerName
+  const seller_id = productDetails.user
+  
+  // const sellerName = productDetails.sellerData.name
+  // console.log(sellerName)
+  // const seller = 
+  //get details of seller: 
+  // const seller = fetch(`http://localhost:1000/api/goals/viewProfile/user${seller_id}`);
+  // console.log(seller)
   const onSellerClick = (sellerId) => {
-    console.log('hello il get you to the seller profile page');
+    
+    console.log('hello il get you to the seller profile page', sellerId);
   };
+
+  const onEditClick = () => {
+    navigate('/Editpost', { state: { productDetails} });
+  }
   return (
     <>
       <Header />
@@ -59,10 +79,8 @@ const Viewpost = () => {
               >
                 <div>
                   <h2>Posted By</h2>
-                  <h1>{productDetails.id}</h1>
-                  <h1 onClick={() => onSellerClick(productDetails.id)}>
-                    Seller user
-                  </h1>
+                  <h1 onClick={() => onSellerClick(seller_id)}>{sellerName}</h1>
+                  
                 </div>
                 <div>
                   <button>Contact</button>
@@ -75,7 +93,7 @@ const Viewpost = () => {
 
 
                 }} */}
-                {flag === true && <button>Edit Profile</button>}
+                {flag === true && <button onClick={() => onEditClick()}>Edit Post</button>}
               </div>
             </div>
           </div>

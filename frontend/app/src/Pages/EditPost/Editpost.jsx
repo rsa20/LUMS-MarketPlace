@@ -17,8 +17,8 @@ const Editpost = () => {
         setProduct(location.state.productDetails);
       }
     }, [location.state]);
-  const [user, setUser] = useState({
-    name: productDetails.name,
+  const [Post, setPost] = useState({
+    title: productDetails.title,
     description: productDetails.description,
     price: productDetails.price,
     tags:"",
@@ -31,47 +31,49 @@ const Editpost = () => {
   const [imagePreview, setImagePreview] = useState(img);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setPost({
+      ...Post,
       [name]: value,
     });
   };
 const cancle = ()=>{
-  setUser({
-    name: productDetails.name,
+  setPost({
+    title: productDetails.title,
     description: productDetails.description,
     price: productDetails.price,
     tags:"",
   })
 }
   const validate = () => {
-    const errors = {};
+    // const errors = {};
 
-    if (!user.name || user.name.trim().length < 3) {
-      errors.name = "Name should be at least 3 characters long";
-    }
+    // if (!Post.title || Post.title.trim().length < 3) {
+    //   errors.name = "Name should be at least 3 characters long";
+    // }
 
-    if (!user.description || user.description.trim().split(/\s+/).length < 3 || user.description.trim().split(/\s+/).length > 250) {
-        errors.description = "Description must be between 3 and 250 words long";
-      }
+    // if (!Post.description || Post.description.trim().split(/\s+/).length < 3 || Post.description.trim().split(/\s+/).length > 250) {
+    //     errors.description = "Description must be between 3 and 250 words long";
+    //   }
       
-    return errors;
+    // return errors;
   };
   const edit = () => {
     const errors = validate();
-    if (Object.keys(errors).length) {
-      setErrors(errors);
-      return;
-    } 
+    if(errors){
+      if (Object.keys(errors).length) {
+        setErrors(errors);
+        return;
+      }
+    }
     const formData = new FormData();
-    formData.append("name", user.name);
-    formData.append("description", user.description);
-    formData.append("price", user.price);
-    formData.append("tags", user.tags.trim().replace(/\s+/g, " "));
+    formData.append("title", Post.title);
+    formData.append("description", Post.description);
+    formData.append("price", Post.price);
+    formData.append("tags", Post.tags.trim().replace(/\s+/g, " "));
     images.forEach((image) => formData.append("images", image));
-    
+    console.log(Post, "at edit button")
     axios
-      .put("api/posts/editpost", formData)
+      .put(`api/posts/editpost/${productDetails._id}`, {params:{Post}})
       .then((res) => {
         alert("post updated");
       })
@@ -100,7 +102,7 @@ const cancle = ()=>{
         <span className="reg">
           <div className="r">
             <span className="edit">
-              {console.log("User", user)}
+              {console.log("Post", Post)}
               <h1 style={{fontSize:"280%", color:"#1C0040"}}> Add Post</h1>
               <h2 style={{color:"#1C0040"}}>upload Product Images</h2>
               
@@ -142,8 +144,8 @@ const cancle = ()=>{
               <input
                 
                 type="text"
-                name="name"
-                value={user.name}
+                name="title"
+                value={Post.title}
                 placeholder={productDetails.name}
                 required="true"
                 pattern="^[A-Za-z0-9]{4,}$"
@@ -157,7 +159,7 @@ const cancle = ()=>{
               <input
                 type="text"
                 name="description"
-                value={user.description}
+                value={Post.description}
                 placeholder={productDetails.description}
                 onChange={handleChange}
               />
@@ -171,7 +173,7 @@ const cancle = ()=>{
               <input
                 type="Text"
                 name="price"
-                value={user.price}
+                value={Post.price}
                 placeholder= {productDetails.price}
                 onChange={handleChange}
               />
@@ -180,8 +182,8 @@ const cancle = ()=>{
 
 <input
   type="Text"
-  name="Tag"
-  value={user.price}
+  name="tags"
+  value={Post.price}
   placeholder= "enter Tags"
   onChange={handleChange}
 />

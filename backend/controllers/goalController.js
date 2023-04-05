@@ -7,10 +7,11 @@ const nodemailer = require('../config/nodemailer');
 // get all goals
 // added by mmoez // it will get eail id and will share all the detalis of the user
 const getUserbyId = async (req, res) => {
+  console.log("what")
   const id = req.params.id;
   // console.log(id);
   try {
-    const user = await User.findOne({ email: id });
+    const user = await User.findById(id );
     if (!user) {
       return res.status(404).send({ message: 'user not found' });
     }

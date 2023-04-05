@@ -68,7 +68,7 @@ const Add = () => {
     images.forEach((image) => formData.append('images', image));
     console.log(Post);
     axios
-      .post('api/posts/createPost', Post)
+      .post('api/posts/createPost', {params: {Post, userEmail}})
       .then((res) => {
         alert('post Added');
         console.log(res);
@@ -130,7 +130,7 @@ const Add = () => {
                       <img
                         key={index}
                         src={URL.createObjectURL(image)}
-                        alt={`Product image ${index + 1}`}
+                        alt={`Product ${index + 1}`}
                         className='img-fluid mt-3'
                       />
                     ))}

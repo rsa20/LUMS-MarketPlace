@@ -17,13 +17,22 @@ const getAllPosts = (async (req, res) => {
 const getPostbyID = (async(req, res)=>{
     
     id = req.params.id
-    console.log(id)
+    loggedInId = req.params.u_id
+    
+    console.log(id, loggedInId)
     try{
-        const post = await Post.findById(id)
+        let post = await Post.findById(id)
         if(!post){
             return res.status(404).send({ message: "Post not found" });
         }
-        return res.status(200).send(post)
+        let myPost = loggedInId == post.user
+        // console.log(loggedInId == post.user)
+        // if(loggedInId == post.user){
+        // myPost = true
+        // console.log('own post')
+        // }
+        
+        return res.status(200).json({post, myPost})
     }catch(error){
         return res.status(500).send({ message: "DB Error" });
     }
@@ -36,15 +45,19 @@ const createPost = async (req, res) => {
     return res.status(404).json({ message: "Missing post fields" });
   }
   const { title, description, price, tags } = req.body.params.Post;
-
-  
-
-  const findSame = await Post.findOne({
-    $or: [{ title: title }, { description: description }],
+  const useremail = req.body.params.userEmail
+  console.log(useremail)
+  const user = await User.findOne(
+  {
+    email: useremail
   });
-  if (findSame) {
-    return res.status(500).json({ message: "Post already exists!" });
-  }
+
+  // const findSame = await Post.findOne({
+  //   $or: [{ title: title }, { description: description }],
+  // });
+  // if (findSame) {
+  //   return res.status(500).json({ message: "Post already exists!" });
+  // }
 
   tagsList = tags.split(" ");
   newPost = new Post({
@@ -54,6 +67,7 @@ const createPost = async (req, res) => {
     tags: tagsList,
     img_url: [""],
     flags: 0,
+    user: user._id,
   });
   await newPost.save((err) => {
     if (err) {
@@ -65,17 +79,12 @@ const createPost = async (req, res) => {
     res.status(200).send(newPost);
   });
 
-  const useremail = req.body.params.userEmail
-  console.log(useremail)
-  const user = await User.findOne(
-  {
-    email: useremail
-  });
+  
 
   let postArr = user.posts
   postArr.push(newPost._id)
 
-  const updateUser = await User.findOneAndUpdate({
+  await User.findOneAndUpdate({
     email:useremail
   },{
     posts :postArr
@@ -84,37 +93,42 @@ const createPost = async (req, res) => {
 };
 
 const editPost = async (req, res) => {
-  const post = await Post.findById(req.body.ObjectId);
-  if (post.title != req.body.title) {
-    post.title = req.body.title;
+  console.log("here")
+  const postID = req.params.p_id
+  const formData = req.body.params.Post
+  console.log(postID)
+  const post = await Post.findById(postID);
+  if (post.title != formData.title) {
+    post.title = formData.title;
   }
-  if (post.description != req.body.description) {
-    post.description = req.body.description;
+  if (post.description != formData.description) {
+    post.description = formData.description;
   }
-  if (post.price != req.body.price) {
-    post.price = req.body.price;
+  if (post.price != formData.price) {
+    post.price = formData.price;
   }
-  if (post.status != req.body.status) {
-    post.status = req.body.status;
+  if (post.status != formData.status) {
+    post.status = formData.status;
   }
 
-  let tags = req.body.tags;
+  console.log(req.body.params.Post)
+  let tags = formData.tags;
   tags = tags.split(" ");
 
-  if (tags !== req.body.title) {
+  if (post.tags !== tags) {
     post.tags = tags;
   }
 
-  if (req.body.img_URL != post.img_URL) {
-    post.img_URL = req.body.img_URL;
+  if (formData.img_URL != post.img_URL) {
+    post.img_URL = formData.img_URL;
   }
-  if (req.body.status == true) {
+  if (formData.status == true) {
     post.sold_date = Date.now();
     post.status = true;
   }
 
   const updatedPost = await Post.findByIdAndUpdate(
-    { _id: post.ObjectId },
+    { _id: post._id },
     post,
     { new: true }
   );
@@ -129,8 +143,14 @@ const editPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
+  const p_id = req.body.params.post._id
+  
   try {
+    const post = await Post.findById(p_id)
+    const u_id = post.user
+    console.log(u_id)
     const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+
     res.status(200).json({
       message: `Post deleted successfully`,
     });
