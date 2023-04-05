@@ -11,8 +11,8 @@ import { useSelector } from 'react-redux';
 export const Viewp = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
-  console.log(userEmail, 'user');
-  console.log(loggedInUser, 'user2');
+  console.log(userEmail, 'userEmail');
+  console.log(loggedInUser, 'logged in user2');
   const location = useLocation();
   const [user, setUser] = useState('');
 
@@ -21,7 +21,7 @@ export const Viewp = () => {
       setUser(location.state.user);
     }
   }, [location.state]);
-  console.log(user, 'hello');
+  console.log(user, 'hello this is user');
   return (
     <>
       <Header />

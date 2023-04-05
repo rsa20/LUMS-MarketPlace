@@ -13,11 +13,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import './Header1.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [wish, setwish] = useState([]);
-const navigate = useNavigate([]);
+  const navigate = useNavigate([]);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   console.log(userEmail, 'user');
   const [showFilterOptions, setShowFilterOptions] = useState(false);
@@ -48,25 +48,24 @@ const navigate = useNavigate([]);
   const handlC = () => {
     axios.post('api/goals/login', { selectedFilter, priceRange, search });
   };
-  const viewWish = async ( email) => {
-    console.log(email, "safsafd")
+  const viewWish = async (email) => {
+    console.log(email, 'safsafd');
     // const response = await fetch(`/api/posts/product ${email}`);
     // const data = await response.json();
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
-    let mywish
-     await fetch('/api/posts/getAllProducts')
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data, "test")
-      mywish = data
-      setwish(data);
-    })
-    .catch((error) => console.log(error));
-    console.log(wish, "hmmm")
+    let mywish;
+    await fetch('/api/posts/getAllProducts')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        mywish = data;
+        setwish(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(wish, 'hmmm');
     navigate('/wish', { state: { mywish } });
-
   };
   return (
     <div className='header'>
@@ -91,7 +90,7 @@ const navigate = useNavigate([]);
           <Link to='/hello'>
             <img className='im' src={l3} alt='fuck of' />
           </Link>
-          <Link to='/hello' >
+          <Link to='/hello'>
             <img onClick={viewWish} className='im' src={l2} alt='fuck of' />
           </Link>
           <Link to='/viewp'>

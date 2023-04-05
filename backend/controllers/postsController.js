@@ -1,55 +1,70 @@
-const Post = require("../models/posts");
-const User = require("../models/user")
+const Post = require('../models/posts');
+const User = require('../models/user');
 
-const getAllPosts = (async (req, res) => {
+async function getUserByPost(req, res) {
+  try {
+    // const post = await Post.findOne({ post_id: req.params.post_id });
+    // if (!post) {
+    //   return res.status(404).json({ error: 'Post not found' });
+    // }
+    // const user = await User.findOne({ posts: post._id });
+    const user = await User.findById(req.params.seller_id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    return res.status(200).json({ user });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Server error' });
+  }
+}
+
+const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find({});
     if (!posts) {
-      return res.status(404).send({ message: "No posts found" });
+      return res.status(404).send({ message: 'No posts found' });
     }
     // console.log(posts)
     return res.status(200).send(posts);
   } catch (error) {
-    return res.status(500).send({ message: "DB Error" });
+    return res.status(500).send({ message: 'DB Error' });
   }
-})
+};
 
-const getPostbyID = (async(req, res)=>{
-    
-    id = req.params.id
-    loggedInId = req.params.u_id
-    
-    console.log(id, loggedInId)
-    try{
-        let post = await Post.findById(id)
-        if(!post){
-            return res.status(404).send({ message: "Post not found" });
-        }
-        let myPost = loggedInId == post.user
-        // console.log(loggedInId == post.user)
-        // if(loggedInId == post.user){
-        // myPost = true
-        // console.log('own post')
-        // }
-        
-        return res.status(200).json({post, myPost})
-    }catch(error){
-        return res.status(500).send({ message: "DB Error" });
+const getPostbyID = async (req, res) => {
+  id = req.params.id;
+  loggedInId = req.params.u_id;
+
+  console.log(id, loggedInId);
+  try {
+    let post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).send({ message: 'Post not found' });
     }
+    let myPost = loggedInId == post.user;
+    // console.log(loggedInId == post.user)
+    // if(loggedInId == post.user){
+    // myPost = true
+    // console.log('own post')
+    // }
 
-})
+    return res.status(200).json({ post, myPost });
+  } catch (error) {
+    return res.status(500).send({ message: 'DB Error' });
+  }
+};
 
 const createPost = async (req, res) => {
-  console.log(req.body.params)
+  console.log(req.body.params);
   if (!req.body) {
-    return res.status(404).json({ message: "Missing post fields" });
+    return res.status(404).json({ message: 'Missing post fields' });
   }
   const { title, description, price, tags } = req.body.params.Post;
-  const useremail = req.body.params.userEmail
-  console.log(useremail)
-  const user = await User.findOne(
-  {
-    email: useremail
+  const useremail = req.body.params.userEmail;
+  console.log(useremail);
+  const user = await User.findOne({
+    email: useremail,
   });
 
   // const findSame = await Post.findOne({
@@ -59,44 +74,45 @@ const createPost = async (req, res) => {
   //   return res.status(500).json({ message: "Post already exists!" });
   // }
 
-  tagsList = tags.split(" ");
+  tagsList = tags.split(' ');
   newPost = new Post({
     title: title,
     description: description,
     price: price,
     tags: tagsList,
-    img_url: [""],
+    img_url: [''],
     flags: 0,
     user: user._id,
   });
   await newPost.save((err) => {
     if (err) {
-      console.log("unsuccesful");
+      console.log('unsuccesful');
       res.send(err);
       return;
     }
-    console.log(title, " added");
+    console.log(title, ' added');
     res.status(200).send(newPost);
   });
 
-  
+  let postArr = user.posts;
+  postArr.push(newPost._id);
 
-  let postArr = user.posts
-  postArr.push(newPost._id)
-
-  await User.findOneAndUpdate({
-    email:useremail
-  },{
-    posts :postArr
-  })
-  console.log(user._id)
+  await User.findOneAndUpdate(
+    {
+      email: useremail,
+    },
+    {
+      posts: postArr,
+    }
+  );
+  console.log(user._id);
 };
 
 const editPost = async (req, res) => {
-  console.log("here")
-  const postID = req.params.p_id
-  const formData = req.body.params.Post
-  console.log(postID)
+  console.log('here');
+  const postID = req.params.p_id;
+  const formData = req.body.params.Post;
+  console.log(postID);
   const post = await Post.findById(postID);
   if (post.title != formData.title) {
     post.title = formData.title;
@@ -111,9 +127,9 @@ const editPost = async (req, res) => {
     post.status = formData.status;
   }
 
-  console.log(req.body.params.Post)
+  console.log(req.body.params.Post);
   let tags = formData.tags;
-  tags = tags.split(" ");
+  tags = tags.split(' ');
 
   if (post.tags !== tags) {
     post.tags = tags;
@@ -127,11 +143,9 @@ const editPost = async (req, res) => {
     post.status = true;
   }
 
-  const updatedPost = await Post.findByIdAndUpdate(
-    { _id: post._id },
-    post,
-    { new: true }
-  );
+  const updatedPost = await Post.findByIdAndUpdate({ _id: post._id }, post, {
+    new: true,
+  });
 
   res.status(200).json({
     _id: updatedPost._id,
@@ -143,20 +157,27 @@ const editPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  const p_id = req.body.params.post._id
-  
+  const p_id = req.body.params.post._id;
+
   try {
-    const post = await Post.findById(p_id)
-    const u_id = post.user
-    console.log(u_id)
+    const post = await Post.findById(p_id);
+    const u_id = post.user;
+    console.log(u_id);
     const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
 
     res.status(200).json({
       message: `Post deleted successfully`,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: 'Server Error' });
   }
 };
 
-module.exports = { editPost, deletePost, createPost, getAllPosts, getPostbyID };
+module.exports = {
+  editPost,
+  deletePost,
+  createPost,
+  getAllPosts,
+  getPostbyID,
+  getUserByPost,
+};

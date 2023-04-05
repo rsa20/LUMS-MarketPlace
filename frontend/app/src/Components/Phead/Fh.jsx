@@ -17,10 +17,11 @@ const ProfileHeader = () => {
   };
 
   const toViewProfile = async (userEmailFR) => {
-    const id = userEmailFR;
+    // const id = userEmailFR;
     axios
-      .get(`api/goals/viewProfile/${id}`)
+      .get(`/api/goals/viewProfile${userEmailFR}`)
       .then((res) => {
+        console.log('here_Phead_24');
         navigateTo(`/viewP`, { state: { user: res.data } });
       })
       .catch((error) => console.error('Profile showing error : ', error));
@@ -33,7 +34,8 @@ const ProfileHeader = () => {
           className='profile-header-btn'
           onClick={() => toViewProfile(userEmail)}
         >
-          <Link to='/viewp' className='linkk'>
+          {/* <Link to='/viewp' className='linkk'> */}
+          <Link className='linkk'>
             Profile
             {/* <a className='linkk'>Profile</a> */}
           </Link>

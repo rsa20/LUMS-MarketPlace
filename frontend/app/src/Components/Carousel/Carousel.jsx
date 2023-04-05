@@ -26,7 +26,7 @@ const ImageCarousel = ({ images }) => {
         {images.map((image) => (
           <div key={image.id}>
             <img
-              style={{ width: '100%', height: '100%s' }}
+              style={{ width: '100%', height: '100%' }}
               src={image.src}
               alt={image.alt}
             />
