@@ -86,8 +86,8 @@ import he1 from './he1.jpg';
 import React, { useEffect, useState } from 'react';
 import Product from './Products';
 import './product.css';
-// import Footer from './../../Components/Footer/logo/Footer';
-// import Header from '../../Components/header/Header1';
+import Footer from './../../Components/Footer/Footer';
+import Header from '../../Components/header/Header1';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -116,6 +116,7 @@ const Home = () => {
 
   return (
     <div className='products'>
+      <Header />
       {products.map((product) => (
         <Product
           id={product._id}
@@ -125,6 +126,7 @@ const Home = () => {
           // status={product.status}
         />
       ))}
+      <Footer />
     </div>
   );
 };

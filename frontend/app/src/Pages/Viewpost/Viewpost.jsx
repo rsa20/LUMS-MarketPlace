@@ -1,7 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import Carousel from '../../Components/Carousel/Carousel';
 import Header from '../../Components/header/Header1';
-import ProfileHeader from '../../Components/Phead/Fh';
 import Footer from '../../Components/Footer/Footer';
 import './Viewpost.css';
 // import he1 from './he1.jpg';
@@ -15,9 +15,11 @@ const Viewpost = () => {
   const location = useLocation();
   const [productDetails, setProduct] = useState('');
   const userEmail = useSelector((state) => state.userEmail.userEmail);
+  const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
+
   console.log(userEmail, 'logged in user');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(location.state, 'test');
@@ -26,31 +28,43 @@ const Viewpost = () => {
     }
   }, [location.state]);
   const flag = productDetails.state;
-  console.log("flag: ",flag);
+  console.log('flag: ', flag);
 
   // '/viewProfile/:id'
-  console.log(productDetails, "checking")
-  const sellerName = productDetails.sellerName
-  const seller_id = productDetails.user
-  
+  console.log(productDetails, 'checking');
+  const sellerName = productDetails.sellerName;
+  const seller_id = productDetails.user;
+
   // const sellerName = productDetails.sellerData.name
   // console.log(sellerName)
-  // const seller = 
-  //get details of seller: 
+  // const seller =
+  //get details of seller:
   // const seller = fetch(`http://localhost:1000/api/goals/viewProfile/user${seller_id}`);
   // console.log(seller)
   const onSellerClick = (sellerId) => {
-    
-    console.log('hello il get you to the seller profile page', sellerId);
+    // console.log('seller id: ', sellerId);
+    // console.log(`logged in user user e : ${userEmail}`);
+    axios
+      .get(`api/posts/userByPost/${sellerId}`)
+      .then((res) => {
+        // can add res 200 500 404 scnz
+        // console.log(res.data.user._id === loggedInUserId);
+        if (res.data.user._id === loggedInUserId) {
+          navigate(`/viewp`, { state: res.data });
+        } else {
+          navigate('/SellerViewP', { state: res.data });
+        }
+        // navigate(`/SellerViewP`, { state: { user: res.data } });
+      })
+      .catch((error) => console.error('Profile showing error : ', error));
   };
 
   const onEditClick = () => {
-    navigate('/Editpost', { state: { productDetails} });
-  }
+    navigate('/Editpost', { state: { productDetails } });
+  };
   return (
     <>
       <Header />
-      <ProfileHeader />
       <div className='pmain'>
         <div className='postmain'>
           <div className='carm'>
@@ -66,21 +80,22 @@ const Viewpost = () => {
               //   backgroundPosition: 'center',
               // }}
             >
-              <Carousel style={{ with: '100%', height: '100%' }} />
+              <Carousel style={{ background: '#ac1616' }} />
             </div>
           </div>
           <div className='postcm'>
             <div className='postc'>
-              <h1 style={{ marginLeft: '-5%' }}>{productDetails.title} </h1>
-              <h1 style={{ marginLeft: '-65%' }}>{productDetails.price}</h1>
-              <div
-                className='end'
-                style={{ display: 'flex', justifyContent: 'space-between' }}
-              >
+              <h1>{productDetails.title} </h1>
+              <h1>{productDetails.price}</h1>
+              <div className='end'>
                 <div>
                   <h2>Posted By</h2>
-                  <h1 onClick={() => onSellerClick(seller_id)}>{sellerName}</h1>
-                  
+                  <h1
+                    style={{ textDecoration: 'underline', color: '#1c0040' }}
+                    onClick={() => onSellerClick(seller_id)}
+                  >
+                    {sellerName}
+                  </h1>
                 </div>
                 <div>
                   <button>Contact</button>
@@ -90,10 +105,10 @@ const Viewpost = () => {
                 </div>
                 {/* { if(flag == true){
                 <button>Edited Profile</button>
-
-
                 }} */}
-                {flag === true && <button onClick={() => onEditClick()}>Edit Post</button>}
+                {flag === true && (
+                  <button onClick={() => onEditClick()}>Edit Post</button>
+                )}
               </div>
             </div>
           </div>
