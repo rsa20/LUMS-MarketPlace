@@ -58,18 +58,26 @@ const removeFromWishlist = (async (req, res)=>{
         } else {
             return res.status(200).json({message:"Post removed from wishlist!"})
         }
-        });
+    });
 })
 
 const getUserWishlist = (async(req, res)=>{
+    console.log("whishlist called")
     const loggedInUserId = req.params.u_id
-    const wishlist = await Wishlist.find({
+    const wishlist = await Wishlist.findOne({
         user:loggedInUserId
     })
     if(!wishlist){
         return res.status(404).send({message:"User has no wishlist"})
     }
-    console.log(getUserWishlist)
+    // return res.send(wishlist)
+    post_ids = wishlist.posts
+    console.log(post_ids)
+    // return res.send(post_ids)
+    wishlistPosts = await Post.find({
+        _id: {$in : post_ids}
+    })
+    res.status(200).send(wishlistPosts)
 })
 
 module.exports = {addToWishlist, removeFromWishlist, getUserWishlist}

@@ -156,7 +156,7 @@ const loginUser = async (req, res) => {
       console.log('invalid pass!');
     }
   } else {
-    res.send({ message: 'email does not exist' });
+    res.status(404).send({ message: 'email does not exist' });
     console.log('email does not exist');
   }
   // res.status(200).json(getUserByEmail)
@@ -228,6 +228,8 @@ const deleteAllUsers = async (req, res) => {
   User.deleteMany({ email: { $ne: '' } });
   res.status(200).json({ message: 'DELETED USERS' });
 };
+
+// const deleteUser = async()
 
 module.exports = {
   updateUserProfile,
