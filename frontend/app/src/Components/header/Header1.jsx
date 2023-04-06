@@ -6,7 +6,7 @@ import l3 from './l3.png';
 import l4 from './l4.png';
 import l5 from './l5.png';
 import l6 from './l6.png';
-import axios from 'axios';
+// import axios from 'axios';
 import logo from './logo.png';
 // import logo2 from './logo2.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,9 +16,9 @@ import './Header1.css';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const loggedInUser = useSelector((state) => state.userObj.userObj);
-
   const [wish, setwish] = useState([]);
+  const [vsearch, setVsearch] = useState([]);
+
   const navigate = useNavigate([]);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   console.log(userEmail, 'user');
@@ -40,33 +40,61 @@ const Header = () => {
   const handle = (e) => {
     const value = e.target.value;
     setSearch(value);
+    console.log(search);
   };
-  const handleFilterSubmit = (e) => {
-    e.preventDefault();
-    axios.post('api/goals/login', { selectedFilter, priceRange, search });
-    console.log('Selected filter:', selectedFilter);
-    console.log('Price range:', priceRange);
+  // const handleFilterSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios.post('api/goals/login', { selectedFilter, priceRange, search });
+  //   console.log('Selected filter:', selectedFilter);
+  //   console.log('Price range:', priceRange);
+  // };
+  const handlC = async (selectedFilter, priceRange, search ) => {
+    console.log(selectedFilter, priceRange, search );
+    let myfilter;
+    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        myfilter = data;
+        console.log(myfilter)
+        setVsearch(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(vsearch, 'hmmm');
+    navigate('/vsea', { state: { myfilter } });  };
+  const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
+    console.log(selectedFilter, priceRange, search );
+    let myfilter;
+    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        myfilter = data;
+        console.log(myfilter)
+        setVsearch(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(vsearch, 'hmmm');
+    navigate('/vsea', { state: { myfilter } });
   };
-  const handlC = () => {
-    axios.post('api/goals/login', { selectedFilter, priceRange, search });
-  };
-  const viewWish = async ( u_id) => {
-    console.log(loggedInUser._id, "safsafd")
+  const viewWish = async (email) => {
+    console.log(email, 'safsafd');
     // const response = await fetch(`/api/posts/product ${email}`);
     // const data = await response.json();
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
     let mywish;
-    await fetch(`/api/wishlist/getWishlist/${u_id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data, "test")
-      mywish = data
-      setwish(data);
-    })
-    .catch((error) => console.log(error));
-    console.log(mywish, "hmmm")
+    await fetch('/api/posts/getAllProducts')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        mywish = data;
+        setwish(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(wish, 'hmmm');
     navigate('/wish', { state: { mywish } });
   };
   return (
@@ -92,8 +120,8 @@ const Header = () => {
           <Link to='/hello'>
             <img className='im' src={l3} alt='fuck of' />
           </Link>
-          <Link to='/hello' >
-            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
+          <Link to='/hello'>
+            <img onClick={viewWish} className='im' src={l2} alt='fuck of' />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />
