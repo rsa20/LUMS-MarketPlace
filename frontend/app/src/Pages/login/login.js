@@ -5,7 +5,7 @@ import img1 from './img1.png';
 import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUserEmail, setUserObj } from "../Redux/Store.jsx"
+import { setUserEmail, setUserObj } from '../Redux/Store.jsx';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -31,12 +31,13 @@ const Login = (props) => {
         // console.log(res.data, "thi")
         // alert(res.data.message);
         console.log(res.data, 'th');
-        dispatch(setUserObj(res.data))
+        dispatch(setUserObj(res.data));
         // props.setUserObj
         dispatch(setUserEmail(user.email));
         props.setLoginUser(res.data.user);
-        
-        navigate(`/viewP`, { state: { user: res.data } });
+
+        // navigate(`/viewP`, { state: { user: res.data } });
+        navigate(`/viewP`);
       })
       .catch((error) => console.error('Login Error: ', error));
   };

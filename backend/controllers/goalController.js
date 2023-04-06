@@ -20,14 +20,15 @@ const getUserByEmail = async (req, res) => {
 };
 
 const getUserbyId = async (req, res) => {
-  // console.log("what")
   const id = req.params.id;
   console.log('User id', id);
   try {
-    const user = await User.findById(id);
+    // const user = await User.findById(id);
+    const user = await User.findOne({ _id: id });
     if (!user) {
       return res.status(404).send({ message: 'user not found' });
     }
+    console.log('user after updation', user);
     return res.json(user);
   } catch (error) {
     return res.status(500).send({ message: 'DB Error' });

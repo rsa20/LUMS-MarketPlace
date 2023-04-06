@@ -13,14 +13,17 @@ export const Viewp = () => {
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   console.log(userEmail, 'userEmail');
   console.log(loggedInUser, 'logged in user2');
-  const location = useLocation();
   const [user, setUser] = useState('');
 
+  // const location = useLocation();
+  // console.log(location.state.user);
+
   useEffect(() => {
-    if (location.state) {
-      setUser(location.state.user);
-    }
-  }, [location.state]);
+    // if (location.state) {
+    //   setUser(location.state.user);
+    // }
+    setUser(loggedInUser);
+  }, [loggedInUser]);
   console.log(user, 'hello this is user');
   return (
     <>

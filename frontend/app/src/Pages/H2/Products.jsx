@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux';
 const Product = ({ id, title, image, price }) => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
-  console.log(loggedInUser._id, 'user2');
-  console.log(userEmail, 'user');
-  console.log(title, 'asdjfbajksdfbsajdfk');
+  // console.log(loggedInUser._id, 'user2');
+  // console.log(userEmail, 'user');
+  // console.log(title, 'asdjfbajksdfbsajdfk');
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 

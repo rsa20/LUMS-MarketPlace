@@ -11,11 +11,13 @@ import Footer from './Components/Footer/Footer';
 import Navbar from './Components/Phead/Fh';
 import Home2 from './Pages/H2/Home2';
 import ReviewsProfile from './Pages/ReviewsProfile/ReviewsProfile';
+import ReviewsSeller from './Pages/ReviewsSeller/ReviewsSeller';
 import CreatePost from './Pages/AddPost/Addpost';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditPost from './Pages/EditPost/Editpost';
 import SellerViewP from './Pages/SellerViewP/SellerViewP';
 import Wishlist from './Pages/wishlist/Wishlist';
+import AddReviews from './Pages/AddReviews/AddReviews';
 // import WishItem from './Pages/wishlist/Wishlist'
 
 // Moez extra
@@ -69,6 +71,8 @@ function App() {
           <Route exact path='/ReviewsP' element={<ReviewsProfile />} />
           {/* extras */}
           <Route exact path='/SellerViewP' element={<SellerViewP />} />
+          <Route exact path='/ReviewsSeller' element={<ReviewsSeller />} />
+          <Route exact path='/AddReviews' element={<AddReviews />} />
           <Route exact path='/wish' element={<Wishlist />} />
           <Route exact path='/hello' element={<Hello />} />
         </Routes>
