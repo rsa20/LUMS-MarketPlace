@@ -13,14 +13,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import './Header1.css';
-import { useNavigate } from "react-router-dom";
-// import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const loggedInUser = useSelector((state) => state.userObj.userObj);
 
   const [wish, setwish] = useState([]);
-const navigate = useNavigate([]);
+  const navigate = useNavigate([]);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   console.log(userEmail, 'user');
   const [showFilterOptions, setShowFilterOptions] = useState(false);
@@ -69,7 +68,6 @@ const navigate = useNavigate([]);
     .catch((error) => console.log(error));
     console.log(mywish, "hmmm")
     navigate('/wish', { state: { mywish } });
-
   };
   return (
     <div className='header'>

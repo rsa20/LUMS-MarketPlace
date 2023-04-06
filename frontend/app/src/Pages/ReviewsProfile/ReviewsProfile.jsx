@@ -55,7 +55,6 @@ export default ReviewsProfile;
 
 // Hard code data
 // const ReviewsProfile = () => {
-
 //   const reviews = [
 //     {
 //       reviewerName: 'Abdul',
