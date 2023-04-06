@@ -7,7 +7,7 @@ const nodemailer = require('../config/nodemailer');
 // get all goals
 // added by mmoez // it will get eail id and will share all the detalis of the user
 const getUserbyId = async (req, res) => {
-  console.log("what")
+  // console.log("what")
   const id = req.params.id;
   // console.log(id);
   try {
@@ -82,7 +82,7 @@ const loginUser = async (req, res) => {
       console.log('invalid pass!');
     }
   } else {
-    res.send({ message: 'email does not exist' });
+    res.status(404).send({ message: 'email does not exist' });
     console.log('email does not exist');
   }
   // res.status(200).json(getUserByEmail)
@@ -154,6 +154,8 @@ const deleteAllUsers = async (req, res) => {
   User.deleteMany({ email: { $ne: '' } });
   res.status(200).json({ message: 'DELETED USERS' });
 };
+
+// const deleteUser = async()
 
 module.exports = {
   updateUserProfile,

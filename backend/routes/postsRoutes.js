@@ -13,3 +13,4 @@ postRouter.route('/getAllProducts').get(getAllPosts);
 postRouter.route('/product:id/:u_id').get(getPostbyID);
 
 module.exports = postRouter;
+   

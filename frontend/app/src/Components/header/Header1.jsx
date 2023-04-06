@@ -14,8 +14,11 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import './Header1.css';
 import { useNavigate } from "react-router-dom";
+// import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const loggedInUser = useSelector((state) => state.userObj.userObj);
+
   const [wish, setwish] = useState([]);
 const navigate = useNavigate([]);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
@@ -48,15 +51,15 @@ const navigate = useNavigate([]);
   const handlC = () => {
     axios.post('api/goals/login', { selectedFilter, priceRange, search });
   };
-  const viewWish = async ( email) => {
-    console.log(email, "safsafd")
+  const viewWish = async ( u_id) => {
+    console.log(loggedInUser._id, "safsafd")
     // const response = await fetch(`/api/posts/product ${email}`);
     // const data = await response.json();
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
-    let mywish
-     await fetch('/api/posts/getAllProducts')
+    let mywish;
+    await fetch(`/api/wishlist/getWishlist/${u_id}`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data, "test")
@@ -64,7 +67,7 @@ const navigate = useNavigate([]);
       setwish(data);
     })
     .catch((error) => console.log(error));
-    console.log(wish, "hmmm")
+    console.log(mywish, "hmmm")
     navigate('/wish', { state: { mywish } });
 
   };
@@ -92,7 +95,7 @@ const navigate = useNavigate([]);
             <img className='im' src={l3} alt='fuck of' />
           </Link>
           <Link to='/hello' >
-            <img onClick={viewWish} className='im' src={l2} alt='fuck of' />
+            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />
