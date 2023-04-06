@@ -14,11 +14,14 @@ import { setUserObj, setUserEmail } from '../Redux/Store.jsx';
 const Edit = () => {
   // const navigate = useNavigate();
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
+  const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
 
   console.log(userEmail, 'sjkdfsjkfn');
+  console.log(loggedInUser.email, 'sjkdfsjkfn');
+
   const [user, setUser] = useState({
+    id: loggedInUser._id,
     name: '',
     email: '',
     password: '',
@@ -37,6 +40,7 @@ const Edit = () => {
   };
   const cancle = () => {
     setUser({
+      id: loggedInUser._id,
       name: '',
       email: '',
       password: '',
@@ -81,18 +85,17 @@ const Edit = () => {
     axios
       .put('api/goals/updateProfile', user)
       .then((res) => {
-        alert('Details changed');
         // resdata should be user details user obj in reducer
         const updateSlicer = async () => {
           try {
             const response = await fetch(
-              `api/goals/viewProfile/user${loggedInUserId}`
+              `api/goals/viewProfile/user${loggedInUser._id}`
             );
             if (!response.ok) {
               console.error(`HTTP error! status: ${response.status}`);
             }
             const user = await response.json();
-            console.log(user);
+            console.log('after update', user);
             dispatch(setUserObj(user));
             dispatch(setUserEmail(user.email));
           } catch (error) {
@@ -100,6 +103,14 @@ const Edit = () => {
           }
         };
         updateSlicer();
+        setUser({
+          id: loggedInUser._id,
+          name: '',
+          email: '',
+          password: '',
+          reEnterPassword: '',
+        });
+        alert('Details changed');
         // navigate("/login");
       })
       .catch((error) => {
