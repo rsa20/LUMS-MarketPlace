@@ -123,6 +123,7 @@ const Home = () => {
           title={product.title}
           image={he1}
           price={product.price}
+          key={product._id}
           // status={product.status}
         />
       ))}

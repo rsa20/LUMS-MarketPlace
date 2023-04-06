@@ -17,9 +17,9 @@
   font-weight: 600;
 }
 
-.s-profile-header div div a:hover {
+/* .s-profile-header div div a:hover {
   color: #c500f7;
-}
+} */
 
 .s-container {
   /* background-color: #c500f7; */
@@ -34,6 +34,19 @@
   margin-right: 6%;
   padding: auto 0%;
 }
+/* .s-profile-header-btn:hover {
+  background-color: #1c0040;
+} */
+.s-profile-header-btn-active {
+  /* background-color: aqua; */
+  padding: 1% 0.5%;
+  margin-right: 6%;
+  padding: auto 0%;
+  border-bottom: 0.35vw solid #fffffa;
+}
+/* .s-profile-header-btn-active:hover {
+  background-color: #1c0040;
+} */
 
 @media all and (max-width: 450px) {
   .s-profile-header div div a {

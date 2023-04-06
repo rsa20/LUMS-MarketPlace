@@ -11,8 +11,12 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { setSellerObj } from '../Redux/Store.jsx';
+
 const Viewpost = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [productDetails, setProduct] = useState('');
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
@@ -52,9 +56,9 @@ const Viewpost = () => {
         if (res.data.user._id === loggedInUserId) {
           navigate(`/viewp`, { state: res.data });
         } else {
-          navigate('/SellerViewP', { state: res.data });
+          dispatch(setSellerObj(res.data));
+          navigate('/SellerViewP');
         }
-        // navigate(`/SellerViewP`, { state: { user: res.data } });
       })
       .catch((error) => console.error('Profile showing error : ', error));
   };

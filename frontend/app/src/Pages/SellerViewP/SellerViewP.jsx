@@ -5,22 +5,24 @@ import Footer from '../../Components/Footer/Footer';
 import SellerPHead from '../../Components/SellerPHead/SellerPHead';
 import img from './placeholderimg.jpg';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SellerViewP = () => {
-  const location = useLocation();
-  const [user, setUser] = useState('');
-
-  useEffect(() => {
-    if (location.state) {
-      setUser(location.state.user);
-    }
-  }, [location.state]);
-  console.log(user, 'hello this is user in seller profile');
+  // const location = useLocation();
+  // const [user, setUser] = useState('');
+  // useEffect(() => {
+  //   if (location.state) {
+  //     setUser(location.state.user);
+  //   }
+  // }, [location.state]);
+  const seller = useSelector((state) => state.sellerObj.sellerObj).user;
+  console.log(seller, 'hello this is user in seller profile');
 
   return (
     <div>
       <Header></Header>
-      <SellerPHead />
+      {/* <SellerPHead id={user._id} /> */}
+      <SellerPHead page='P' />
       {/* <h1>SellerViewP</h1> */}
       <div className='profile'>
         <div className='pro'>
@@ -34,10 +36,10 @@ const SellerViewP = () => {
           </div>
           <div className='co'>
             <p>Name</p>
-            <h2>{user.name}</h2>
+            <h2>{seller.name}</h2>
             {/* <h2>Talha Bhatti</h2> */}
             <p>Email</p>
-            <h2>{user.email}</h2>
+            <h2>{seller.email}</h2>
             {/* <h2>Talha_Bhatti@lums.edu.pk</h2> */}
             <p>Account</p>
             <h2>Users</h2>
