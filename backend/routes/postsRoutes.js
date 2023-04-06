@@ -15,3 +15,4 @@ postRouter.route('/product:id/:u_id').get(getPostbyID);
 postRouter.route('/userByPost/:seller_id').get(getUserByPost);
 
 module.exports = postRouter;
+   

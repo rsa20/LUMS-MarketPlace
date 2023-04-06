@@ -6,7 +6,7 @@ import l3 from './l3.png';
 import l4 from './l4.png';
 import l5 from './l5.png';
 import l6 from './l6.png';
-import axios from 'axios';
+// import axios from 'axios';
 import logo from './logo.png';
 // import logo2 from './logo2.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [wish, setwish] = useState([]);
+  const [vsearch, setVsearch] = useState([]);
+
   const navigate = useNavigate([]);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   console.log(userEmail, 'user');
@@ -38,15 +40,43 @@ const Header = () => {
   const handle = (e) => {
     const value = e.target.value;
     setSearch(value);
+    console.log(search);
   };
-  const handleFilterSubmit = (e) => {
-    e.preventDefault();
-    axios.post('api/goals/login', { selectedFilter, priceRange, search });
-    console.log('Selected filter:', selectedFilter);
-    console.log('Price range:', priceRange);
-  };
-  const handlC = () => {
-    axios.post('api/goals/login', { selectedFilter, priceRange, search });
+  // const handleFilterSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   axios.post('api/goals/login', { selectedFilter, priceRange, search });
+  //   console.log('Selected filter:', selectedFilter);
+  //   console.log('Price range:', priceRange);
+  // };
+  const handlC = async (selectedFilter, priceRange, search ) => {
+    console.log(selectedFilter, priceRange, search );
+    let myfilter;
+    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        myfilter = data;
+        console.log(myfilter)
+        setVsearch(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(vsearch, 'hmmm');
+    navigate('/vsea', { state: { myfilter } });  };
+  const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
+    console.log(selectedFilter, priceRange, search );
+    let myfilter;
+    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        myfilter = data;
+        console.log(myfilter)
+        setVsearch(data);
+      })
+      .catch((error) => console.log(error));
+    console.log(vsearch, 'hmmm');
+    navigate('/vsea', { state: { myfilter } });
   };
   const viewWish = async (email) => {
     console.log(email, 'safsafd');
