@@ -20,8 +20,9 @@ const Header = () => {
   const [vsearch, setVsearch] = useState([]);
 
   const navigate = useNavigate([]);
+  const loggedInUser = useSelector((state) => state.userObj.userObj);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
-  console.log(userEmail, 'user');
+  // console.log(userEmail, 'user');
   const [showFilterOptions, setShowFilterOptions] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
 
@@ -52,7 +53,7 @@ const Header = () => {
   const handlC = async (selectedFilter, priceRange, search ) => {
     console.log(selectedFilter, priceRange, search );
     let myfilter;
-    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -63,10 +64,11 @@ const Header = () => {
       .catch((error) => console.log(error));
     console.log(vsearch, 'hmmm');
     navigate('/vsea', { state: { myfilter } });  };
-  const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
+
+    const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
     console.log(selectedFilter, priceRange, search );
     let myfilter;
-    await fetch('api/goals/login',{ selectedFilter, priceRange, search })
+    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -78,15 +80,16 @@ const Header = () => {
     console.log(vsearch, 'hmmm');
     navigate('/vsea', { state: { myfilter } });
   };
-  const viewWish = async (email) => {
-    console.log(email, 'safsafd');
+
+  const viewWish = async (userID) => {
+    console.log(userID, 'safsafd');
     // const response = await fetch(`/api/posts/product ${email}`);
     // const data = await response.json();
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
     let mywish;
-    await fetch('/api/posts/getAllProducts')
+    await fetch(`/api/wishlist/getWishlist/${userID}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -94,7 +97,7 @@ const Header = () => {
         setwish(data);
       })
       .catch((error) => console.log(error));
-    console.log(wish, 'hmmm');
+    // console.log(wish, 'hmmm');
     navigate('/wish', { state: { mywish } });
   };
   return (
@@ -120,8 +123,8 @@ const Header = () => {
           <Link to='/hello'>
             <img className='im' src={l3} alt='fuck of' />
           </Link>
-          <Link to='/hello'>
-            <img onClick={viewWish} className='im' src={l2} alt='fuck of' />
+          <Link>
+            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />

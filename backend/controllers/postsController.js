@@ -19,6 +19,31 @@ async function getUserByPost(req, res) {
   }
 }
 
+const getPostsbyUser = async(req, res)=>{
+  console.log("here")
+    
+    // console.log(req)
+  const user_id = req.params.u_id
+  // console.log("user id:",user_id)
+  const userfound = await User.findOne({
+    _id : user_id
+  })
+  // console.log("user found:", userfound)
+  const post_ids = userfound.posts
+  console.log("post id: ", post_ids)
+  userPosts = await Post.find({
+    _id: {$in : post_ids}
+  })
+  if(!userPosts){
+    return res.status(404).send({message:"No posts"})
+  }
+  console.log("Posts sent")
+  return res.status(200).send(userPosts)
+  
+  
+
+}
+
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find({});
@@ -60,7 +85,7 @@ const createPost = async (req, res) => {
   if (!req.body) {
     return res.status(404).json({ message: 'Missing post fields' });
   }
-  const { title, description, price, tags } = req.body.params.Post;
+  const { title, description, price, tags, image } = req.body.params.Post;
   const useremail = req.body.params.userEmail;
   console.log(useremail);
   const user = await User.findOne({
@@ -180,4 +205,5 @@ module.exports = {
   getAllPosts,
   getPostbyID,
   getUserByPost,
+  getPostsbyUser
 };
