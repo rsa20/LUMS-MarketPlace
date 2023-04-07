@@ -44,10 +44,7 @@ const ReviewsProfile = () => {
   // }, [location.state]);
   // console.log(reviews);
   const allReviews = reviews.map((review) => (
-    <Review
-      // key={toString(review._id)}
-      {...review}
-    />
+    <Review key={toString(review._id)} {...review} />
   ));
   return (
     <>

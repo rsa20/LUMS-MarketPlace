@@ -134,7 +134,7 @@ const AddReviews = () => {
           </div>
         </form>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

@@ -18,6 +18,7 @@ import EditPost from './Pages/EditPost/Editpost';
 import SellerViewP from './Pages/SellerViewP/SellerViewP';
 import Wishlist from './Pages/wishlist/Wishlist';
 import AddReviews from './Pages/AddReviews/AddReviews';
+import ViewUserAdmin from './Pages/ViewUserAdmin/ViewUserAdmin';
 // import WishItem from './Pages/wishlist/Wishlist'
 
 // Moez extra
@@ -75,6 +76,7 @@ function App() {
           <Route exact path='/AddReviews' element={<AddReviews />} />
           <Route exact path='/wish' element={<Wishlist />} />
           <Route exact path='/hello' element={<Hello />} />
+          <Route exact path='/ViewUserAdmin' element={<ViewUserAdmin />} />
         </Routes>
       </Router>
       {/* <Header/> */}
