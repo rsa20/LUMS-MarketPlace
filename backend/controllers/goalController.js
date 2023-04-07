@@ -57,17 +57,77 @@ const updateUserProfile = async (req, res) => {
     user.password = hash;
   }
   // user.password = req.body.password || user.password;
-
   const updatedUser = await User.findOneAndUpdate({ _id: user._id }, user, {
     new: true,
   });
-
+  if (!updatedUser) {
+    return res.status(500).json({
+      message: 'Entered email is already linked with another account',
+    });
+  }
   res.status(200).json({
     _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
   });
 };
+// const updateUserProfile = async (req, res) => {
+//   const user = await User.findOne({ email: req.body.id });
+//   const userbyEmail = await User.findOne({ email: req.body.email });
+
+//   // if (userbyEmail && userbyEmail.email !== user.email) {
+//   //   return res.status(500).json({
+//   //     message: 'Entered email is already linked with another account',
+//   //   });
+//   // } else
+//   if (!userbyEmail) {
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     user.name = req.body.name || user.name;
+//     user.email = req.body.email || user.email;
+//     if (req.body.password) {
+//       const hash = await bcrypt.hash(req.body.password, 10);
+//       user.password = hash;
+//     }
+//     const updatedUser = await User.findOneAndUpdate({ _id: user._id }, user, {
+//       new: true,
+//     });
+
+//     res.status(200).json({
+//       _id: updatedUser._id,
+//       name: updatedUser.name,
+//       email: updatedUser.email,
+//     });
+//   } else {
+//     if (userbyEmail.email != user.email) {
+//       if (!user) {
+//         return res.status(404).json({ message: 'User not found' });
+//       }
+
+//       user.name = req.body.name || user.name;
+//       user.email = req.body.email || user.email;
+//       if (req.body.password) {
+//         const hash = await bcrypt.hash(req.body.password, 10);
+//         user.password = hash;
+//       }
+//       const updatedUser = await User.findOneAndUpdate({ _id: user._id }, user, {
+//         new: true,
+//       });
+
+//       res.status(200).json({
+//         _id: updatedUser._id,
+//         name: updatedUser.name,
+//         email: updatedUser.email,
+//       });
+//     } else {
+//       return res.status(500).json({
+//         message: 'Entered email is already linked with another account',
+//       });
+//     }
+//   }
+// };
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
