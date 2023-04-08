@@ -95,8 +95,12 @@ const AddReviews = () => {
             value={reviewScore}
             onChange={handleReviewScoreChange}
           />
-          <label className='addRev-label' htmlFor='reviewText'>
-            Review Text {'(1-200) characters'}
+          <label
+            className='addRev-label'
+            htmlFor='reviewText'
+            style={{ marginTop: '1vw' }}
+          >
+            Review Text (1-200) characters
           </label>
           <textarea
             className='addRev-textarea'

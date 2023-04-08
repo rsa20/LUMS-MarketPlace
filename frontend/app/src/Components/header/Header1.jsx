@@ -55,8 +55,9 @@ const Header = () => {
     console.log(selectedFilter, priceRange, search);
     let myfilter;
 
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
-
+    await fetch('api/search/filtersearch', {
+      params: { selectedFilter, priceRange, search },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -67,13 +68,15 @@ const Header = () => {
       .catch((error) => console.log(error));
     console.log(vsearch, 'hmmm');
 
-    navigate('/vsea', { state: { myfilter } });  };
+    navigate('/vsea', { state: { myfilter } });
+  };
 
-    const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
-    console.log(selectedFilter, priceRange, search );
+  const handleFilterSubmit = async (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search);
     let myfilter;
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
-
+    await fetch('api/search/filtersearch', {
+      params: { selectedFilter, priceRange, search },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -120,13 +123,12 @@ const Header = () => {
         </div>
         <div className='icon-container'>
           {userEmail === '24100244@lums.edu.pk' ? (
-            <Link to='/ViewUserAdmin'>
+            <Link to='/ViewUserAdmin' style={{ marginRight: '0.9vw' }}>
               <FontAwesomeIcon
                 icon={faFolder}
                 style={{
                   color: '#fffffa',
                   fontSize: '1.7vw',
-                  marginRight: '0.9vw',
                 }}
               />
             </Link>
@@ -143,7 +145,12 @@ const Header = () => {
             <img className='im' src={l3} alt='fuck of' />
           </Link>
           <Link>
-            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
+            <img
+              onClick={() => viewWish(loggedInUser._id)}
+              className='im'
+              src={l2}
+              alt='fuck of'
+            />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />
