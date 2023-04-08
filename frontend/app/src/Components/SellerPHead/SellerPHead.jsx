@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 
 const SellerPHeader = ({ page }) => {
   console.log(page);
@@ -14,7 +15,7 @@ const SellerPHeader = ({ page }) => {
     setHeaderSt(page);
   }, [page]);
   // console.log('seller profile header', id);
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
   // const [sellerId, setSellerId] = useState('');
   // useEffect(() => {
   //   if (id) {
@@ -30,22 +31,41 @@ const SellerPHeader = ({ page }) => {
   //     .get(`/api/goals/viewProfile/user${seller_Id}`)
   //     .then((res) => {
   //       // console.log('in Pheader line22', res.data);
-  //       navigateTo(`/SellerViewP`, { state: { user: res.data } });
+  //       navigate(`/SellerViewP`, { state: { user: res.data } });
   //     })
   //     .catch((error) => console.error('Profile showing error : ', error));
   // };
   const toSellerProfile = () => {
     // setHeaderSt('P');
-    navigateTo(`/SellerViewP`);
+    navigate(`/SellerViewP`);
   };
 
   // Listing Ads
 
+  const toSellerposts = async (seller) => {
+
+    console.log("fetch seller posts", seller)
+    
+    let mywish;
+    const sellerID = seller._id
+    await fetch(`/api/posts/getSellerPosts${sellerID}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data, 'test');
+        mywish = data;
+        // setwish(data);
+      })
+      .catch((error) => console.log(error));
+    // console.log(wish, 'hmmm');
+    navigate('/wish', { state: { mywish } });
+
+  }
+
   // AddReviews
   const toAddReviews = (RevieweeId) => {
     // setHeaderSt('A');
-    // navigateTo(`/AddReviews`, { state: { R_id: RevieweeId } });
-    navigateTo(`/AddReviews`);
+    // navigate(`/AddReviews`, { state: { R_id: RevieweeId } });
+    navigate(`/AddReviews`);
   };
 
   // Reviews list
@@ -61,7 +81,7 @@ const SellerPHeader = ({ page }) => {
       }
       const reviews = await response.json();
       console.log(reviews);
-      navigateTo('/ReviewsSeller', { state: { data: reviews } });
+      navigate('/ReviewsSeller', { state: { data: reviews } });
     } catch (error) {
       console.error(`Error fetching reviews: ${error.message}`);
       // return null;
@@ -83,8 +103,9 @@ const SellerPHeader = ({ page }) => {
 
         <div
           className={`s-profile-header-btn${headerSt === 'L' ? '-active' : ''}`}
+          onClick={() => toSellerposts(sellerObj)}
         >
-          <Link to='/hello' className='s-linkk'>
+          <Link className='s-linkk'>
             Listing Ads
             {/* <a className='s-linkk'>Edit & delete</a> */}
           </Link>

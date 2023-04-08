@@ -47,7 +47,7 @@ const Product = ({ id, title, image, price }) => {
     const seller = await fetch(`/api/goals/viewProfile/user${user}`);
     const sellerName = (await seller.json()).name;
 
-    // console.log(seller_name, "seller")
+    console.log(sellerName, "seller")
 
     const productDetails = {
       title,

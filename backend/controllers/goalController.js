@@ -28,7 +28,7 @@ const getUserbyId = async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: 'user not found' });
     }
-    console.log('user after updation', user);
+    // console.log('user after updation', user);
     return res.json(user);
   } catch (error) {
     return res.status(500).send({ message: 'DB Error' });
@@ -138,6 +138,7 @@ const loginUser = async (req, res) => {
   // console.log(req.body)
 
   if (getUserByEmail) {
+    
     if (!getUserByEmail.email_verification) {
       return res.status(401).send({
         message:
