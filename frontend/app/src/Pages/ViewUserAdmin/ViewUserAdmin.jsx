@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserView from '../../Components/UserView/UserView';
-import Header from '../../Components/header/Header1';
+import AdminHeader from '../../Components/AdminHeader/AdminHeader';
 import Footer from '../../Components/Footer/Footer';
 
 const ViewUserAdmin = () => {
@@ -23,7 +23,7 @@ const ViewUserAdmin = () => {
   }, []);
 
   useEffect(() => {
-    console.log(userArray);
+    // console.log(userArray);
   }, [userArray]);
 
   let i = 0;
@@ -38,10 +38,10 @@ const ViewUserAdmin = () => {
 
   return (
     <div>
-      {/* <Header></Header> */}
+      <AdminHeader></AdminHeader>
       <h1 style={{ marginTop: '3.5vw', color: '#1c0040' }}>All Users</h1>
       {allUsers}
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };
