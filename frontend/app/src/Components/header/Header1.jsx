@@ -14,6 +14,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import './Header1.css';
 import { useNavigate } from 'react-router-dom';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const [wish, setwish] = useState([]);
@@ -50,30 +51,37 @@ const Header = () => {
   //   console.log('Selected filter:', selectedFilter);
   //   console.log('Price range:', priceRange);
   // };
-  const handlC = async (selectedFilter, priceRange, search ) => {
-    console.log(selectedFilter, priceRange, search );
+  const handlC = async (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search);
     let myfilter;
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
+
+    await fetch('api/search/filtersearch', {
+      params: { selectedFilter, priceRange, search },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
         myfilter = data;
-        console.log(myfilter)
+        console.log(myfilter);
         setVsearch(data);
       })
       .catch((error) => console.log(error));
     console.log(vsearch, 'hmmm');
-    navigate('/vsea', { state: { myfilter } });  };
 
-    const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
-    console.log(selectedFilter, priceRange, search );
+    navigate('/vsea', { state: { myfilter } });
+  };
+
+  const handleFilterSubmit = async (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search);
     let myfilter;
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
+    await fetch('api/search/filtersearch', {
+      params: { selectedFilter, priceRange, search },
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
         myfilter = data;
-        console.log(myfilter)
+        console.log(myfilter);
         setVsearch(data);
       })
       .catch((error) => console.log(error));
@@ -114,6 +122,19 @@ const Header = () => {
           </Link>
         </div>
         <div className='icon-container'>
+          {userEmail === '24100244@lums.edu.pk' ? (
+            <Link to='/ViewUserAdmin' style={{ marginRight: '0.9vw' }}>
+              <FontAwesomeIcon
+                icon={faFolder}
+                style={{
+                  color: '#fffffa',
+                  fontSize: '1.7vw',
+                }}
+              />
+            </Link>
+          ) : (
+            ''
+          )}
           <Link to='/Addpost'>
             <img className='im' src={l5} alt='fuck of' />
           </Link>
@@ -124,7 +145,12 @@ const Header = () => {
             <img className='im' src={l3} alt='fuck of' />
           </Link>
           <Link>
-            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
+            <img
+              onClick={() => viewWish(loggedInUser._id)}
+              className='im'
+              src={l2}
+              alt='fuck of'
+            />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />

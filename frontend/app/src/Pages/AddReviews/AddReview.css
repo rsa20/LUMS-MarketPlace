@@ -46,8 +46,10 @@
 .addRev-textarea {
   border: 1px solid #1c0040;
   border-radius: 0.5vw;
-  color: #1c0040;
+  /* color: #1c0040; */
   background-color: #fffffa;
+  font-family: 'Poppins';
+  font-weight: 500;
 }
 
 .addRev-btns {

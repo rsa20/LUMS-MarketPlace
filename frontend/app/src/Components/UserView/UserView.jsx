@@ -56,7 +56,7 @@ const UserView = ({
     axios
       .get(`api/goals/viewProfile/user${id_}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(setSellerObj({ user: res.data }));
         navigate('/SellerViewP');
       })
@@ -65,7 +65,20 @@ const UserView = ({
 
   return (
     <div className='uv-userView-con' onClick={toSellerProfile}>
-      <h4 className='uv-userView-heading'>User{children_}</h4>
+      <div className='uv-userView-start'>
+        <h4 className='uv-userView-heading'>User{children_}</h4>
+        <button
+          style={{
+            color: '#fffffa',
+            fontFamily: 'inherit',
+            backgroundColor: 'rgb(204, 0, 0)',
+            fontSize: '12px',
+            borderRadius: '10px',
+          }}
+        >
+          Delete
+        </button>
+      </div>
       <div
         className='uv-userView-imageContainer'
         style={{
