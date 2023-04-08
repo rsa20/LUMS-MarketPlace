@@ -16,7 +16,7 @@ const AdminHeader = () => {
           </Link>
         </div>
         <div className='ah-link-con'>
-          <Link className='ah-link' to=''>
+          <Link className='ah-link' to='/PostViewAdmin'>
             Posts
           </Link>
         </div>

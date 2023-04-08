@@ -19,39 +19,75 @@ async function getUserByPost(req, res) {
   }
 }
 
-const getPostsbyUser = async(req, res)=>{
-  console.log("here")
-    
-    // console.log(req)
-  const user_id = req.params.u_id
+const getPostsbyUser = async (req, res) => {
+  console.log('here');
+
+  // console.log(req)
+  const user_id = req.params.u_id;
   // console.log("user id:",user_id)
   const userfound = await User.findOne({
-    _id : user_id
-  })
+    _id: user_id,
+  });
   // console.log("user found:", userfound)
-  const post_ids = userfound.posts
-  console.log("post id: ", post_ids)
+  const post_ids = userfound.posts;
+  console.log('post id: ', post_ids);
   userPosts = await Post.find({
-    _id: {$in : post_ids}
-  })
-  if(!userPosts){
-    return res.status(404).send({message:"No posts"})
+    _id: { $in: post_ids },
+  });
+  if (!userPosts) {
+    return res.status(404).send({ message: 'No posts' });
   }
-  console.log("Posts sent")
-  return res.status(200).send(userPosts)
-  
-  
-
-}
+  console.log('Posts sent');
+  return res.status(200).send(userPosts);
+};
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).sort({
+      date_created: 'desc',
+    });
     if (!posts) {
       return res.status(404).send({ message: 'No posts found' });
     }
     // console.log(posts)
     return res.status(200).send(posts);
+  } catch (error) {
+    return res.status(500).send({ message: 'DB Error' });
+  }
+};
+
+const allProductsWithUserName = async (req, res) => {
+  try {
+    const posts = await Post.find({}).sort({
+      date_created: 'desc',
+    });
+    if (!posts) {
+      return res.status(404).send({ message: 'No posts found' });
+    }
+    // console.log(posts)
+    //
+    const formattedPosts = await Promise.all(
+      posts.map(async (post) => {
+        const poster = await User.findById(post.user);
+        // console.log(reviewer);
+        return {
+          _id: post._id,
+          title: post.title,
+          description: post.description,
+          price: post.price,
+          status: post.status,
+          sold_date: post.sold_date,
+          img_URL: post.img_URL,
+          date_created: post.date_created,
+          tags: post.tags,
+          flags: post.flags,
+          user: post.user,
+          seller: poster.user_name,
+        };
+      })
+    );
+    //
+    return res.status(200).send(formattedPosts);
   } catch (error) {
     return res.status(500).send({ message: 'DB Error' });
   }
@@ -205,5 +241,6 @@ module.exports = {
   getAllPosts,
   getPostbyID,
   getUserByPost,
-  getPostsbyUser
+  getPostsbyUser,
+  allProductsWithUserName,
 };

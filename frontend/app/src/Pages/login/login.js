@@ -10,7 +10,7 @@ import { setUserEmail, setUserObj } from '../Redux/Store.jsx';
 const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [logId, setLogId] = useState('');
+  // const [logId, setLogId] = useState('');
 
   const [user, setUser] = useState({
     email: '',
@@ -43,7 +43,7 @@ const Login = (props) => {
           .get('api/admin/getAdmin')
           .then((response) => {
             // res.data is admin id here
-            console.log('here', res.data.id);
+            // console.log('here', res.data.id);
             if (response.data === res.data._id) {
               console.log('Admin', response.data);
               navigate(`/ViewUserAdmin`);

@@ -31,6 +31,7 @@ const Viewpost = () => {
       setProduct(location.state.productDetails);
     }
   }, [location.state]);
+  console.log(productDetails);
   const flag = productDetails.state;
   console.log('flag: ', flag);
 
