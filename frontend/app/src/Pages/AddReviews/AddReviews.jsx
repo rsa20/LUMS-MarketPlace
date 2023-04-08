@@ -14,6 +14,8 @@ const AddReviews = () => {
   const reviewed = useSelector((state) => state.sellerObj.sellerObj).user;
   const reviewer = useSelector((state) => state.userObj.userObj);
   // const [resp, setResp] = useState('');
+  console.log('reviewed', reviewed);
+  console.log('reviewer', reviewer);
 
   useEffect(() => {
     setReviewedId(reviewed._id);
