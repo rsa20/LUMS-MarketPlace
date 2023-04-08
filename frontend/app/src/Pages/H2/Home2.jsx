@@ -115,20 +115,22 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='products'>
+    <>
       <Header />
-      {products.map((product) => (
-        <Product
-          id={product._id}
-          title={product.title}
-          image={he1}
-          price={product.price}
-          key={product._id}
-          // status={product.status}
-        />
-      ))}
+      <div className='products' style={{ padding: '2.5vw 7vw' }}>
+        {products.map((product) => (
+          <Product
+            id={product._id}
+            title={product.title}
+            image={he1}
+            price={product.price}
+            key={product._id}
+            // status={product.status}
+          />
+        ))}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
