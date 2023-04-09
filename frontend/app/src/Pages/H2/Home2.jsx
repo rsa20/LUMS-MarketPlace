@@ -1,7 +1,7 @@
 // import React from 'react';
 // import Product from './Products';
 // import he from './he.jpg';
-import he1 from './he1.jpg';
+// import he1 from './he1.jpg';
 // import blank from './f3.png'
 // import he2 from './he2.jpg';
 // import he3 from './he3.jpg';
@@ -113,17 +113,18 @@ const Home = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
+  console.log(products[0]);
   return (
     <>
       <Header />
-      <div className='products' style={{ padding: '2.5vw 7vw' }}>
+      <div className='products' style={{ padding: '2.5vw 1vw' }}>
         {products.map((product) => (
           <Product
-            id={product._id}
-            title={product.title}
-            image={he1}
-            price={product.price}
+            // id={product._id}
+            // title={product.title}
+            // image={he1}
+            // price={product.price}
+            {...product}
             key={product._id}
             // status={product.status}
           />

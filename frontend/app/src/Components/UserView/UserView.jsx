@@ -64,9 +64,11 @@ const UserView = ({
   };
 
   return (
-    <div className='uv-userView-con' onClick={toSellerProfile}>
+    <div className='uv-userView-con'>
       <div className='uv-userView-start'>
-        <h4 className='uv-userView-heading'>User{children_}</h4>
+        <h4 className='uv-userView-heading' onClick={toSellerProfile}>
+          User{children_}
+        </h4>
         <button
           style={{
             color: '#fffffa',
@@ -81,6 +83,7 @@ const UserView = ({
       </div>
       <div
         className='uv-userView-imageContainer'
+        onClick={toSellerProfile}
         style={{
           width: '70px',
           height: '70px',
@@ -108,7 +111,7 @@ const UserView = ({
           }}
         />
       </div>
-      <div className='uv-subDiv'>
+      <div className='uv-subDiv' onClick={toSellerProfile}>
         <h4 className='uv-userView-id'>
           ID: <br />
           {id_}
@@ -118,7 +121,7 @@ const UserView = ({
           {email_}
         </h4>
       </div>
-      <div className='uv-subDiv'>
+      <div className='uv-subDiv' onClick={toSellerProfile}>
         <h4 className='uv-userView-name'>
           NAME: <br />
           {name_}
@@ -128,7 +131,7 @@ const UserView = ({
           {user_name_}
         </h4>
       </div>
-      <div className='uv-subDiv'>
+      <div className='uv-subDiv' onClick={toSellerProfile}>
         <h4 className='uv-userView-created'>
           CREATED: <br />
           {date_created_.split('T')[0]}
@@ -164,88 +167,3 @@ const UserView = ({
 };
 
 export default UserView;
-
-// import React from 'react';
-// import imgPlaceholder from './placeholderimg.jpg';
-// import './UserView.css';
-
-// const UserView = ({
-//   _id,
-//   email,
-//   name,
-//   user_name,
-//   profile_picture,
-//   date_created,
-//   flag,
-//   children,
-// }) => {
-//   const defaultData = {
-//     _id: 'default',
-//     email: 'default',
-//     name: 'name',
-//     user_name: 'user_name',
-//     profile_picture: imgPlaceholder,
-//     date_created: 'default',
-//     flag: false,
-//   };
-
-//   const {
-//     _id: id_ = defaultData._id,
-//     email: email_ = defaultData.email,
-//     name: name_ = defaultData.name,
-//     user_name: user_name_ = defaultData.user_name,
-//     profile_picture: profile_picture_ = defaultData.profile_picture,
-//     date_created: date_created_ = defaultData.date_created,
-//     flag: flag_ = defaultData.flag,
-//     children: children_ = children,
-//   } = {
-//     _id,
-//     email,
-//     name,
-//     user_name,
-//     profile_picture,
-//     date_created,
-//     flag,
-//     children,
-//   };
-//   return (
-//     <div className='userView-con'>
-//       <h2>User{children_}</h2>
-//       <h4>ID: {id_}</h4>
-//       <h4>EMAIL: {email_}</h4>
-//       <h4>NAME: {name_}</h4>
-//       <h4>USERNAME: {user_name_}</h4>
-//       <div
-//         style={{
-//           width: '70px',
-//           height: '70px',
-//           display: 'flex',
-//           alignItems: 'center',
-//           justifyContent: 'center',
-//           margin: '0 auto',
-//         }}
-//       >
-//         <img
-//           src={profile_picture_}
-//           alt='profileImage'
-//           style={{
-//             borderRadius: '20px',
-//             position: 'relative',
-//             width: '100%',
-//             height: '100%',
-//             objectFit: 'cover',
-//             top: '0',
-//             left: '0',
-//             bottom: '0',
-//             right: '0',
-//             margin: 'auto',
-//           }}
-//         />
-//       </div>
-//       <h4>CREATED: {date_created_.split('T')[0]}</h4>
-//       <h4>FLAG: {flag_ && 'Flagged'}</h4>
-//     </div>
-//   );
-// };
-
-// export default UserView;

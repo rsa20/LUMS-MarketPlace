@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './product.css';
+import placeholderimg from './placeholderimg.jpg';
+import he1 from './he1.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Product = ({ id, title, image, price }) => {
+const Product = ({ _id, title, img_URL, price }) => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   // console.log(loggedInUser._id, 'user2');
@@ -47,7 +49,7 @@ const Product = ({ id, title, image, price }) => {
     const seller = await fetch(`/api/goals/viewProfile/user${user}`);
     const sellerName = (await seller.json()).name;
 
-    console.log(sellerName, "seller")
+    console.log(sellerName, 'seller');
 
     const productDetails = {
       title,
@@ -65,31 +67,40 @@ const Product = ({ id, title, image, price }) => {
     //   state: { productDetails }
     // });
   };
+  var img_URL_ = he1;
+  if (img_URL.length !== 0) {
+    img_URL_ = img_URL[0];
+  }
 
   return (
-    <div className='product'>
-      <img
-        onClick={() => handleClick(id, loggedInUser._id)}
-        style={{ maxWidth: '100%', marginBottom: '2%', borderRadius: '5%' }}
-        src={image}
-        alt={title}
-      />
-      <h3 onClick={() => handleClick(id, loggedInUser._id)}>{title}</h3>
+    <div className='product-main'>
+      <div
+        className='product-img-con'
+        // style={{ width: '234px', height: '234px' }}
+      >
+        <img
+          className='product-img'
+          onClick={() => handleClick(_id, loggedInUser._id)}
+          // style={{ maxWidth: '100%', marginBottom: '2%', borderRadius: '5%' }}
+          src={img_URL_}
+          alt={title}
+        />
+      </div>
+      <h3 onClick={() => handleClick(_id, loggedInUser._id)}>{title}</h3>
       <div className='c-text'>
-        <span className='ext' onClick={() => handleClick(id, loggedInUser._id)}>
-          <p
-            style={{ marginLeft: '-30%', color: '#cc0000', fontWeight: 'bold' }}
-          >
-            {price}
-          </p>
+        <span
+          className='ext'
+          onClick={() => handleClick(_id, loggedInUser._id)}
+        >
+          <p style={{ color: '#cc0000', fontWeight: 'bold' }}>{price}Rs</p>
           {/* <p style={{ marginLeft: "-70%", color: "#cc0000" }}>{status}</p> */}
         </span>
-        <span className='icons' onClick={() => handleHeart(id, userEmail)}>
+        <span className='icons' onClick={() => handleHeart(_id, userEmail)}>
           <FontAwesomeIcon
             icon={isFavorite ? faHeartPulse : faHeart}
             className={isFavorite ? 'favorite' : ''}
             onClick={toggleFavorite}
-            style={{ color: 'red', fontSize: '2rem' }}
+            style={{ color: 'red', fontSize: '2vw' }}
           />
         </span>
       </div>
