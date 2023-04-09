@@ -10,6 +10,7 @@ const {
   verifyUser,
   deleteAllUsers,
   deleteUser,
+  getInfoRP,
 } = require('../controllers/goalController');
 
 // router.route('/').get(getGoals).post(setGoal)
@@ -26,6 +27,7 @@ router.route('/viewProfile/user:id').get(getUserbyId);
 // this is new route and controller by moez used in Ph header
 router.route('/viewProfile:email').get(getUserByEmail);
 router.route('/deleteUser/:u_id').get(deleteUser);
+router.route('/infoRP/:u_id').get(getInfoRP);
 
 // router.get('/', getGoals)
 

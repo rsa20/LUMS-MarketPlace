@@ -7,9 +7,8 @@ const http = require('http');
 connectDataBase();
 
 // for chat
-const configureWebsocket = require('./controllers/chat');
-const Message = require('./models/msg');
-
+// const configureWebsocket = require('./controllers/chat');
+// const Message = require('./models/msg');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,9 +22,8 @@ app.use('/api/search', require('./routes/searchRoutes'));
 app.use('/api/wishlist', require('./routes/wishlistRoutes'));
 app.use('/api/reviews', require('./routes/reviewsRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
-app.use('/api/messages', require('./routes/chatRouter'));
+// app.use('/api/messages', require('./routes/chatRouter'));
 
-configureWebsocket(server);
-
+// configureWebsocket(server);
 
 server.listen(port, () => console.log(`Server started on port ${port}`));

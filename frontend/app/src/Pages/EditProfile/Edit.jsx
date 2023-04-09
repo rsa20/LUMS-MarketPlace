@@ -8,6 +8,7 @@ import ProfileHeader from '../../Components/Phead/Fh';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setUserObj, setUserEmail } from '../Redux/Store.jsx';
+import { useNavigate } from 'react-router-dom';
 
 // import { useNavigate } from "react-router-dom";
 
@@ -16,14 +17,15 @@ const Edit = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   console.log(userEmail, 'sjkdfsjkfn');
   console.log(loggedInUser.email, 'sjkdfsjkfn');
 
   const [user, setUser] = useState({
     id: loggedInUser._id,
-    name: '',
-    email: '',
+    name: loggedInUser.user_name,
+    email: loggedInUser.email,
     password: '',
     reEnterPassword: '',
   });
@@ -46,6 +48,7 @@ const Edit = () => {
       password: '',
       reEnterPassword: '',
     });
+    navigate('/viewp');
   };
   const validate = () => {
     const errors = {};
@@ -111,6 +114,7 @@ const Edit = () => {
           reEnterPassword: '',
         });
         alert('Details changed');
+        navigate('/viewp');
         // navigate("/login");
       })
       .catch((error) => {
@@ -143,7 +147,7 @@ const Edit = () => {
     <>
       <Header />
       <ProfileHeader />
-      <div className='main'>
+      <div className='editp-main' style={{ margin: '15vw 0 -60px 0' }}>
         <div className='in'>
           <span className='reg'>
             <div className='r'>
@@ -154,7 +158,10 @@ const Edit = () => {
                   Edit Profile
                 </h1>
                 <h2 style={{ color: '#1C0040' }}>Change Profile Pic</h2>
-
+                {/* <div
+                  className='editp-img-con'
+                  // style={{ background: '#000000' }}
+                > */}
                 {selectedImage && (
                   <img
                     style={{
@@ -167,6 +174,7 @@ const Edit = () => {
                     className='img-fluid mt-3'
                   />
                 )}
+                {/* </div> */}
                 <span className='up'>
                   {/* <button>upload profile</button> */}
                   {/* <input className= "pl" style={{fontFamily:"popins", color:"green", borderBlockColor:"purple"}} type="text" placeholder="Directry"  /> */}
@@ -182,16 +190,8 @@ const Edit = () => {
                     </div>
                   </div>
                 </span>
-                {/* <h1
-                style={{
-                  color: "#013221",
-                  font: "Poppins",
-                  fontSize: "100%",
-                }}
-              >
-                Welcome to Thrift. Lums
-              </h1> */}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Name</h1>
+
+                <h1 style={{ fontSize: '110%' }}>Name</h1>
                 <input
                   type='text'
                   name='name'
@@ -202,7 +202,7 @@ const Edit = () => {
                   onChange={handleChange}
                 />
                 {errors.name && <span className='error'>{errors.name}</span>}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Email</h1>
+                <h1 style={{ fontSize: '110%' }}>Email</h1>
 
                 <input
                   type='email'
@@ -213,9 +213,7 @@ const Edit = () => {
                 />
                 {errors.email && <span className='error'>{errors.email}</span>}
 
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>
-                  Password
-                </h1>
+                <h1 style={{ fontSize: '110%' }}>Password</h1>
 
                 <input
                   type='password'
@@ -227,9 +225,7 @@ const Edit = () => {
                 {errors.password && (
                   <span className='error'>{errors.password}</span>
                 )}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>
-                  Confirm{' '}
-                </h1>
+                <h1 style={{ fontSize: '110%' }}>Confirm Password </h1>
 
                 <input
                   type='password'
@@ -257,6 +253,7 @@ const Edit = () => {
           </span>
         </div>
       </div>
+
       <div className='del'>
         <h1 style={{ fontSize: '300%', color: '#1C0040' }}>Delete Profile</h1>
         <h2>Delete my account permanently</h2>

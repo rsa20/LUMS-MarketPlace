@@ -6,8 +6,10 @@ import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from '../../Components/Phead/Fh';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Add = () => {
+  const navigate = useNavigate();
   const [Post, setPost] = useState({
     title: '',
     description: '',
@@ -68,10 +70,11 @@ const Add = () => {
     images.forEach((image) => formData.append('images', image));
     console.log(Post);
     axios
-      .post('api/posts/createPost', {params: {Post, userEmail}})
+      .post('api/posts/createPost', { params: { Post, userEmail } })
       .then((res) => {
         alert('post Added');
         console.log(res);
+        navigate('/home');
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -89,17 +92,14 @@ const Add = () => {
     <>
       <Header />
       <ProfileHeader />
-      <div className='main'>
+      <div className='main' style={{ margin: '15vw 0 -60px 0' }}>
         <div className='in'>
           <span className='reg'>
             <div className='r'>
               <span className='edit'>
                 {console.log('Post', Post)}
-                <h1 style={{ fontSize: '280%', color: '#1C0040' }}>
-                  {' '}
-                  Add Post
-                </h1>
-                <h2 style={{ color: '#1C0040' }}>upload Product Images</h2>
+                <h1 style={{ fontSize: '280%', color: '#1C0040' }}>Add Post</h1>
+                <h2 style={{ color: '#1C0040' }}>Upload Product Images</h2>
 
                 {selectedImage && (
                   <img
@@ -135,23 +135,6 @@ const Add = () => {
                       />
                     ))}
                   </div>
-
-                  <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>
-                    Title
-                  </h1>
-                  <input
-                    type='text'
-                    name='name'
-                    value={Post.name}
-                    placeholder='Enter Product Name'
-                    required='true'
-                    pattern='^[A-Za-z0-9]{4,}$'
-                    onChange={handleChange}
-                  />
-                  {errors.name && <span className='error'>{errors.name}</span>}
-                  <h1 style={{ marginLeft: '-75%', fontSize: '110%' }}>
-                    Description
-                  </h1>
                 </span>
 
                 <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Title</h1>
