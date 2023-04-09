@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
+
+.products {
+  background-color: rgb(249, 248, 248);
+  display: flex;
+  flex-wrap: wrap; /* allow cards to wrap to next line */
+  justify-content: center; /* center cards horizontally */
+  font-family: 'Poppins';
+}
+
+.product {
+  background: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 20%; /* show 2 cards in a row */
+  margin: 1rem;
+}
+
+/* media queries for smaller screen sizes */
+@media (max-width: 768px) {
+  .product {
+    width: 45%; /* show 1 card per row with smaller width */
+  }
+}
+
+.c-text {
+  margin-left: 0%;
+  display: flex;
+  justify-content: space-between;
+}
+.icons {
+  /* margin-left: 50%; */
+  margin-top: 10%;
+}

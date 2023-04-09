@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
+
+.addRev-main {
+  font-family: 'Poppins';
+  /* background-color: aqua; */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15vw;
+}
+
+.addRev-h1 {
+  color: #1c0040;
+  margin: 3.5vw auto;
+}
+
+.addRev-form {
+  background-color: #fffffa;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 35vw;
+  max-width: 60vw;
+  padding: 3vw;
+  border-radius: 2vw;
+  box-shadow: 0px 0.1vw 5vw -3vw black;
+}
+
+.addRev-label {
+  font-weight: 600;
+  color: #1c0040;
+}
+
+.addRev-scoreinp {
+  border: 1px solid #1c0040;
+  border-radius: 1vw;
+  color: #1c0040;
+  width: 10%;
+  text-align: center;
+}
+
+.addRev-textarea {
+  border: 1px solid #1c0040;
+  border-radius: 0.5vw;
+  /* color: #1c0040; */
+  background-color: #fffffa;
+  font-family: 'Poppins';
+  font-weight: 500;
+}
+
+.addRev-btns {
+  /* background-color: rgb(255, 0, 119); */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.addRev-submitBtn {
+  padding: 1vw 3vw;
+  border-radius: 1vw;
+  font-family: 'Poppins';
+  background-color: #1c0040;
+}
+.addRev-submitBtn:hover {
+  background-color: #fffffa;
+  border: 1px solid #1c0040;
+  color: #1c0040;
+  font-weight: 700;
+}

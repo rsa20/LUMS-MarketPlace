@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
+
+.register {
+  width: 31%;
+  font-family: 'Poppins';
+  border-radius: 8px;
+  margin: 9% auto;
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+}
+
+.register > img {
+  /* background-color: #7136bd; */
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.lh1 {
+  color: #1c0040;
+  margin: 0 auto;
+  margin-top: 12%;
+  font-size: 150%;
+}
+
+.register-h {
+  color: #1c0040;
+  /* background-color: aqua; */
+  margin: 1% auto;
+  text-align: left;
+  margin-left: 1%;
+  font-weight: 600;
+  font-size: 110%;
+  text-overflow: initial;
+}
+.register input {
+  width: 92.5%;
+  background-color: #fffffa;
+  padding: 10% auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: 1px solid #969696;
+  outline: none;
+  color: #858585;
+  font-family: 'Poppins';
+  padding: 1.5% 3.5%;
+}
+
+.register-form-inp {
+  /* background-color: blue; */
+  margin: auto;
+  margin-bottom: 6%;
+  width: 100%;
+}
+.error {
+  color: red;
+  font-size: 75%;
+  font-weight: 400;
+  line-height: 100%;
+  align-content: center;
+  text-align: center;
+}
+
+.register-button {
+  margin: 0 auto;
+  padding: 4% 20%;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 110%;
+  border: 2px solid #1c0040;
+  color: #1c0040;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.register-button:hover {
+  color: #fffffa;
+  background-color: #1c0040;
+  font-weight: 600;
+}
+
+.loginlinebtn {
+  display: flex;
+  justify-content: center;
+  margin: -3% auto;
+  width: 100%;
+  color: #1c0040;
+  /* background-color: #7136bd; */
+}
+.loginbtn {
+  text-decoration: underline;
+}
+
+.loginbtn:hover {
+  color: #fffffa;
+  font-weight: 400;
+  background-color: #1c0040;
+  border-radius: 5px;
+}
+
+@media all and (max-width: 855px) {
+  .register {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 530px) {
+  .register-button {
+    padding: 2% 10%;
+    border-radius: 5px;
+    font-size: 80%;
+    font-weight: 600;
+  }
+  .loginlinebtn {
+    font-size: 70%;
+  }
+  .error {
+    font-size: 55%;
+  }
+}
+
+@media all and (max-width: 370px) {
+  .lh1 {
+    font-size: 110%;
+  }
+  .register-h {
+    font-size: 80%;
+    margin: -2% auto;
+  }
+  .register input {
+    font-size: 60%;
+  }
+  .register-button {
+    border-radius: 3px;
+    font-size: 70%;
+    border: 1px solid #1c0040;
+  }
+  .loginlinebtn {
+    font-size: 50%;
+  }
+  .error {
+    font-size: 45%;
+  }
+}

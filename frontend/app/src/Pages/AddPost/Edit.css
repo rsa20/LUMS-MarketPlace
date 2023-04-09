@@ -1,0 +1,247 @@
+.main {
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #6c06f0;
+}
+/* .in {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  background-color: #025538;
+}
+.reg {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  background-color: pink;
+}
+.r {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #1544a1;
+} */
+.edit {
+  max-width: 100%;
+  height: auto;
+  margin-right: 1%;
+  margin-top: -10%;
+  background: rgb(236, 73, 73);
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+/* .i{
+    margin-top: 5%;
+    width: 45%;
+    height: auto;
+    display: inline-block;
+    margin-bottom: -5%;
+} */
+/* @media only screen and (max-width: 768px) {
+    .image {
+      display: none;
+    }
+  }
+  
+  @media only screen and (min-width: 769px) {
+    .image {
+      display: inline-block;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .r {
+      margin-left: 15%;
+    }
+  }
+  
+  */
+.img {
+  width: 200%;
+  height: 420px;
+  display: inline-block;
+  margin-bottom: -5%;
+  margin-left: -2%;
+}
+
+.edit {
+  margin-bottom: 5%;
+}
+
+.edit > input {
+  border-radius: 8px;
+  border: 2px solid #dddfe2;
+  outline: none;
+  color: #1d2129;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  width: 92%;
+  font-size: 1rem;
+}
+
+.edit > .button {
+  background: #013221;
+  border: 1px solid #025538;
+  color: #fff;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+}
+
+.edit input {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+.edit button {
+  width: 70%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #1c0040;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit button:hover {
+  background-color: #7136bd;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.image {
+  margin-left: 30px;
+}
+.up {
+  display: flex;
+}
+.pl {
+  background-color: rgb(219, 242, 242);
+}
+.lab {
+  margin-left: -10%;
+}
+.but {
+  /* border: 3px slid green;
+    border-radius: 50px; */
+  border-style: solid;
+  border-radius: 17%;
+  /* border-width: 500%; */
+  width: 150%;
+}
+.del {
+  background: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 40%;
+  margin-left: 28%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.del button {
+  width: 50%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #cc0000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del button:hover {
+  background-color: #e34242;
+}
+
+.confirmation {
+  background-color: white;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 40%;
+  margin-left: 28%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.confirmation p {
+  margin-bottom: 1rem;
+}
+
+.confirmation button {
+  margin: 0 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirmation button:first-child {
+  background-color: #cc0000;
+  color: white;
+}
+
+.confirmation button:first-child:hover {
+  background-color: #e34242;
+}
+
+.confirmation button:last-child {
+  background-color: white;
+  color: #1c0040;
+  border: 1px solid #dddfe2;
+}
+
+.confirmation button:last-child:hover {
+  background-color: #dddfe2;
+}
+
+.custom-file {
+  background-color: #1c0040;
+  color: #dddfe2;
+  /* border-radius: 5%;
+  border: 1px solid; */
+}

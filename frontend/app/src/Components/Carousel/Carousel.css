@@ -1,0 +1,47 @@
+.carousel-container {
+  width: 30%;
+  margin: 0 auto;
+  height: 30vh;
+}
+
+.slick-dots {
+  bottom: 20px;
+}
+
+.slick-dots li button:before {
+  color: #1b0457;
+  font-size: 14px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #130869;
+  opacity: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #100335;
+  font-size: 64px;
+  size: 64px;
+}
+
+.slick-prev:before {
+  content: '\2190';
+  font-size: 30px;
+}
+
+.slick-next:before {
+  content: '\2192';
+  font-size: 30px;
+}
+
+.slick-list,
+.slick-track,
+.slick-slide {
+  height: 100%;
+}
+
+.slick-slide img {
+  height: 100%;
+  object-fit: cover;
+}

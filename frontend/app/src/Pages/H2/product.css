@@ -1,0 +1,69 @@
+.products {
+  background-color: #fffffa;
+  display: flex;
+  flex-wrap: wrap; /* allow cards to wrap to next line */
+  justify-content: center; /* center cards horizontally */
+}
+
+.product-main {
+  background: #fffffa;
+  border: 1px solid #dddfe2;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 20%; /* show 2 cards in a row */
+  margin: 1rem;
+}
+
+/* .product-img-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-img {
+  border-radius: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+} */
+.product-img-con {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* set height to be equal to width */
+}
+
+.product-img {
+  border-radius: 2vw;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-fit: cover; /* fit image inside container without stretching */
+  width: 100%;
+  height: 100%;
+}
+
+/* media queries for smaller screen sizes */
+@media (max-width: 768px) {
+  .product-main {
+    width: 45%; /* show 1 card per row with smaller width */
+  }
+}
+
+.c-text {
+  margin-left: 0%;
+  display: flex;
+  justify-content: space-between;
+}
+.icons {
+  /* margin-left: 50%; */
+  margin-top: 10%;
+}

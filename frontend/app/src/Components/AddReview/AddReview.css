@@ -1,0 +1,45 @@
+.addR-main {
+  padding: 0 auto;
+  background-color: #0077ff;
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+}
+.addR-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.addR-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.addR-label {
+  font-weight: bold;
+}
+
+.addR-input {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+}
+
+.addR-btn {
+  background-color: #0077ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.addR-btn:hover {
+  background-color: #0066cc;
+}

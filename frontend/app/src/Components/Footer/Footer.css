@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
+
+.footer {
+  background-color: #1c0040;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: #fffffa;
+  padding: 2vw 7vw;
+  width: 86vw;
+  /* height: 150px; */
+  position: relative;
+  /* position: fixed; */
+  bottom: 0;
+}
+.footer-inside {
+  /* background-color: grey; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* margin: auto 7vw; */
+}
+.footer-imcont {
+  /* background-color: red; */
+  width: 20vw;
+}
+.footerLogo {
+  width: 100%;
+}
+
+.footer-text {
+  /* background-color: rgb(255, 94, 0); */
+  border-left: 0.3vw solid #fffffa;
+  padding-left: 1vw;
+  text-align: left;
+  align-items: center;
+}
+.footer-text-p {
+  /* background-color: #5e0ec7; */
+  font-size: 2vw;
+  font-weight: 600;
+  line-height: 1.07em;
+  margin: -0vw auto;
+  margin: 0.5vw auto;
+}
+.footer-contrb {
+  /* background-color: rgb(175, 20, 85); */
+  font-size: 1.1vw;
+  width: 35vw;
+}
+.footer-contrb-p {
+  /* background-color: rgb(38, 175, 20); */
+  margin-top: -0vw;
+  margin-bottom: -0vw;
+}
+.footer-contrb-names {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+  border-top: 0.12vw solid #fffffa;
+  margin-top: 0.2vw;
+  padding-top: 0.4vw;
+}
+.tag {
+  /* background-color: #a5c70e; */
+  font-size: 0.9vw;
+  text-decoration: none;
+  font-weight: 500;
+  color: #fffffa;
+}
+.tag:hover {
+  color: #c500f7;
+}
+.sec2 {
+  margin-left: 8%;
+}
+.third3 {
+  margin-left: 8%;
+}
+
+@media all and (max-width: 900px) {
+  .footer-inside {
+    flex-direction: column;
+  }
+  .footer-imcont {
+    width: 30vw;
+  }
+  .footer-text {
+    border-left: none;
+    text-align: center;
+    padding: 1vw 1vw;
+    margin: 1vw auto;
+    border-top: 0.5vw solid #fffffa;
+  }
+  .footer-text-p {
+    font-size: 4vw;
+  }
+  .footer-contrb {
+    width: 60vw;
+    font-size: 3vw;
+  }
+  .footer-contrb-names {
+    margin-top: 0vw;
+    padding-top: 0vw;
+    line-height: 1.5vw;
+  }
+  .tag {
+    font-size: 1.5vw;
+  }
+}
+@media all and (max-width: 600px) {
+  .footer-contrb {
+    width: 70vw;
+  }
+}

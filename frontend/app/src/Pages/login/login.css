@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&display=swap');
+
+.login {
+  width: 31%;
+  /* background: cyan; */
+  font-family: 'Poppins';
+  border-radius: 8px;
+  margin: 9% auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.login > img {
+  /* background-color: #7136bd; */
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.lh1 {
+  color: #1c0040;
+  margin: 0 auto;
+  margin-top: 12%;
+  font-size: 150%;
+}
+
+.inp {
+  /* background-color: blue; */
+  margin: auto;
+  margin-bottom: 6%;
+  width: 100%;
+}
+.inp_top {
+  padding-top: 10%;
+}
+
+.h {
+  color: #1c0040;
+  /* background-color: aqua; */
+  margin: 1% auto;
+  text-align: left;
+  margin-left: 1%;
+  font-weight: 600;
+  font-size: 110%;
+  text-overflow: initial;
+}
+
+.login input {
+  width: 92.5%;
+  background-color: #fffffa;
+  padding: 10% auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: 1px solid #969696;
+  outline: none;
+  color: #858585;
+  font-family: 'Poppins';
+  padding: 1.5% 3.5%;
+}
+
+.button {
+  margin: 0 auto;
+  padding: 4% 20%;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 110%;
+  border: 2px solid #1c0040;
+  color:  #fffffa;
+  border-radius: 10px;
+  background-color:  #1c0040;
+}
+
+.button:hover {
+  color: #1c0040;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.signuplinebtn {
+  display: flex;
+  justify-content: center;
+  margin: -3% auto;
+  width: 100%;
+  color: #1c0040;
+  /* background-color: #7136bd; */
+}
+
+.signupbtn {
+  text-decoration: underline;
+}
+
+.signupbtn:hover {
+  /* color: #1b013b;
+  font-weight: 400;
+  background-color:transparent ;
+  border-radius: 5px; */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media all and (max-width: 855px) {
+  .login {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 530px) {
+  .button {
+    padding: 2% 10%;
+    border-radius: 5px;
+    font-size: 80%;
+    font-weight: 600;
+  }
+  .signuplinebtn {
+    font-size: 70%;
+  }
+}
+
+@media all and (max-width: 370px) {
+  .lh1 {
+    font-size: 110%;
+  }
+  .h {
+    font-size: 80%;
+    margin: -2% auto;
+  }
+  .login input {
+    font-size: 60%;
+  }
+  .button {
+    border-radius: 3px;
+    font-size: 70%;
+    border: 1px solid #1c0040;
+  }
+  .signuplinebtn {
+    font-size: 50%;
+  }
+}
