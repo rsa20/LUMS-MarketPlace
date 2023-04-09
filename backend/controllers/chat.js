@@ -2,28 +2,24 @@ const socketIO = require('socket.io');
 const Message = require('../models/msg');
 
 function configureWebsocket(server) {
-  const io = socketIO(server);
+  const io = require('socket.io')(server);
 
   io.on('connection', (socket) => {
-    console.log('New user connected');
-
-    // Handle new messages
+    console.log('A user connected');
     socket.on('message', (data) => {
-      console.log('New message:', data);
-      const message = new Message(data);
-      message.save((err) => {
+      const newMessage = new Message(data);
+      newMessage.save((err) => {
         if (err) {
           console.error(err);
+          socket.emit('error', 'Internal server error');
         } else {
-          io.emit('message', data);
+          socket.emit('message', newMessage);
         }
       });
     });
-
-    // Handle disconnected users
     socket.on('disconnect', () => {
-      console.log('User disconnected');
-    });
+      console.log('A user disconnected');
+    }); 
   });
 }
 
