@@ -96,7 +96,8 @@ const Header = () => {
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
-    let mywish;
+    //
+    let mywish = [];
     await fetch(`/api/wishlist/getWishlist/${userID}`)
       .then((response) => response.json())
       .then((data) => {
@@ -105,7 +106,18 @@ const Header = () => {
         setwish(data);
       })
       .catch((error) => console.log(error));
-    // console.log(wish, 'hmmm');
+    // let mywish = [];
+    // await fetch(`/api/wishlist/getWishlist/${userID}`)
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       response.json();
+    //       console.log(data, 'test here header');
+    //       // setwish(data);
+    //       // mywish = wish;
+    //     }
+    //     alert();
+    //   })
+    //   .catch((error) => console.log(error));
     navigate('/wish', { state: { mywish } });
   };
   return (

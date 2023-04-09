@@ -25,7 +25,7 @@ const Login = (props) => {
     });
   };
 
-  const login = () => {
+  const login = async () => {
     axios
       .post('api/goals/login', user)
       .then((res) => {
@@ -47,14 +47,28 @@ const Login = (props) => {
             if (response.data === res.data._id) {
               console.log('Admin', response.data);
               navigate(`/ViewUserAdmin`);
+            } else {
+              navigate(`/viewP`);
             }
           })
-          .catch((err) => console.error(err));
+          .catch((err) => {
+            console.error(err);
+            navigate(`/viewP`);
+          });
+
+        // if (response.data === res.data._id) {
+        //   console.log('Admin', response.data);
+        //   navigate(`/ViewUserAdmin`);
+        // } else {
+        //   navigate(`/viewP`);
+        // }
 
         // navigate(`/viewP`, { state: { user: res.data } });
-        navigate(`/viewP`);
       })
-      .catch((error) => console.error('Login Error: ', error));
+      .catch((error) => {
+        console.error('Login Error: ', error.response.data.message);
+        alert(error.response.data.message);
+      });
   };
 
   return (

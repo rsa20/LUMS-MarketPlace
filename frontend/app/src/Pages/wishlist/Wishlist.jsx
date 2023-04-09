@@ -16,9 +16,9 @@ const Wishlist = () => {
     console.log(location.state, 'test');
     if (location.state) {
       setwishlist(location.state.mywish);
-      console.log(wishlist);
+      console.log('herer in wishlidt ', wishlist);
     }
-  }, [location.state]);
+  }, [wishlist]);
 
   return (
     <>
