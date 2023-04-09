@@ -4,6 +4,8 @@ const Message = require('../models/msg');
 
 // Get all messages
 router.get('/allChats', (req, res) => {
+  console.log("working")
+
   Message.find((err, messages) => {
     if (err) {
       console.error(err);
@@ -12,6 +14,11 @@ router.get('/allChats', (req, res) => {
       res.json(messages);
     }
   });
+});
+
+router.post('/tester', (req, res) => {
+  console.log("tester")
+
 });
 
 // Create a new message
@@ -56,7 +63,7 @@ router.put('/chat/:id', (req, res) => {
 });
 
 // Delete a message by ID
-router.delete('deleteChat/:id', (req, res) => {
+router.delete('/deleteChat/:id', (req, res) => {
   Message.findByIdAndDelete(req.params.id, (err, message) => {
     if (err) {
       console.error(err);

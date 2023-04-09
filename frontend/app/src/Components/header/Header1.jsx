@@ -51,42 +51,42 @@ const Header = () => {
   //   console.log('Selected filter:', selectedFilter);
   //   console.log('Price range:', priceRange);
   // };
-  const handlC = async (selectedFilter, priceRange, search) => {
-    console.log(selectedFilter, priceRange, search);
-    let myfilter;
+  const handlC =  (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search, "handle");
+    // let myfilter;
 
-    await fetch('api/search/filtersearch', {
-      params: { selectedFilter, priceRange, search },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'test');
-        myfilter = data;
-        console.log(myfilter);
-        setVsearch(data);
-      })
-      .catch((error) => console.log(error));
-    console.log(vsearch, 'hmmm');
+    // await fetch('/api/search/filtersearch', {
+    //   params: { selectedFilter, priceRange, search },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data, 'test');
+    //     myfilter = data;
+    //     console.log(myfilter);
+    //     setVsearch(data);
+    //   })
+    //   .catch((error) => console.log(error));
+    // console.log(vsearch, 'hmmm');
 
-    navigate('/vsea', { state: { myfilter } });
+    // navigate('/vsea', { state: { myfilter } });
   };
 
-  const handleFilterSubmit = async (selectedFilter, priceRange, search) => {
-    console.log(selectedFilter, priceRange, search);
+  const handleFilterSubmit = (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search, "hello");
     let myfilter;
-    await fetch('api/search/filtersearch', {
-      params: { selectedFilter, priceRange, search },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'test');
-        myfilter = data;
-        console.log(myfilter);
-        setVsearch(data);
-      })
-      .catch((error) => console.log(error));
-    console.log(vsearch, 'hmmm');
-    navigate('/vsea', { state: { myfilter } });
+    // await fetch('/api/search/filtersearch', {
+    //   params: { selectedFilter, priceRange, search },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data, 'test');
+    //     myfilter = data;
+    //     console.log(myfilter);
+    //     setVsearch(data);
+    //   })
+    //   .catch((error) => console.log(error));
+    // console.log(vsearch, 'hmmm');
+    // navigate('/vsea', { state: { myfilter } });
   };
 
   const viewWish = async (userID) => {
@@ -148,10 +148,10 @@ const Header = () => {
             ''
           )}
           <Link to='/Addpost'>
-            <img className='im' src={l5} alt='fuck of' />
+            <img className='im' src={l5} alt='add post button' />
           </Link>
           <Link to='/home'>
-            <img className='im' src={l4} alt='fuck of' />
+            <img className='im' src={l4} alt='home button' />
           </Link>
           <Link to='/hello'>
             <img className='im' src={l3} alt='fuck of' />
@@ -183,6 +183,7 @@ const Header = () => {
               onChange={handle}
             />
             <button type='submit' className='search-btn' onClick={handlC}>
+            {/* <button type='submit' className='search-btn'> */}
               <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
             </button>
           </form>
