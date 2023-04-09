@@ -156,6 +156,7 @@
   max-width: 320px;
   position: relative;
   /* background-color: #0cdf3a; */
+
 }
 .search-input {
   padding: 8px;
@@ -169,6 +170,7 @@
   border-radius: 25px;
   background-color: #1c0040;
   color: #fffffa;
+
 }
 
 .search-btn {
@@ -187,8 +189,12 @@
 
 .button-container {
   position: relative;
+  padding: 1%;
 }
-
+::placeholder{
+  color: #ffffff;
+  opacity: 75%;
+}
 /* .filter-options {
     position: absolute;
     top: 40px;
