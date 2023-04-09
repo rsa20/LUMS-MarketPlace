@@ -1,5 +1,6 @@
 const Post = require('../models/posts');
 const User = require('../models/user');
+const Wishlist = require('../models/wishlist');
 
 async function getUserByPost(req, res) {
   try {
@@ -218,21 +219,46 @@ const editPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  const p_id = req.body.params.post._id;
-
+  console.log('mujhe delet kro please :)', req.params.p_id);
   try {
-    const post = await Post.findById(p_id);
-    const u_id = post.user;
-    console.log(u_id);
-    const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+    const p_id = req.params.p_id;
 
+    // delete from posts collection
+    const deletedPost = await Post.findByIdAndDelete(p_id);
+
+    // delete post ID from users collection
+    const u_id = deletedPost.user;
+    await User.findByIdAndUpdate(u_id, { $pull: { posts: p_id } });
+
+    // delete post ID from wishlist collection
+    await Wishlist.updateMany({ posts: p_id }, { $pull: { posts: p_id } });
+
+    console.log('Post successfully deleted!');
     res.status(200).json({
-      message: `Post deleted successfully`,
+      message: 'Post successfully deleted from all collections.',
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting post from collections.' });
   }
 };
+
+// const deletePost = async (req, res) => {
+//   const p_id = req.body.params.post._id;
+
+//   try {
+//     const post = await Post.findById(p_id);
+//     const u_id = post.user;
+//     console.log(u_id);
+//     const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+
+//     res.status(200).json({
+//       message: `Post deleted successfully`,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server Error' });
+//   }
+// };
 
 module.exports = {
   editPost,

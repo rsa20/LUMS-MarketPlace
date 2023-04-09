@@ -1,14 +1,14 @@
 import React from 'react';
-import imgPlaceholder from './placeholderimg.jpg';
 import './PostAdmin.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFlag } from '@fortawesome/free-regular-svg-icons';
 import { faFlag as faFlagSolid } from '@fortawesome/free-solid-svg-icons';
-
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { setSellerObj } from '../../Pages/Redux/Store.jsx';
+import imgPlaceholder from './placeholderimg.jpg';
+
+// import { faFlag } from '@fortawesome/free-regular-svg-icons';
+// import { useDispatch } from 'react-redux';
+// import { setSellerObj } from '../../Pages/Redux/Store.jsx';
 
 const PostAdmin = ({
   _id,
@@ -17,11 +17,13 @@ const PostAdmin = ({
   user,
   img_URL,
   date_created,
-  flag,
+  flags,
+  price,
+  description,
   children,
+  onDelete,
 }) => {
-  console.log('here,', img_URL);
-  const dispatch = useDispatch();
+  // console.log('here,', img_URL);
   const navigate = useNavigate();
   const defaultData = {
     _id: 'default',
@@ -30,7 +32,9 @@ const PostAdmin = ({
     user: 'default',
     // img_URL: [imgPlaceholder],
     date_created: 'default',
-    flag: false,
+    flags: 0,
+    price: 0,
+    description: 'default',
   };
 
   const {
@@ -40,7 +44,9 @@ const PostAdmin = ({
     user: user_ = defaultData.user,
     // img_URL: img_URL_ = defaultData.img_URL,
     date_created: date_created_ = defaultData.date_created,
-    flag: flag_ = defaultData.flag,
+    flags: flags_ = defaultData.flag,
+    price: price_ = defaultData.price,
+    description: description_ = defaultData.description,
     children: children_ = children,
   } = {
     _id,
@@ -49,32 +55,56 @@ const PostAdmin = ({
     user,
     // img_URL,
     date_created,
-    flag,
+    flags,
+    price,
+    description,
     children,
   };
-
-  const toSellerProfile = () => {
-    axios
-      .get(`api/goals/viewProfile/user${id_}`)
-      .then((res) => {
-        // console.log(res.data);
-        dispatch(setSellerObj({ user: res.data }));
-        navigate('/SellerViewP');
-      })
-      .catch((error) => console.error('Profile showing error : ', error));
-  };
-
   var img_URL_ = imgPlaceholder;
   if (img_URL.length !== 0) {
     img_URL_ = img_URL[0];
   }
-  console.log('69 ', img_URL_);
+
+  // console.log('69 ', img_URL_);
+  const onClickHandlerr = () => {
+    console.log('here');
+    const productDetails = {
+      title: title_,
+      description: description_,
+      _id: id_,
+      price: price_,
+      state: false,
+      user: user_,
+      sellerName: seller_,
+      img_URL: [img_URL_],
+    };
+    console.log(productDetails, 'here prod details');
+    navigate('/viewpost', { state: { productDetails } });
+  };
+
+  const handleDeleteClick = async (postId) => {
+    try {
+      const response = await fetch(`api/posts/deletePost/${postId}`);
+      const data = await response.json();
+      console.log(data.message); // Post successfully deleted from all collections.
+      // Add any other necessary logic after successful deletion
+    } catch (error) {
+      console.error(error);
+      // Handle error cases here, e.g. show an error message to the user
+    }
+    onDelete();
+  };
 
   return (
     <div className='pv-userView-con'>
       <div className='pv-userView-start'>
-        <h4 className='pv-userView-heading'>Post{children_}</h4>
+        <h4 className='pv-userView-heading' onClick={onClickHandlerr}>
+          Post{children_}
+        </h4>
         <button
+          onClick={() => {
+            handleDeleteClick(_id);
+          }}
           style={{
             color: '#fffffa',
             fontFamily: 'inherit',
@@ -88,6 +118,7 @@ const PostAdmin = ({
       </div>
       <div
         className='pv-userView-imageContainer'
+        onClick={onClickHandlerr}
         style={{
           width: '70px',
           height: '70px',
@@ -115,7 +146,7 @@ const PostAdmin = ({
           }}
         />
       </div>
-      <div className='pv-subDiv'>
+      <div className='pv-subDiv' onClick={onClickHandlerr}>
         <h4 className='pv-userView-id'>
           ID: <br />
           {id_}
@@ -125,7 +156,7 @@ const PostAdmin = ({
           {title_}
         </h4>
       </div>
-      <div className='pv-subDiv'>
+      <div className='pv-subDiv' onClick={onClickHandlerr}>
         <h4 className='pv-userView-name'>
           SELLER username: <br />
           {seller_}
@@ -135,35 +166,28 @@ const PostAdmin = ({
           {user_}
         </h4>
       </div>
-      <div className='pv-subDiv'>
+      <div className='pv-subDiv' onClick={onClickHandlerr}>
         <h4 className='pv-userView-created'>
           CREATED: <br />
           {date_created_.split('T')[0]}
         </h4>
         <h4 className='pv-userView-flag'>
           FLAG: <br />
-          {/* {flag_ && 'Flagged'} */}
-          {flag_ ? (
-            <FontAwesomeIcon
-              className='icon-star'
-              icon={faFlagSolid}
-              style={{
-                color: '#cc0505',
-                margin: '0 0.07rem',
-                fontSize: '12px',
-              }}
-            />
-          ) : (
-            <FontAwesomeIcon
-              className='icon-star'
-              icon={faFlag}
-              style={{
-                color: '#00ff40',
-                margin: '0 0.07rem',
-                fontSize: '12px',
-              }}
-            />
-          )}
+          {flags_ === 0
+            ? 'No flagged'
+            : new Array(flags_).fill(null).map(() => {
+                return (
+                  <FontAwesomeIcon
+                    className='icon-star'
+                    icon={faFlagSolid}
+                    style={{
+                      color: '#cc0505',
+                      margin: '0 0.07rem',
+                      fontSize: '12px',
+                    }}
+                  />
+                );
+              })}
         </h4>
       </div>
     </div>

@@ -70,6 +70,7 @@ const Viewpost = () => {
   return (
     <>
       <Header />
+      {/* <img src={productDetails.img_URL_} alt='' /> */}
       <div className='pmain'>
         <div className='postmain'>
           <div className='carm'>

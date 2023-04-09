@@ -8,6 +8,7 @@ import axios from 'axios';
 const PostsViewAdmin = () => {
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const [check, setCheck] = useState(false);
+  const [reRend, setReRend] = useState(false);
 
   const [adminId, setAdminId] = useState('');
   useEffect(() => {
@@ -20,7 +21,7 @@ const PostsViewAdmin = () => {
         }
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [reRend]);
 
   useEffect(() => {
     setCheck(adminId === loggedInUser._id);
@@ -35,8 +36,12 @@ const PostsViewAdmin = () => {
         setProducts(data);
       })
       .catch((error) => console.log(error));
-  }, []);
-  console.log(products);
+  }, [reRend, check]);
+  // console.log(products);
+  const handleDelete = () => {
+    setReRend(!reRend);
+    // console.log('hello here i am to reload');
+  };
 
   let i = 0;
   const allProducts = products.map((p) => {
@@ -44,7 +49,7 @@ const PostsViewAdmin = () => {
     return (
       <>
         {check ? (
-          <PostAdmin key={p._id} {...p}>
+          <PostAdmin key={p._id} {...p} onDelete={handleDelete}>
             {i}
           </PostAdmin>
         ) : (
