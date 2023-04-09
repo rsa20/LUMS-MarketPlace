@@ -8,6 +8,7 @@ import axios from 'axios';
 const ViewUserAdmin = () => {
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const [check, setCheck] = useState(false);
+  const [reRend, setReRend] = useState(false);
 
   const [adminId, setAdminId] = useState('');
   useEffect(() => {
@@ -20,7 +21,7 @@ const ViewUserAdmin = () => {
         }
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [reRend]);
 
   useEffect(() => {
     setCheck(adminId === loggedInUser._id);
@@ -41,17 +42,22 @@ const ViewUserAdmin = () => {
       .catch((error) => {
         console.error(error.message);
       });
-  }, []);
+  }, [reRend, check]);
 
   useEffect(() => {
     // console.log(userArray);
   }, [userArray]);
 
+  const handleDelete = () => {
+    setReRend(!reRend);
+    // console.log('hello here i am to reload');
+  };
+
   let i = 0;
   const allUsers = userArray.map((user) => {
     i++;
     return (
-      <UserView key={user._id} {...user}>
+      <UserView key={user._id} {...user} onDelete={handleDelete}>
         {i}
       </UserView>
     );

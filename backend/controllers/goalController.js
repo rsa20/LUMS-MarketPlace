@@ -1,5 +1,8 @@
 // const Goal = require('../models/goalModel')
 const User = require('../models/user');
+const Post = require('../models/posts');
+const Wishlist = require('../models/wishlist');
+const Reviews = require('../models/reviews');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('../config/nodemailer');
@@ -138,7 +141,6 @@ const loginUser = async (req, res) => {
   // console.log(req.body)
 
   if (getUserByEmail) {
-    
     if (!getUserByEmail.email_verification) {
       return res.status(401).send({
         message:
@@ -230,6 +232,40 @@ const deleteAllUsers = async (req, res) => {
   res.status(200).json({ message: 'DELETED USERS' });
 };
 
+const deleteUser = async (req, res) => {
+  console.log('mujhe delet kro please :)', req.params.u_id);
+  const userId = req.params.u_id;
+
+  try {
+    //Delete that user
+    await User.deleteOne({ _id: userId });
+
+    //Delete all that user's posts
+    await Post.deleteMany({ user: userId });
+
+    //Delete that user's wishlist
+    await Wishlist.deleteOne({ user: userId });
+
+    //Delete all reviews of the user
+    const reviewsToDelete = await Reviews.find({
+      $or: [{ reviewer: userId }, { reviewed: userId }],
+    });
+
+    //If no reviews to be deleted, this step will be skipped
+    if (reviewsToDelete.length > 0) {
+      await Reviews.deleteMany({
+        $or: [{ reviewer: userId }, { reviewed: userId }],
+      });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({ message: 'Error deleting User' });
+  }
+};
+
 // const deleteUser = async()
 
 module.exports = {
@@ -241,4 +277,5 @@ module.exports = {
   getUser,
   getUserbyId,
   getUserByEmail,
+  deleteUser,
 };

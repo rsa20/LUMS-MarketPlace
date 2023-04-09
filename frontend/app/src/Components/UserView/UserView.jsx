@@ -19,6 +19,7 @@ const UserView = ({
   date_created,
   flag,
   children,
+  onDelete,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,6 +64,19 @@ const UserView = ({
       .catch((error) => console.error('Profile showing error : ', error));
   };
 
+  const handleDeleteClick = async (userId) => {
+    try {
+      const response = await fetch(`api/goals/deleteUser/${userId}`);
+      const data = await response.json();
+      console.log(data.message); // Post successfully deleted from all collections.
+      // Add any other necessary logic after successful deletion
+    } catch (error) {
+      console.error(error);
+      // Handle error cases here, e.g. show an error message to the user
+    }
+    onDelete();
+  };
+
   return (
     <div className='uv-userView-con'>
       <div className='uv-userView-start'>
@@ -70,6 +84,9 @@ const UserView = ({
           User{children_}
         </h4>
         <button
+          onClick={() => {
+            handleDeleteClick(_id);
+          }}
           style={{
             color: '#fffffa',
             fontFamily: 'inherit',
