@@ -29,7 +29,7 @@ const Wishlist = () => {
       <div className='products' style={{ padding: '2vw 7vw' }}>
         {wishlist.map((wish) => (
           <Wishitem
-            id={wish._id}
+            _id={wish._id}
             title={wish.title}
             image={img}
             price={wish.price}
