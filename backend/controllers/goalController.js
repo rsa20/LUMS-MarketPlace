@@ -37,6 +37,31 @@ const getUserbyId = async (req, res) => {
     return res.status(500).send({ message: 'DB Error' });
   }
 };
+
+// const getInfoRP = async (req, res) => {
+//   console.log(req.params.u_id);
+// };
+const getInfoRP = async (req, res) => {
+  const { u_id } = req.params;
+  console.log(u_id);
+
+  try {
+    const user = await User.findById(u_id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const postsCount = user.posts.length;
+
+    const reviews = await Reviews.find({ reviewed: u_id });
+
+    return res.json({ posts: postsCount, reviews: reviews.length });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
 //
 const getUser = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -278,4 +303,5 @@ module.exports = {
   getUserbyId,
   getUserByEmail,
   deleteUser,
+  getInfoRP,
 };

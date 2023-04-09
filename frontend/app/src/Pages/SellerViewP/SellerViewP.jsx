@@ -4,7 +4,7 @@ import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import SellerPHead from '../../Components/SellerPHead/SellerPHead';
 import img from './placeholderimg.jpg';
-import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const SellerViewP = () => {
@@ -16,7 +16,49 @@ const SellerViewP = () => {
   //   }
   // }, [location.state]);
   const seller = useSelector((state) => state.sellerObj.sellerObj).user;
+  const [accStatus, setAccStatus] = useState('User');
+
   console.log(seller, 'hello this is user in seller profile');
+  const [info, setInfo] = useState({
+    posts: 0,
+    reviews: 0,
+  });
+
+  useEffect(() => {
+    const getInfoRP = async (userId) => {
+      try {
+        const response = await fetch(`api/goals/infoRP/${userId}`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch user info');
+      }
+    };
+    getInfoRP(seller._id)
+      .then((data) => {
+        setInfo(data);
+        // console.log(data); // { posts: 5, reviews: [{...}, {...}, ...] }
+      })
+      .catch((error) => {
+        console.error(error); // Failed to fetch user info
+      });
+
+    axios
+      .get('api/admin/getAdmin')
+      .then((response) => {
+        // res.data is admin id here
+        if (response.data === seller._id) {
+          console.log('Admin', response.data);
+          setAccStatus('Admin');
+        }
+      })
+      .catch((err) => {
+        console.error('admin call catch: ', err);
+      });
+  }, [seller]);
+
+  console.log(info, 'info here');
 
   return (
     <div>
@@ -42,17 +84,21 @@ const SellerViewP = () => {
             <h2>{seller.email}</h2>
             {/* <h2>Talha_Bhatti@lums.edu.pk</h2> */}
             <p>Account</p>
-            <h2>Users</h2>
+            <h2>{accStatus}</h2>
             {/* <span className="rev"> */}
             <span>
-              <span style={{ fontSize: '130%' }}>Post</span>
+              <span style={{ fontSize: '130%' }}>Posts</span>
             </span>
             <span>
-              <span style={{ fontSize: '130%', marginLeft: '8%' }}>Review</span>
+              <span style={{ fontSize: '130%', marginLeft: '8%' }}>
+                Reviews
+              </span>
             </span>
             <div>
               <span>
-                <span style={{ fontSize: '130%', fontWeight: 'bold' }}>60</span>
+                <span style={{ fontSize: '130%', fontWeight: 'bold' }}>
+                  {info.posts}
+                </span>
               </span>
               <span>
                 <span
@@ -62,7 +108,7 @@ const SellerViewP = () => {
                     fontWeight: 'bold',
                   }}
                 >
-                  100
+                  {info.reviews}
                 </span>
               </span>
             </div>

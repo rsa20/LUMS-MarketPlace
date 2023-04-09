@@ -47,7 +47,7 @@ const getReviewsByReviewedId = async (req, res) => {
         };
       })
     );
-    console.log('formattedReviews:', formattedReviews);
+    // console.log('formattedReviews:', formattedReviews);
 
     res.status(200).json(formattedReviews.reverse());
   } catch (err) {

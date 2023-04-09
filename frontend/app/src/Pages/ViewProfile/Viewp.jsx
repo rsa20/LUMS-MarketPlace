@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import img from './img.jpg';
 import './Viewp.css';
 import Header from '../../Components/header/Header1';
@@ -7,24 +6,65 @@ import Footer from '../../Components/Footer/Footer';
 
 import ProfileHeader from '../../Components/Phead/Fh';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const Viewp = () => {
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
+  const [user, setUser] = useState('');
+  const [accStatus, setAccStatus] = useState('User');
+  const [info, setInfo] = useState({
+    posts: 0,
+    reviews: 0,
+  });
   console.log(userEmail, 'userEmail');
   console.log(loggedInUser, 'logged in user2');
-  const [user, setUser] = useState('');
 
   // const location = useLocation();
   // console.log(location.state.user);
 
   useEffect(() => {
+    const getInfoRP = async (userId) => {
+      try {
+        const response = await fetch(`api/goals/infoRP/${userId}`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Failed to fetch user info');
+      }
+    };
+    getInfoRP(loggedInUser._id)
+      .then((data) => {
+        setInfo(data);
+        // console.log(data); // { posts: 5, reviews: [{...}, {...}, ...] }
+      })
+      .catch((error) => {
+        console.error(error); // Failed to fetch user info
+      });
     // if (location.state) {
     //   setUser(location.state.user);
     // }
+
+    axios
+      .get('api/admin/getAdmin')
+      .then((response) => {
+        // res.data is admin id here
+        if (response.data === loggedInUser._id) {
+          console.log('Admin', response.data);
+          setAccStatus('Admin');
+        }
+      })
+      .catch((err) => {
+        console.error('admin call catch: ', err);
+      });
+
     setUser(loggedInUser);
   }, [loggedInUser]);
-  console.log(user, 'hello this is user');
+
+  // console.log(user, 'hello this is user');
+  // console.log(info, 'info here');
+
   return (
     <>
       <Header />
@@ -42,21 +82,25 @@ export const Viewp = () => {
           </div>
           <div className='co'>
             <p>Name</p>
-            <h2>{loggedInUser.name}</h2>
+            <h2>{user.name}</h2>
             <p>Email</p>
-            <h2>{loggedInUser.email}</h2>
+            <h2>{user.email}</h2>
             <p>Account</p>
-            <h2>Users</h2>
+            <h2>{accStatus}</h2>
             {/* <span className="rev"> */}
             <span>
-              <span style={{ fontSize: '130%' }}>Post</span>
+              <span style={{ fontSize: '130%' }}>Posts</span>
             </span>
             <span>
-              <span style={{ fontSize: '130%', marginLeft: '8%' }}>Review</span>
+              <span style={{ fontSize: '130%', marginLeft: '8%' }}>
+                Reviews
+              </span>
             </span>
             <div>
               <span>
-                <span style={{ fontSize: '130%', fontWeight: 'bold' }}>60</span>
+                <span style={{ fontSize: '130%', fontWeight: 'bold' }}>
+                  {info.posts}
+                </span>
               </span>
               <span>
                 <span
@@ -66,7 +110,7 @@ export const Viewp = () => {
                     fontWeight: 'bold',
                   }}
                 >
-                  100
+                  {info.reviews}
                 </span>
               </span>
             </div>
