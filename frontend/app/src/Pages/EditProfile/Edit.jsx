@@ -138,6 +138,8 @@ const Edit = () => {
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
+    console.log('img Preview', imagePreview);
+    console.log('img file', e.target.files[0]);
   };
 
   // useEffect(() => {
