@@ -25,6 +25,7 @@ import PostViewAdmin from './Pages/PostsViewAdmin/PostsViewAdmin';
 // Moez extra
 import Viewpost from './Pages/Viewpost/Viewpost';
 import Addpost from './Pages/AddPost/Addpost';
+import UploadImage from './Pages/UploadImg/UploadImage';
 
 function App() {
   const [user, setLoginUser] = useState({ _id: null });
@@ -79,6 +80,8 @@ function App() {
           <Route exact path='/hello' element={<Hello />} />
           <Route exact path='/ViewUserAdmin' element={<ViewUserAdmin />} />
           <Route exact path='/PostViewAdmin' element={<PostViewAdmin />} />
+          <Route exact path='/UP' element={<UploadImage />} />
+          
         </Routes>
       </Router>
       {/* <Header/> */}

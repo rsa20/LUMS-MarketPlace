@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Edit = () => {
   // const navigate = useNavigate();
+  const [p_img, setp] = useState(null);
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Edit = () => {
 
   const [user, setUser] = useState({
     id: loggedInUser._id,
-    name: loggedInUser.user_name,
+    name: loggedInUser.name,
     email: loggedInUser.email,
     password: '',
     reEnterPassword: '',
@@ -80,13 +81,25 @@ const Edit = () => {
   const edit = async () => {
     const errors = validate();
 
+    const form_data = new FormData();
+      form_data.append('file', selectedImage);
+
+
+
+
     if (Object.keys(errors).length) {
       setErrors(errors);
       return;
     }
 
+    console.log("img selected", form_data)
+    axios.post('api/cloudinary/upload', form_data).then((res)=>{
+      console.log("hello", res.data)
+      setp(res.data)
+    })
+
     axios
-      .put('api/goals/updateProfile', user)
+      .put('api/goals/updateProfile', {...user, p_img})
       .then((res) => {
         // resdata should be user details user obj in reducer
         const updateSlicer = async () => {
@@ -97,10 +110,10 @@ const Edit = () => {
             if (!response.ok) {
               console.error(`HTTP error! status: ${response.status}`);
             }
-            const user = await response.json();
-            console.log('after update', user);
-            dispatch(setUserObj(user));
-            dispatch(setUserEmail(user.email));
+            const user1 = await response.json();
+            console.log('after update', user1);
+            dispatch(setUserObj(user1));
+            dispatch(setUserEmail(user1.email));
           } catch (error) {
             console.error(`Error fetching reviews: ${error.message}`);
           }
@@ -114,7 +127,7 @@ const Edit = () => {
           reEnterPassword: '',
         });
         alert('Details changed');
-        navigate('/viewp');
+        // navigate('/viewp');
         // navigate("/login");
       })
       .catch((error) => {
@@ -137,6 +150,7 @@ const Edit = () => {
   };
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
+    console.log('here i am hello ',selectedImage)
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -147,6 +161,7 @@ const Edit = () => {
     <>
       <Header />
       <ProfileHeader />
+      <img src={p_img} alt="" />
       <div className='editp-main' style={{ margin: '15vw 0 -60px 0' }}>
         <div className='in'>
           <span className='reg'>
