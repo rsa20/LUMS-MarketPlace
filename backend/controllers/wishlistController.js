@@ -68,7 +68,7 @@ const getUserWishlist = (async(req, res)=>{
         user:loggedInUserId
     })
     if(!wishlist){
-        return res.status(404).send({message:"User has no wishlist"})
+        return res.status(200).send([])
     }
     // return res.send(wishlist)
     post_ids = wishlist.posts

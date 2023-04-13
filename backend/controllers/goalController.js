@@ -233,7 +233,7 @@ const registerUser = async (req, res) => {
         user_name: name,
         token: token,
         flag: 0,
-        profile_picture: "",
+        profile_picture: null,
       });
       // User.insertMany(newUser)
       newUser.save((err) => {
