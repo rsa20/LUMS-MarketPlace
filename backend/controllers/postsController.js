@@ -118,23 +118,24 @@ const getPostbyID = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  console.log(req.body.params);
+  // console.log(req.body.params);
   if (!req.body) {
     return res.status(404).json({ message: 'Missing post fields' });
   }
   const { title, description, price, tags, image } = req.body.params.Post;
-  const useremail = req.body.params.userEmail;
-  console.log(useremail);
+  const u_id = req.body.params.loggedInUser._id;
   const user = await User.findOne({
-    email: useremail,
+    _id: u_id,
   });
 
-  // const findSame = await Post.findOne({
-  //   $or: [{ title: title }, { description: description }],
-  // });
-  // if (findSame) {
-  //   return res.status(500).json({ message: "Post already exists!" });
-  // }
+  // console.log(req.body.params.imgUrlArray);
+
+  // // const findSame = await Post.findOne({
+  // //   $or: [{ title: title }, { description: description }],
+  // // });
+  // // if (findSame) {
+  // //   return res.status(500).json({ message: "Post already exists!" });
+  // // }
 
   tagsList = tags.split(' ');
   newPost = new Post({
@@ -142,7 +143,7 @@ const createPost = async (req, res) => {
     description: description,
     price: price,
     tags: tagsList,
-    img_url: [''],
+    img_URL: req.body.params.imgUrlArray,
     flags: 0,
     user: user._id,
   });
@@ -161,19 +162,20 @@ const createPost = async (req, res) => {
 
   await User.findOneAndUpdate(
     {
-      email: useremail,
+      _id: u_id,
     },
     {
       posts: postArr,
     }
   );
-  console.log(user._id);
 };
 
 const editPost = async (req, res) => {
-  console.log('here');
+  console.log("edit image urls: ", req.body.params.imgUrlArray);
+
   const postID = req.params.p_id;
   const formData = req.body.params.Post;
+  const imgUrlArray = req.body.params.imgUrlArray
   console.log(postID);
   const post = await Post.findById(postID);
   if (post.title != formData.title) {
@@ -197,8 +199,8 @@ const editPost = async (req, res) => {
     post.tags = tags;
   }
 
-  if (formData.img_URL != post.img_URL) {
-    post.img_URL = formData.img_URL;
+  if (imgUrlArray != post.img_URL) {
+    post.img_URL = imgUrlArray;
   }
   if (formData.status == true) {
     post.sold_date = Date.now();
@@ -215,6 +217,7 @@ const editPost = async (req, res) => {
     description: updatedPost.description,
     price: updatedPost.price,
     status: updatedPost.status,
+    img_URL: updatedPost.img_URL,
   });
 };
 

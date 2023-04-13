@@ -30,7 +30,7 @@ const PostAdmin = ({
     title: 'default',
     seller: 'default',
     user: 'default',
-    // img_URL: [imgPlaceholder],
+    img_URL: [imgPlaceholder],
     date_created: 'default',
     flags: 0,
     price: 0,
@@ -60,9 +60,11 @@ const PostAdmin = ({
     description,
     children,
   };
-  var img_URL_ = imgPlaceholder;
+
+  // console.log(img_URL[0]);
+  var img_URL_ = defaultData.img_URL;
   if (img_URL.length !== 0) {
-    img_URL_ = img_URL[0];
+    img_URL_ = img_URL;
   }
 
   // console.log('69 ', img_URL_);
@@ -76,7 +78,7 @@ const PostAdmin = ({
       state: false,
       user: user_,
       sellerName: seller_,
-      img_URL: [img_URL_],
+      img_URL: img_URL_,
     };
     console.log(productDetails, 'here prod details');
     navigate('/viewpost', { state: { productDetails } });
@@ -129,7 +131,7 @@ const PostAdmin = ({
         }}
       >
         <img
-          src={img_URL_}
+          src={img_URL_[0]}
           alt='profileImage'
           className='pv-userView-image'
           style={{

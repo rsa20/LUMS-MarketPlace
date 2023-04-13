@@ -54,7 +54,7 @@ const Editpost = () => {
     //   }
     // return errors;
   };
-  const edit = () => {
+  const edit = async () => {
     const errors = validate();
     if (errors) {
       if (Object.keys(errors).length) {
@@ -69,14 +69,37 @@ const Editpost = () => {
     formData.append('tags', Post.tags.trim().replace(/\s+/g, ' '));
     images.forEach((image) => formData.append('images', image));
     console.log(Post, 'at edit button');
-    axios
-      .put(`api/posts/editpost/${productDetails._id}`, { params: { Post } })
-      .then((res) => {
-        alert('post updated');
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
+    try {
+      const formDataArray = [];
+      for (let i = 0; i < images.length; i++) {
+        const formDatai = new FormData();
+        formDatai.append('file', images[i]);
+        formDataArray.push(formDatai);
+      }
+
+      const responses = await Promise.all(
+        formDataArray.map((formData) =>
+          axios.post('api/cloudinary/upload', formData)
+        )
+      );
+      console.log(responses);
+      const imgUrlArray = [];
+      responses.forEach((response) => {
+        imgUrlArray.push(response.data);
       });
+
+      console.log(imgUrlArray);
+      axios
+        .put(`api/posts/editpost/${productDetails._id}`, { params: { Post, imgUrlArray } })
+        .then((res) => {
+          alert('post updated');
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }catch(error){
+
+    }
   };
 
   const handleImageChange = (e) => {
@@ -98,7 +121,7 @@ const Editpost = () => {
                 {console.log('Post', Post)}
                 <h1 style={{ fontSize: '280%', color: '#1C0040' }}>
                   {' '}
-                  Add Post
+                  Edit Post
                 </h1>
                 <h2 style={{ color: '#1C0040' }}>upload Product Images</h2>
 

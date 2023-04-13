@@ -38,7 +38,7 @@ const UserView = ({
     email: email_ = defaultData.email,
     name: name_ = defaultData.name,
     user_name: user_name_ = defaultData.user_name,
-    profile_picture: profile_picture_ = defaultData.profile_picture,
+    // profile_picture: profile_picture_ = defaultData.profile_picture,
     date_created: date_created_ = defaultData.date_created,
     flag: flag_ = defaultData.flag,
     children: children_ = children,
@@ -47,12 +47,17 @@ const UserView = ({
     email,
     name,
     user_name,
-    profile_picture,
+    // profile_picture,
     date_created,
     flag,
     children,
   };
+  let profile_picture_ = imgPlaceholder;
+  if (profile_picture !== null) {
+    profile_picture_ = profile_picture;
+  }
 
+  console.log('pp', profile_picture, name_);
   const toSellerProfile = () => {
     axios
       .get(`api/goals/viewProfile/user${id_}`)

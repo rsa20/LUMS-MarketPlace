@@ -185,3 +185,8 @@
   /* border-radius: 5%;
   border: 1px solid; */
 }
+
+.img-fluid {
+  height: 40px;
+  width: 40px;
+}

@@ -4,6 +4,7 @@ import Carousel from '../../Components/Carousel/Carousel';
 import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import './Viewpost.css';
+import placeholder from '../H2/placeholderimg.jpg';
 // import he1 from './he1.jpg';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -17,7 +18,16 @@ import { setSellerObj } from '../Redux/Store.jsx';
 const Viewpost = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [productDetails, setProduct] = useState('');
+  const [productDetails, setProduct] = useState({
+    title: 'default',
+    description: 'default',
+    _id: 'default',
+    price: 0,
+    state: false,
+    user: 'default',
+    sellerName: 'default',
+    img_URL: [],
+  });
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
 
@@ -31,7 +41,7 @@ const Viewpost = () => {
       setProduct(location.state.productDetails);
     }
   }, [location.state]);
-  console.log(productDetails);
+  console.log('pd', productDetails);
   const flag = productDetails.state;
   console.log('flag: ', flag);
 
@@ -67,10 +77,15 @@ const Viewpost = () => {
   const onEditClick = () => {
     navigate('/Editpost', { state: { productDetails } });
   };
+
+  console.log(productDetails.img_URL.length);
+  let imgshow = [placeholder];
+  if (productDetails.img_URL.length > 0) {
+    imgshow = productDetails.img_URL;
+  }
   return (
     <>
       <Header />
-      {/* <img src={productDetails.img_URL_} alt='' /> */}
       <div className='pmain'>
         <div className='postmain'>
           <div className='carm'>
@@ -86,6 +101,7 @@ const Viewpost = () => {
               //   backgroundPosition: 'center',
               // }}
             >
+              <img src={imgshow[0]} alt='' style={{ height: '100%' }} />
               <Carousel style={{ background: '#ac1616' }} />
             </div>
           </div>
