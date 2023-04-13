@@ -54,7 +54,7 @@ const Editpost = () => {
     //   }
     // return errors;
   };
-  const edit = () => {
+  const edit = async () => {
     const errors = validate();
     if (errors) {
       if (Object.keys(errors).length) {
@@ -69,14 +69,22 @@ const Editpost = () => {
     formData.append('tags', Post.tags.trim().replace(/\s+/g, ' '));
     images.forEach((image) => formData.append('images', image));
     console.log(Post, 'at edit button');
-    axios
-      .put(`api/posts/editpost/${productDetails._id}`, { params: { Post } })
-      .then((res) => {
-        alert('post updated');
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+    try {
+      const response = await axios.post('api/cloudinary/upload', form_data);
+      console.log('hello', response.data);
+      setp(response.data);
+      console.log(p_img, 'p_img');
+      axios
+        .put(`api/posts/editpost/${productDetails._id}`, { params: { Post } })
+        .then((res) => {
+          alert('post updated');
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    }catch(error){
+
+    }
   };
 
   const handleImageChange = (e) => {
