@@ -1,0 +1,61 @@
+.car2 {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.car2-slide {
+  display: flex;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.car2-itemi {
+  flex: 0 0 100%;
+  height: 400px;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.car2-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.car2-item.active {
+  opacity: 1;
+  transform: translateX(0%);
+  z-index: 1;
+}
+
+.car2-item:not(.active) {
+  position: absolute;
+  opacity: 0;
+  transform: translateX(100%);
+  z-index: 0;
+}
+
+.car2-prev,
+.car2-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.car2-prev {
+  left: 0;
+}
+
+.car2-next {
+  right: 0;
+}
