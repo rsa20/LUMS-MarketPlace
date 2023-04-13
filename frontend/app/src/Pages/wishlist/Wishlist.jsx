@@ -33,6 +33,7 @@ const Wishlist = () => {
             title={wish.title}
             image={img}
             price={wish.price}
+            img_URL={wish.img_URL}
             // status={product.status}
           />
         ))}

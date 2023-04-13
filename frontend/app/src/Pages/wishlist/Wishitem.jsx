@@ -4,7 +4,7 @@ import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import he1 from './he1.jpg';
+import he1 from './placeholderimg.jpg';
 
 import './wish.css';
 
@@ -42,7 +42,7 @@ const Wishitem = ({ _id, title, img_URL, price }) => {
     const response = await fetch(`/api/posts/product${newID}/${user_id}`);
 
     const data = await response.json();
-    const { _id, title, description, price, user } = data.post;
+    const { _id, title, description, price, user, img_URL } = data.post;
     const state = data.myPost;
     // console.log(data, 'tester')
     // const imageUrls = images.map((image) => image.url);
@@ -59,6 +59,7 @@ const Wishitem = ({ _id, title, img_URL, price }) => {
       state,
       user,
       sellerName,
+      img_URL
     };
     console.log(productDetails, 'prod details');
     navigate('/viewpost', { state: { productDetails } });
@@ -67,12 +68,8 @@ const Wishitem = ({ _id, title, img_URL, price }) => {
     //   state: { productDetails }
     // });
   };
-  var img_URL_ = he1;
-  if(img_URL){
-    if (img_URL.length !== 0) {
-      img_URL_ = img_URL[0];
-    }
-  }
+  const img_URL_ = img_URL[0] || he1;
+  
   return (
     <div className='product-main'>
       <div
