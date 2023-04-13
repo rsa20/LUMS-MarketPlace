@@ -60,6 +60,11 @@ const SellerViewP = () => {
 
   console.log(info, 'info here');
 
+  let imgShow = img;
+  if (seller.profile_picture !== null) {
+    imgShow = seller.profile_picture;
+  }
+
   return (
     <div>
       <Header></Header>
@@ -72,7 +77,7 @@ const SellerViewP = () => {
             <img
               className='im'
               style={{ borderRadius: '10%' }}
-              src={img}
+              src={imgShow}
               alt='user-pic'
             />
           </div>

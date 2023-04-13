@@ -98,7 +98,7 @@ const Editpost = () => {
                 {console.log('Post', Post)}
                 <h1 style={{ fontSize: '280%', color: '#1C0040' }}>
                   {' '}
-                  Add Post
+                  Edit Post
                 </h1>
                 <h2 style={{ color: '#1C0040' }}>upload Product Images</h2>
 
