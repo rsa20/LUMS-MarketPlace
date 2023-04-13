@@ -171,9 +171,11 @@ const createPost = async (req, res) => {
 };
 
 const editPost = async (req, res) => {
-  console.log('here');
+  console.log("edit image urls: ", req.body.params.imgUrlArray);
+
   const postID = req.params.p_id;
   const formData = req.body.params.Post;
+  const imgUrlArray = req.body.params.imgUrlArray
   console.log(postID);
   const post = await Post.findById(postID);
   if (post.title != formData.title) {
@@ -197,8 +199,8 @@ const editPost = async (req, res) => {
     post.tags = tags;
   }
 
-  if (formData.img_URL != post.img_URL) {
-    post.img_URL = formData.img_URL;
+  if (imgUrlArray != post.img_URL) {
+    post.img_URL = imgUrlArray;
   }
   if (formData.status == true) {
     post.sold_date = Date.now();
@@ -215,6 +217,7 @@ const editPost = async (req, res) => {
     description: updatedPost.description,
     price: updatedPost.price,
     status: updatedPost.status,
+    img_URL: updatedPost.img_URL,
   });
 };
 

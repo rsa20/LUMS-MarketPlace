@@ -70,12 +70,27 @@ const Editpost = () => {
     images.forEach((image) => formData.append('images', image));
     console.log(Post, 'at edit button');
     try {
-      const response = await axios.post('api/cloudinary/upload', form_data);
-      console.log('hello', response.data);
-      setp(response.data);
-      console.log(p_img, 'p_img');
+      const formDataArray = [];
+      for (let i = 0; i < images.length; i++) {
+        const formDatai = new FormData();
+        formDatai.append('file', images[i]);
+        formDataArray.push(formDatai);
+      }
+
+      const responses = await Promise.all(
+        formDataArray.map((formData) =>
+          axios.post('api/cloudinary/upload', formData)
+        )
+      );
+      console.log(responses);
+      const imgUrlArray = [];
+      responses.forEach((response) => {
+        imgUrlArray.push(response.data);
+      });
+
+      console.log(imgUrlArray);
       axios
-        .put(`api/posts/editpost/${productDetails._id}`, { params: { Post } })
+        .put(`api/posts/editpost/${productDetails._id}`, { params: { Post, imgUrlArray } })
         .then((res) => {
           alert('post updated');
         })
