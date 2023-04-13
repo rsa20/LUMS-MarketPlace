@@ -18,7 +18,7 @@ const user = new Schema({
   user_name: { type: String, required: false, unique: true },
   posts: { type: [Schema.Types.ObjectId], required: false, default: [] },
   name: { type: String, required: true },
-  profile_picture: { type: String, required: false },
+  profile_picture: { type: String, default: ""},
   flag: { type: Boolean, default: false },
   date_created: { type: Date, required: true, default: Date.now },
 });

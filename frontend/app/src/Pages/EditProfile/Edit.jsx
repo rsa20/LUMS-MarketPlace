@@ -15,13 +15,13 @@ import { useNavigate } from 'react-router-dom';
 const Edit = () => {
   // const navigate = useNavigate();
   const [p_img, setp] = useState(null);
-  const userEmail = useSelector((state) => state.userEmail.userEmail);
+  // const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(userEmail, 'sjkdfsjkfn');
-  console.log(loggedInUser.email, 'sjkdfsjkfn');
+  // console.log(userEmail, 'sjkdfsjkfn');
+  // console.log(loggedInUser.email, 'sjkdfsjkfn');
 
   const [user, setUser] = useState({
     id: loggedInUser._id,
@@ -84,21 +84,28 @@ const Edit = () => {
     const form_data = new FormData();
       form_data.append('file', selectedImage);
 
-
-
-
     if (Object.keys(errors).length) {
       setErrors(errors);
       return;
     }
 
-    console.log("img selected", form_data)
-    axios.post('api/cloudinary/upload', form_data).then((res)=>{
-      console.log("hello", res.data)
-      setp(res.data)
-    })
+    // var cloudinary_url
+    // console.log("img selected", form_data)
+    // axios.post('api/cloudinary/upload', form_data).then((res)=>{
+    //   console.log("hello", res.data)
+    //   setp(res.data)
+    //   cloudinary_url = res.data
+    // })
+    // console.log(cloudinary_url,"p_img")
+    
+      console.log("img selected", form_data)
+      try {
+        const response = await axios.post('api/cloudinary/upload', form_data)
+        console.log("hello", response.data)
+        setp(response.data)
+        console.log(p_img, "p_img")
 
-    axios
+        axios
       .put('api/goals/updateProfile', {...user, p_img})
       .then((res) => {
         // resdata should be user details user obj in reducer
@@ -133,20 +140,25 @@ const Edit = () => {
       .catch((error) => {
         alert(error.response.data.message);
       });
+        
+      } catch (error) {
+        console.error(error)
+      }
+    
   };
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleDelete = () => {
-    axios
-      .put('api/goals/delProfile', user)
-      .then((res) => {
-        alert('Deleted profile');
-        // navigate("/login");
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`api/goals/deleteUser/${loggedInUser._id}`);
+      const data = await response.json();
+      console.log(data.message); // Post successfully deleted from all collections.
+      // Add any other necessary logic after successful deletion
+    } catch (error) {
+      console.error(error);
+      // Handle error cases here, e.g. show an error message to the user
+    }
   };
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);

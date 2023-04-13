@@ -72,14 +72,16 @@ const getUser = async (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ _id: req.body.id });
 
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-
+  console.log("req.body: ", req.body)
+  console.log("received img: ", req.body.p_img)
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
+  user.profile_picture =  req.body.p_img || user.profile_picture
   if (req.body.password) {
     const hash = await bcrypt.hash(req.body.password, 10);
     user.password = hash;
@@ -97,6 +99,7 @@ const updateUserProfile = async (req, res) => {
     _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
+    profile_picture: updatedUser.profile_picture,
   });
 };
 // const updateUserProfile = async (req, res) => {
@@ -227,10 +230,10 @@ const registerUser = async (req, res) => {
         name: name,
         email: email,
         password: password,
-        created_date: Date(),
         user_name: name,
         token: token,
-        flags: 0,
+        flag: 0,
+        profile_picture: "",
       });
       // User.insertMany(newUser)
       newUser.save((err) => {
