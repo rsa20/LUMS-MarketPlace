@@ -18,11 +18,14 @@ import EditPost from './Pages/EditPost/Editpost';
 import SellerViewP from './Pages/SellerViewP/SellerViewP';
 import Wishlist from './Pages/wishlist/Wishlist';
 import AddReviews from './Pages/AddReviews/AddReviews';
+import ViewUserAdmin from './Pages/ViewUserAdmin/ViewUserAdmin';
+import PostViewAdmin from './Pages/PostsViewAdmin/PostsViewAdmin';
 // import WishItem from './Pages/wishlist/Wishlist'
 
 // Moez extra
 import Viewpost from './Pages/Viewpost/Viewpost';
 import Addpost from './Pages/AddPost/Addpost';
+import UploadImage from './Pages/UploadImg/UploadImage';
 
 function App() {
   const [user, setLoginUser] = useState({ _id: null });
@@ -75,6 +78,10 @@ function App() {
           <Route exact path='/AddReviews' element={<AddReviews />} />
           <Route exact path='/wish' element={<Wishlist />} />
           <Route exact path='/hello' element={<Hello />} />
+          <Route exact path='/ViewUserAdmin' element={<ViewUserAdmin />} />
+          <Route exact path='/PostViewAdmin' element={<PostViewAdmin />} />
+          <Route exact path='/UP' element={<UploadImage />} />
+          
         </Routes>
       </Router>
       {/* <Header/> */}

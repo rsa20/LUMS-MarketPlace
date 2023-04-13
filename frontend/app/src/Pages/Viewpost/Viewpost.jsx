@@ -31,6 +31,7 @@ const Viewpost = () => {
       setProduct(location.state.productDetails);
     }
   }, [location.state]);
+  console.log(productDetails);
   const flag = productDetails.state;
   console.log('flag: ', flag);
 
@@ -69,6 +70,7 @@ const Viewpost = () => {
   return (
     <>
       <Header />
+      {/* <img src={productDetails.img_URL_} alt='' /> */}
       <div className='pmain'>
         <div className='postmain'>
           <div className='carm'>

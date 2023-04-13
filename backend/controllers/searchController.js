@@ -13,7 +13,7 @@ const simpleSearch = async (req, res) => {
 
 const filterSearch = async (req, res) => {
 
-  console.log("called")
+  console.log(req.body.params)
   const searchString = req.body.params.search;
   const filters = req.body.params.selectedFilters;
   const priceRange = req.body.params.priceRange;

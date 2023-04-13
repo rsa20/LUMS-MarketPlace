@@ -1,5 +1,8 @@
 // const Goal = require('../models/goalModel')
 const User = require('../models/user');
+const Post = require('../models/posts');
+const Wishlist = require('../models/wishlist');
+const Reviews = require('../models/reviews');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('../config/nodemailer');
@@ -34,6 +37,31 @@ const getUserbyId = async (req, res) => {
     return res.status(500).send({ message: 'DB Error' });
   }
 };
+
+// const getInfoRP = async (req, res) => {
+//   console.log(req.params.u_id);
+// };
+const getInfoRP = async (req, res) => {
+  const { u_id } = req.params;
+  console.log(u_id);
+
+  try {
+    const user = await User.findById(u_id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const postsCount = user.posts.length;
+
+    const reviews = await Reviews.find({ reviewed: u_id });
+
+    return res.json({ posts: postsCount, reviews: reviews.length });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
 //
 const getUser = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -44,14 +72,16 @@ const getUser = async (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ _id: req.body.id });
 
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-
+  console.log("req.body: ", req.body)
+  console.log("received img: ", req.body.p_img)
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
+  user.profile_picture =  req.body.p_img || user.profile_picture
   if (req.body.password) {
     const hash = await bcrypt.hash(req.body.password, 10);
     user.password = hash;
@@ -69,6 +99,7 @@ const updateUserProfile = async (req, res) => {
     _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
+    profile_picture: updatedUser.profile_picture,
   });
 };
 // const updateUserProfile = async (req, res) => {
@@ -138,7 +169,6 @@ const loginUser = async (req, res) => {
   // console.log(req.body)
 
   if (getUserByEmail) {
-    
     if (!getUserByEmail.email_verification) {
       return res.status(401).send({
         message:
@@ -200,10 +230,10 @@ const registerUser = async (req, res) => {
         name: name,
         email: email,
         password: password,
-        created_date: Date(),
         user_name: name,
         token: token,
-        flags: 0,
+        flag: 0,
+        profile_picture: "",
       });
       // User.insertMany(newUser)
       newUser.save((err) => {
@@ -230,6 +260,40 @@ const deleteAllUsers = async (req, res) => {
   res.status(200).json({ message: 'DELETED USERS' });
 };
 
+const deleteUser = async (req, res) => {
+  console.log('mujhe delet kro please :)', req.params.u_id);
+  const userId = req.params.u_id;
+
+  try {
+    //Delete that user
+    await User.deleteOne({ _id: userId });
+
+    //Delete all that user's posts
+    await Post.deleteMany({ user: userId });
+
+    //Delete that user's wishlist
+    await Wishlist.deleteOne({ user: userId });
+
+    //Delete all reviews of the user
+    const reviewsToDelete = await Reviews.find({
+      $or: [{ reviewer: userId }, { reviewed: userId }],
+    });
+
+    //If no reviews to be deleted, this step will be skipped
+    if (reviewsToDelete.length > 0) {
+      await Reviews.deleteMany({
+        $or: [{ reviewer: userId }, { reviewed: userId }],
+      });
+    }
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({ message: 'Error deleting User' });
+  }
+};
+
 // const deleteUser = async()
 
 module.exports = {
@@ -241,4 +305,6 @@ module.exports = {
   getUser,
   getUserbyId,
   getUserByEmail,
+  deleteUser,
+  getInfoRP,
 };

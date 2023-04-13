@@ -14,6 +14,8 @@ const AddReviews = () => {
   const reviewed = useSelector((state) => state.sellerObj.sellerObj).user;
   const reviewer = useSelector((state) => state.userObj.userObj);
   // const [resp, setResp] = useState('');
+  console.log('reviewed', reviewed);
+  console.log('reviewer', reviewer);
 
   useEffect(() => {
     setReviewedId(reviewed._id);
@@ -93,8 +95,12 @@ const AddReviews = () => {
             value={reviewScore}
             onChange={handleReviewScoreChange}
           />
-          <label className='addRev-label' htmlFor='reviewText'>
-            Review Text {'(1-200) characters'}
+          <label
+            className='addRev-label'
+            htmlFor='reviewText'
+            style={{ marginTop: '1vw' }}
+          >
+            Review Text (1-200) characters
           </label>
           <textarea
             className='addRev-textarea'
@@ -134,7 +140,7 @@ const AddReviews = () => {
           </div>
         </form>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

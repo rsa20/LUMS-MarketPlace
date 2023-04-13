@@ -12,7 +12,7 @@ const Vsea = () => {
 
     const [vsea, setVsea] = useState([]);
     useEffect(() => {
-        console.log(location.state, 'test');
+        console.log(location.state, 'isdfmk');
         if (location.state) {
             setVsea(location.state.myfilter);
           console.log(vsea);

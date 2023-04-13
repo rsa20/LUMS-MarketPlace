@@ -8,22 +8,25 @@ import ProfileHeader from '../../Components/Phead/Fh';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setUserObj, setUserEmail } from '../Redux/Store.jsx';
+import { useNavigate } from 'react-router-dom';
 
 // import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
   // const navigate = useNavigate();
-  const userEmail = useSelector((state) => state.userEmail.userEmail);
+  const [p_img, setp] = useState(null);
+  // const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log(userEmail, 'sjkdfsjkfn');
-  console.log(loggedInUser.email, 'sjkdfsjkfn');
+  // console.log(userEmail, 'sjkdfsjkfn');
+  // console.log(loggedInUser.email, 'sjkdfsjkfn');
 
   const [user, setUser] = useState({
     id: loggedInUser._id,
-    name: '',
-    email: '',
+    name: loggedInUser.name,
+    email: loggedInUser.email,
     password: '',
     reEnterPassword: '',
   });
@@ -46,6 +49,7 @@ const Edit = () => {
       password: '',
       reEnterPassword: '',
     });
+    navigate('/viewp');
   };
   const validate = () => {
     const errors = {};
@@ -77,13 +81,32 @@ const Edit = () => {
   const edit = async () => {
     const errors = validate();
 
+    const form_data = new FormData();
+      form_data.append('file', selectedImage);
+
     if (Object.keys(errors).length) {
       setErrors(errors);
       return;
     }
 
-    axios
-      .put('api/goals/updateProfile', user)
+    // var cloudinary_url
+    // console.log("img selected", form_data)
+    // axios.post('api/cloudinary/upload', form_data).then((res)=>{
+    //   console.log("hello", res.data)
+    //   setp(res.data)
+    //   cloudinary_url = res.data
+    // })
+    // console.log(cloudinary_url,"p_img")
+    
+      console.log("img selected", form_data)
+      try {
+        const response = await axios.post('api/cloudinary/upload', form_data)
+        console.log("hello", response.data)
+        setp(response.data)
+        console.log(p_img, "p_img")
+
+        axios
+      .put('api/goals/updateProfile', {...user, p_img})
       .then((res) => {
         // resdata should be user details user obj in reducer
         const updateSlicer = async () => {
@@ -94,10 +117,10 @@ const Edit = () => {
             if (!response.ok) {
               console.error(`HTTP error! status: ${response.status}`);
             }
-            const user = await response.json();
-            console.log('after update', user);
-            dispatch(setUserObj(user));
-            dispatch(setUserEmail(user.email));
+            const user1 = await response.json();
+            console.log('after update', user1);
+            dispatch(setUserObj(user1));
+            dispatch(setUserEmail(user1.email));
           } catch (error) {
             console.error(`Error fetching reviews: ${error.message}`);
           }
@@ -111,28 +134,35 @@ const Edit = () => {
           reEnterPassword: '',
         });
         alert('Details changed');
+        // navigate('/viewp');
         // navigate("/login");
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
+        
+      } catch (error) {
+        console.error(error)
+      }
+    
   };
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleDelete = () => {
-    axios
-      .put('api/goals/delProfile', user)
-      .then((res) => {
-        alert('Deleted profile');
-        // navigate("/login");
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`api/goals/deleteUser/${loggedInUser._id}`);
+      const data = await response.json();
+      console.log(data.message); // Post successfully deleted from all collections.
+      // Add any other necessary logic after successful deletion
+    } catch (error) {
+      console.error(error);
+      // Handle error cases here, e.g. show an error message to the user
+    }
   };
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
+    console.log('here i am hello ',selectedImage)
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -143,7 +173,8 @@ const Edit = () => {
     <>
       <Header />
       <ProfileHeader />
-      <div className='main'>
+      <img src={p_img} alt="" />
+      <div className='editp-main' style={{ margin: '15vw 0 -60px 0' }}>
         <div className='in'>
           <span className='reg'>
             <div className='r'>
@@ -154,7 +185,10 @@ const Edit = () => {
                   Edit Profile
                 </h1>
                 <h2 style={{ color: '#1C0040' }}>Change Profile Pic</h2>
-
+                {/* <div
+                  className='editp-img-con'
+                  // style={{ background: '#000000' }}
+                > */}
                 {selectedImage && (
                   <img
                     style={{
@@ -167,6 +201,7 @@ const Edit = () => {
                     className='img-fluid mt-3'
                   />
                 )}
+                {/* </div> */}
                 <span className='up'>
                   {/* <button>upload profile</button> */}
                   {/* <input className= "pl" style={{fontFamily:"popins", color:"green", borderBlockColor:"purple"}} type="text" placeholder="Directry"  /> */}
@@ -182,16 +217,8 @@ const Edit = () => {
                     </div>
                   </div>
                 </span>
-                {/* <h1
-                style={{
-                  color: "#013221",
-                  font: "Poppins",
-                  fontSize: "100%",
-                }}
-              >
-                Welcome to Thrift. Lums
-              </h1> */}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Name</h1>
+
+                <h1 style={{ fontSize: '110%' }}>Name</h1>
                 <input
                   type='text'
                   name='name'
@@ -202,7 +229,7 @@ const Edit = () => {
                   onChange={handleChange}
                 />
                 {errors.name && <span className='error'>{errors.name}</span>}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>Email</h1>
+                <h1 style={{ fontSize: '110%' }}>Email</h1>
 
                 <input
                   type='email'
@@ -213,9 +240,7 @@ const Edit = () => {
                 />
                 {errors.email && <span className='error'>{errors.email}</span>}
 
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>
-                  Password
-                </h1>
+                <h1 style={{ fontSize: '110%' }}>Password</h1>
 
                 <input
                   type='password'
@@ -227,9 +252,7 @@ const Edit = () => {
                 {errors.password && (
                   <span className='error'>{errors.password}</span>
                 )}
-                <h1 style={{ marginLeft: '-85%', fontSize: '110%' }}>
-                  Confirm{' '}
-                </h1>
+                <h1 style={{ fontSize: '110%' }}>Confirm Password </h1>
 
                 <input
                   type='password'
@@ -257,6 +280,7 @@ const Edit = () => {
           </span>
         </div>
       </div>
+
       <div className='del'>
         <h1 style={{ fontSize: '300%', color: '#1C0040' }}>Delete Profile</h1>
         <h2>Delete my account permanently</h2>

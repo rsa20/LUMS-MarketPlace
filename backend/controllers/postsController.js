@@ -1,5 +1,6 @@
 const Post = require('../models/posts');
 const User = require('../models/user');
+const Wishlist = require('../models/wishlist');
 
 async function getUserByPost(req, res) {
   try {
@@ -19,39 +20,75 @@ async function getUserByPost(req, res) {
   }
 }
 
-const getPostsbyUser = async(req, res)=>{
-  console.log("here")
-    
-    // console.log(req)
-  const user_id = req.params.u_id
+const getPostsbyUser = async (req, res) => {
+  console.log('here');
+
+  // console.log(req)
+  const user_id = req.params.u_id;
   // console.log("user id:",user_id)
   const userfound = await User.findOne({
-    _id : user_id
-  })
+    _id: user_id,
+  });
   // console.log("user found:", userfound)
-  const post_ids = userfound.posts
-  console.log("post id: ", post_ids)
+  const post_ids = userfound.posts;
+  console.log('post id: ', post_ids);
   userPosts = await Post.find({
-    _id: {$in : post_ids}
-  })
-  if(!userPosts){
-    return res.status(404).send({message:"No posts"})
+    _id: { $in: post_ids },
+  });
+  if (!userPosts) {
+    return res.status(404).send({ message: 'No posts' });
   }
-  console.log("Posts sent")
-  return res.status(200).send(userPosts)
-  
-  
-
-}
+  console.log('Posts sent');
+  return res.status(200).send(userPosts);
+};
 
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).sort({
+      date_created: 'desc',
+    });
     if (!posts) {
       return res.status(404).send({ message: 'No posts found' });
     }
     // console.log(posts)
     return res.status(200).send(posts);
+  } catch (error) {
+    return res.status(500).send({ message: 'DB Error' });
+  }
+};
+
+const allProductsWithUserName = async (req, res) => {
+  try {
+    const posts = await Post.find({}).sort({
+      date_created: 'desc',
+    });
+    if (!posts) {
+      return res.status(404).send({ message: 'No posts found' });
+    }
+    // console.log(posts)
+    //
+    const formattedPosts = await Promise.all(
+      posts.map(async (post) => {
+        const poster = await User.findById(post.user);
+        // console.log(reviewer);
+        return {
+          _id: post._id,
+          title: post.title,
+          description: post.description,
+          price: post.price,
+          status: post.status,
+          sold_date: post.sold_date,
+          img_URL: post.img_URL,
+          date_created: post.date_created,
+          tags: post.tags,
+          flags: post.flags,
+          user: post.user,
+          seller: poster.user_name,
+        };
+      })
+    );
+    //
+    return res.status(200).send(formattedPosts);
   } catch (error) {
     return res.status(500).send({ message: 'DB Error' });
   }
@@ -182,21 +219,46 @@ const editPost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
-  const p_id = req.body.params.post._id;
-
+  console.log('mujhe delet kro please :)', req.params.p_id);
   try {
-    const post = await Post.findById(p_id);
-    const u_id = post.user;
-    console.log(u_id);
-    const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+    const p_id = req.params.p_id;
 
+    // delete from posts collection
+    const deletedPost = await Post.findByIdAndDelete(p_id);
+
+    // delete post ID from users collection
+    const u_id = deletedPost.user;
+    await User.findByIdAndUpdate(u_id, { $pull: { posts: p_id } });
+
+    // delete post ID from wishlist collection
+    await Wishlist.updateMany({ posts: p_id }, { $pull: { posts: p_id } });
+
+    console.log('Post successfully deleted!');
     res.status(200).json({
-      message: `Post deleted successfully`,
+      message: 'Post successfully deleted from all collections.',
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server Error' });
+    console.error(error);
+    res.status(500).json({ message: 'Error deleting post from collections.' });
   }
 };
+
+// const deletePost = async (req, res) => {
+//   const p_id = req.body.params.post._id;
+
+//   try {
+//     const post = await Post.findById(p_id);
+//     const u_id = post.user;
+//     console.log(u_id);
+//     const deletedPost = await Post.findByIdAndDelete(req.body.ObjectId);
+
+//     res.status(200).json({
+//       message: `Post deleted successfully`,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server Error' });
+//   }
+// };
 
 module.exports = {
   editPost,
@@ -205,5 +267,6 @@ module.exports = {
   getAllPosts,
   getPostbyID,
   getUserByPost,
-  getPostsbyUser
+  getPostsbyUser,
+  allProductsWithUserName,
 };

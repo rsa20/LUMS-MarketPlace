@@ -14,6 +14,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import './Header1.css';
 import { useNavigate } from 'react-router-dom';
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
   const [wish, setwish] = useState([]);
@@ -50,35 +51,42 @@ const Header = () => {
   //   console.log('Selected filter:', selectedFilter);
   //   console.log('Price range:', priceRange);
   // };
-  const handlC = async (selectedFilter, priceRange, search ) => {
-    console.log(selectedFilter, priceRange, search );
-    let myfilter;
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'test');
-        myfilter = data;
-        console.log(myfilter)
-        setVsearch(data);
-      })
-      .catch((error) => console.log(error));
-    console.log(vsearch, 'hmmm');
-    navigate('/vsea', { state: { myfilter } });  };
+  const handlC =  (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search, "handle");
+    // let myfilter;
 
-    const handleFilterSubmit = async (selectedFilter, priceRange, search ) => {
-    console.log(selectedFilter, priceRange, search );
+    // await fetch('/api/search/filtersearch', {
+    //   params: { selectedFilter, priceRange, search },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data, 'test');
+    //     myfilter = data;
+    //     console.log(myfilter);
+    //     setVsearch(data);
+    //   })
+    //   .catch((error) => console.log(error));
+    // console.log(vsearch, 'hmmm');
+
+    // navigate('/vsea', { state: { myfilter } });
+  };
+
+  const handleFilterSubmit = (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search, "hello");
     let myfilter;
-    await fetch('api/search/filtersearch',{params:{ selectedFilter, priceRange, search }})
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'test');
-        myfilter = data;
-        console.log(myfilter)
-        setVsearch(data);
-      })
-      .catch((error) => console.log(error));
-    console.log(vsearch, 'hmmm');
-    navigate('/vsea', { state: { myfilter } });
+    // await fetch('/api/search/filtersearch', {
+    //   params: { selectedFilter, priceRange, search },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data, 'test');
+    //     myfilter = data;
+    //     console.log(myfilter);
+    //     setVsearch(data);
+    //   })
+    //   .catch((error) => console.log(error));
+    // console.log(vsearch, 'hmmm');
+    // navigate('/vsea', { state: { myfilter } });
   };
 
   const viewWish = async (userID) => {
@@ -88,7 +96,8 @@ const Header = () => {
     // const { id, title, description, price,state } = data;
     // const productDetails = { title, description, id, price,state };
     // console.log(productDetails);
-    let mywish;
+    //
+    let mywish = [];
     await fetch(`/api/wishlist/getWishlist/${userID}`)
       .then((response) => response.json())
       .then((data) => {
@@ -97,7 +106,18 @@ const Header = () => {
         setwish(data);
       })
       .catch((error) => console.log(error));
-    // console.log(wish, 'hmmm');
+    // let mywish = [];
+    // await fetch(`/api/wishlist/getWishlist/${userID}`)
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       response.json();
+    //       console.log(data, 'test here header');
+    //       // setwish(data);
+    //       // mywish = wish;
+    //     }
+    //     alert();
+    //   })
+    //   .catch((error) => console.log(error));
     navigate('/wish', { state: { mywish } });
   };
   return (
@@ -114,17 +134,35 @@ const Header = () => {
           </Link>
         </div>
         <div className='icon-container'>
+          {userEmail === '24100244@lums.edu.pk' ? (
+            <Link to='/ViewUserAdmin' style={{ marginRight: '0.9vw' }}>
+              <FontAwesomeIcon
+                icon={faFolder}
+                style={{
+                  color: '#fffffa',
+                  fontSize: '1.7vw',
+                }}
+              />
+            </Link>
+          ) : (
+            ''
+          )}
           <Link to='/Addpost'>
-            <img className='im' src={l5} alt='fuck of' />
+            <img className='im' src={l5} alt='add post button' />
           </Link>
           <Link to='/home'>
-            <img className='im' src={l4} alt='fuck of' />
+            <img className='im' src={l4} alt='home button' />
           </Link>
           <Link to='/hello'>
             <img className='im' src={l3} alt='fuck of' />
           </Link>
           <Link>
-            <img onClick={()=>viewWish(loggedInUser._id)} className='im' src={l2} alt='fuck of' />
+            <img
+              onClick={() => viewWish(loggedInUser._id)}
+              className='im'
+              src={l2}
+              alt='fuck of'
+            />
           </Link>
           <Link to='/viewp'>
             <img className='im' src={l1} alt='' />
@@ -145,6 +183,7 @@ const Header = () => {
               onChange={handle}
             />
             <button type='submit' className='search-btn' onClick={handlC}>
+            {/* <button type='submit' className='search-btn'> */}
               <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
             </button>
           </form>

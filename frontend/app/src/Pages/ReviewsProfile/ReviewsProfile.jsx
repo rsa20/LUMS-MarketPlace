@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import Header from '../../Components/header/Header1';
 import Phead from '../../Components/Phead/Fh';
@@ -44,10 +43,7 @@ const ReviewsProfile = () => {
   // }, [location.state]);
   // console.log(reviews);
   const allReviews = reviews.map((review) => (
-    <Review
-      // key={toString(review._id)}
-      {...review}
-    />
+    <Review key={review._id} {...review} />
   ));
   return (
     <>
