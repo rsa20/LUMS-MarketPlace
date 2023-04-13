@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import './product.css';
-import placeholderimg from './placeholderimg.jpg';
-import he1 from './he1.jpg';
+// import placeholderimg from './placeholderimg.jpg';
+import he1 from './placeholderimg.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

@@ -63,7 +63,11 @@ export const Viewp = () => {
   }, [loggedInUser]);
 
   // console.log(user, 'hello this is user');
-  // console.log(info, 'info here');
+  // console.log(info, 'info here');\
+  let imgShow = img;
+  if (loggedInUser.profile_picture !== null) {
+    imgShow = loggedInUser.profile_picture;
+  }
 
   return (
     <>
@@ -76,7 +80,7 @@ export const Viewp = () => {
             <img
               className='im'
               style={{ borderRadius: '10%' }}
-              src={img}
+              src={imgShow}
               alt='user-pic'
             />
           </div>
