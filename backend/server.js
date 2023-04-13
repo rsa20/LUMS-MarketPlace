@@ -15,6 +15,8 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// app.use(express.bodyParser({limit: '50mb'}));
+
 
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/posts', require('./routes/postsRoutes'));
@@ -22,6 +24,8 @@ app.use('/api/search', require('./routes/searchRoutes'));
 app.use('/api/wishlist', require('./routes/wishlistRoutes'));
 app.use('/api/reviews', require('./routes/reviewsRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/cloudinary', require('./routes/imageRoutes'))
+
 // app.use('/api/messages', require('./routes/chatRouter'));
 
 // configureWebsocket(server);
