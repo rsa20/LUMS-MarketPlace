@@ -17,6 +17,7 @@ const Add = () => {
     tags: '',
   });
   const userEmail = useSelector((state) => state.userEmail.userEmail);
+  const loggedInUser = useSelector((state) => state.userObj.userObj);
   console.log(userEmail, 'idhr');
   const [errors, setErrors] = useState({});
   const [images, setImages] = useState([]);
@@ -56,7 +57,7 @@ const Add = () => {
 
     return errors;
   };
-  const edit = () => {
+  const edit = async () => {
     const errors = validate();
     if (Object.keys(errors).length) {
       setErrors(errors);
@@ -68,17 +69,58 @@ const Add = () => {
     formData.append('price', Post.price);
     formData.append('tags', Post.tags.trim().replace(/\s+/g, ' '));
     images.forEach((image) => formData.append('images', image));
-    console.log(Post);
-    axios
-      .post('api/posts/createPost', { params: { Post, userEmail } })
-      .then((res) => {
-        alert('post Added');
-        console.log(res);
-        navigate('/home');
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
+    console.log('post', Post);
+    console.log('images', images);
+
+    try {
+      const formDataArray = [];
+      for (let i = 0; i < images.length; i++) {
+        const formDatai = new FormData();
+        formDatai.append('file', images[i]);
+        formDataArray.push(formDatai);
+      }
+
+      const responses = await Promise.all(
+        formDataArray.map((formData) =>
+          axios.post('api/cloudinary/upload', formData)
+        )
+      );
+      console.log(responses);
+      const imgUrlArray = [];
+      responses.forEach((response) => {
+        imgUrlArray.push(response.data);
       });
+
+      console.log(imgUrlArray);
+      // sending post details to backend
+      axios
+        .post('api/posts/createPost', {
+          params: { Post, loggedInUser, imgUrlArray },
+        })
+        .then((res) => {
+          alert('post Added');
+          console.log(res);
+          // navigate('/home');
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
+    } catch (error) {
+      alert(
+        'Error occurred while uploading pictures, try uploading a smaller image size or try again later.'
+      );
+      console.error(error);
+    }
+    // axios
+    //   .post('api/posts/createPost', { params: { Post, userEmail } })
+    //   .then((res) => {
+    //     alert('post Added');
+    //     console.log(res);
+    //     navigate('/home');
+    //   })
+    //   .catch((error) => {
+    //     alert(error.response.data.message);
+    //   });
   };
 
   const handleImageChange = (e) => {
@@ -110,7 +152,7 @@ const Add = () => {
                     }}
                     src={imagePreview}
                     alt='Profile'
-                    className='img-fluid mt-3'
+                    className='img-fluidi'
                   />
                 )}
                 <span className='up'>
@@ -131,7 +173,7 @@ const Add = () => {
                         key={index}
                         src={URL.createObjectURL(image)}
                         alt={`Product ${index + 1}`}
-                        className='img-fluid mt-3'
+                        className='img-fluid'
                       />
                     ))}
                   </div>

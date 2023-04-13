@@ -51,8 +51,8 @@ const Header = () => {
   //   console.log('Selected filter:', selectedFilter);
   //   console.log('Price range:', priceRange);
   // };
-  const handlC =  (selectedFilter, priceRange, search) => {
-    console.log(selectedFilter, priceRange, search, "handle");
+  const handlC = (selectedFilter, priceRange, search) => {
+    console.log(selectedFilter, priceRange, search, 'handle');
     // let myfilter;
 
     // await fetch('/api/search/filtersearch', {
@@ -72,7 +72,7 @@ const Header = () => {
   };
 
   const handleFilterSubmit = (selectedFilter, priceRange, search) => {
-    console.log(selectedFilter, priceRange, search, "hello");
+    console.log(selectedFilter, priceRange, search, 'hello');
     let myfilter;
     // await fetch('/api/search/filtersearch', {
     //   params: { selectedFilter, priceRange, search },
@@ -140,7 +140,7 @@ const Header = () => {
                 icon={faFolder}
                 style={{
                   color: '#fffffa',
-                  fontSize: '1.7vw',
+                  fontSize: '20px',
                 }}
               />
             </Link>
@@ -183,7 +183,7 @@ const Header = () => {
               onChange={handle}
             />
             <button type='submit' className='search-btn' onClick={handlC}>
-            {/* <button type='submit' className='search-btn'> */}
+              {/* <button type='submit' className='search-btn'> */}
               <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
             </button>
           </form>
