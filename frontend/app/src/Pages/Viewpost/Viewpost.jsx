@@ -28,7 +28,6 @@ const Viewpost = () => {
     sellerName: 'default',
     img_URL: [],
   });
-  const [imgss, setImgss] = useState('');
   const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
 
@@ -40,7 +39,6 @@ const Viewpost = () => {
     console.log(location.state, 'test');
     if (location.state) {
       setProduct(location.state.productDetails);
-      setImgss(location.state.productDetails.img_URL);
     }
   }, [location.state]);
   console.log('pd', productDetails);
