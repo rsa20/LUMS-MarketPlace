@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Edit.css';
 import axios from 'axios';
-import img from './img.jpg';
+import img from './profile_place.jpg';
 import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from '../../Components/Phead/Fh';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Edit = () => {
   // const navigate = useNavigate();
-  const [p_img, setp] = useState(null);
+  const [p_img, setp] = useState('');
   // const userEmail = useSelector((state) => state.userEmail.userEmail);
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
@@ -33,7 +33,9 @@ const Edit = () => {
 
   const [errors, setErrors] = useState({});
   const [selectedImage, setSelectedImage] = useState(img);
-  const [imagePreview, setImagePreview] = useState(img);
+  const [imagePreview, setImagePreview] = useState(
+    loggedInUser.profile_picture === null ? img : loggedInUser.profile_picture
+  );
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({
@@ -82,69 +84,58 @@ const Edit = () => {
     const errors = validate();
 
     const form_data = new FormData();
-      form_data.append('file', selectedImage);
+    form_data.append('file', selectedImage);
 
     if (Object.keys(errors).length) {
       setErrors(errors);
       return;
     }
 
-    // var cloudinary_url
-    // console.log("img selected", form_data)
-    // axios.post('api/cloudinary/upload', form_data).then((res)=>{
-    //   console.log("hello", res.data)
-    //   setp(res.data)
-    //   cloudinary_url = res.data
-    // })
-    // console.log(cloudinary_url,"p_img")
-    
-      console.log("img selected", form_data)
-      try {
-        const response = await axios.post('api/cloudinary/upload', form_data)
-        console.log("hello", response.data)
-        setp(response.data)
-        console.log(p_img, "p_img")
+    console.log('img selected', form_data);
+    try {
+      const response = await axios.post('api/cloudinary/upload', form_data);
+      console.log('hello', response.data);
+      setp(response.data);
+      console.log(p_img, 'p_img');
 
-        axios
-      .put('api/goals/updateProfile', {...user, p_img})
-      .then((res) => {
-        // resdata should be user details user obj in reducer
-        const updateSlicer = async () => {
-          try {
-            const response = await fetch(
-              `api/goals/viewProfile/user${loggedInUser._id}`
-            );
-            if (!response.ok) {
-              console.error(`HTTP error! status: ${response.status}`);
+      axios
+        .put('api/goals/updateProfile', { ...user, p_img: response.data })
+        .then((res) => {
+          // resdata should be user details user obj in reducer
+          const updateSlicer = async () => {
+            try {
+              const response = await fetch(
+                `api/goals/viewProfile/user${loggedInUser._id}`
+              );
+              if (!response.ok) {
+                console.error(`HTTP error! status: ${response.status}`);
+              }
+              const user1 = await response.json();
+              console.log('after update', user1);
+              dispatch(setUserObj(user1));
+              dispatch(setUserEmail(user1.email));
+            } catch (error) {
+              console.error(`Error fetching reviews: ${error.message}`);
             }
-            const user1 = await response.json();
-            console.log('after update', user1);
-            dispatch(setUserObj(user1));
-            dispatch(setUserEmail(user1.email));
-          } catch (error) {
-            console.error(`Error fetching reviews: ${error.message}`);
-          }
-        };
-        updateSlicer();
-        setUser({
-          id: loggedInUser._id,
-          name: '',
-          email: '',
-          password: '',
-          reEnterPassword: '',
+          };
+          updateSlicer();
+          setUser({
+            id: loggedInUser._id,
+            name: '',
+            email: '',
+            password: '',
+            reEnterPassword: '',
+          });
+          alert('Details changed');
+          navigate('/viewp');
+          // navigate("/login");
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
         });
-        alert('Details changed');
-        // navigate('/viewp');
-        // navigate("/login");
-      })
-      .catch((error) => {
-        alert(error.response.data.message);
-      });
-        
-      } catch (error) {
-        console.error(error)
-      }
-    
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -154,6 +145,7 @@ const Edit = () => {
       const response = await fetch(`api/goals/deleteUser/${loggedInUser._id}`);
       const data = await response.json();
       console.log(data.message); // Post successfully deleted from all collections.
+      alert(data.message);
       // Add any other necessary logic after successful deletion
     } catch (error) {
       console.error(error);
@@ -162,7 +154,7 @@ const Edit = () => {
   };
   const handleImageChange = (e) => {
     setSelectedImage(e.target.files[0]);
-    console.log('here i am hello ',selectedImage)
+    console.log('here i am hello ', selectedImage);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
@@ -173,7 +165,6 @@ const Edit = () => {
     <>
       <Header />
       <ProfileHeader />
-      <img src={p_img} alt="" />
       <div className='editp-main' style={{ margin: '15vw 0 -60px 0' }}>
         <div className='in'>
           <span className='reg'>

@@ -19,13 +19,18 @@ const Review = memo(
       reviewerName: name = defaultData.reviewerName,
       reviewText: text = defaultData.reviewText,
       reviewScore: score = defaultData.reviewScore,
-      reviewerImg: img = defaultData.reviewerImg,
+      // reviewerImg: img = defaultData.reviewerImg,
     } = {
       reviewerName,
       reviewText,
       reviewScore,
-      reviewerImg,
+      // reviewerImg,
     };
+
+    let img = defaultData.reviewerImg;
+    if (reviewerImg !== null) {
+      img = reviewerImg;
+    }
 
     const stars = new Array(score).fill(null).map(() => (
       <FontAwesomeIcon
