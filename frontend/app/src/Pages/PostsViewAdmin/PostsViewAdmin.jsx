@@ -37,7 +37,7 @@ const PostsViewAdmin = () => {
       })
       .catch((error) => console.log(error));
   }, [reRend, check]);
-  // console.log(products);
+  console.log(products[0]);
   const handleDelete = () => {
     setReRend(!reRend);
     // console.log('hello here i am to reload');

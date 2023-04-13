@@ -42,7 +42,8 @@ const Product = ({ _id, title, img_URL, price }) => {
     const response = await fetch(`/api/posts/product${newID}/${user_id}`);
 
     const data = await response.json();
-    const { _id, title, description, price, user } = data.post;
+    console.log(data);
+    const { _id, title, description, price, user, img_URL } = data.post;
     const state = data.myPost;
     // console.log(data, 'tester')
     // const imageUrls = images.map((image) => image.url);
@@ -51,6 +52,7 @@ const Product = ({ _id, title, img_URL, price }) => {
 
     console.log(sellerName, 'seller');
 
+    console.log(img_URL);
     const productDetails = {
       title,
       description,
@@ -59,6 +61,7 @@ const Product = ({ _id, title, img_URL, price }) => {
       state,
       user,
       sellerName,
+      img_URL: img_URL,
     };
     console.log(productDetails, 'prod details');
     navigate('/viewpost', { state: { productDetails } });

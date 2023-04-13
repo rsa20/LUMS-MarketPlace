@@ -14,6 +14,9 @@ const images = [
   'https://picsum.photos/id/1018/1000/600',
   'https://picsum.photos/id/1021/1000/600',
   'https://picsum.photos/id/1025/1000/600',
+  i1,
+  i2,
+  i3,
 ];
 
 export const Hello = () => {
@@ -49,11 +52,17 @@ export const Hello = () => {
         reviewScore={2}
         reviewerImg={false}
       /> */}
-      <Header></Header>
+      {/* <Header></Header>
       <div className='car2con'>
         <Car2 images={images} />
       </div>
-      <Footer></Footer>
+      <Footer></Footer> */}
+      <div
+        className='car2-con'
+        style={{ margin: '0 auto ', display: 'flex', alignContent: 'center' }}
+      >
+        <Car2 images={images} />
+      </div>
     </div>
   );
 };

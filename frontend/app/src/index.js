@@ -6,6 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './Pages/Redux/Store.jsx';
 
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'jquery/dist/jquery.min.js';
+// import 'popper.js/dist/umd/popper.min.js';
+// import 'bootstrap/dist/js/bootstrap.min.js';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
