@@ -46,7 +46,7 @@ export default function Uploadimage() {
 
       const responses = await Promise.all(
         formDataArray.map((formData) =>
-          axios.post('api/cloudinary/upload', formData)
+          axios.post('https://good-tan-woodpecker-wrap.cyclic.app/api/cloudinary/upload', formData)
         )
       );
       console.log(responses);

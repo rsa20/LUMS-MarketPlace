@@ -20,6 +20,8 @@ import Wishlist from './Pages/wishlist/Wishlist';
 import AddReviews from './Pages/AddReviews/AddReviews';
 import ViewUserAdmin from './Pages/ViewUserAdmin/ViewUserAdmin';
 import PostViewAdmin from './Pages/PostsViewAdmin/PostsViewAdmin';
+import Listings from './Pages/Listings/Listings';
+import SelletListings from './Pages/SellerListing/SellerListing';
 // import WishItem from './Pages/wishlist/Wishlist'
 
 // Moez extra
@@ -32,9 +34,9 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <h1>Landing Page</h1> */}
       <Router>
         <Routes>
+          <Route path='/' element={<Login setLoginUser={setLoginUser} />} />
           <Route exact path='/'>
             {user && user._id !== null ? (
               <Route index element={<Homepage setLoginUser={setLoginUser} />} />
@@ -80,8 +82,9 @@ function App() {
           <Route exact path='/hello' element={<Hello />} />
           <Route exact path='/ViewUserAdmin' element={<ViewUserAdmin />} />
           <Route exact path='/PostViewAdmin' element={<PostViewAdmin />} />
+          <Route exact path='/listings' element={<Listings />} />
+          <Route exact path='/sellerlistings' element={<SelletListings />} />
           <Route exact path='/UP' element={<UploadImage />} />
-          
         </Routes>
       </Router>
       {/* <Header/> */}

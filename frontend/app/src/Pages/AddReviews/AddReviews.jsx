@@ -46,7 +46,7 @@ const AddReviews = () => {
     console.log({ reviewerId, reviewedId, reviewText, reviewScore });
 
     try {
-      const response = await fetch(`/api/reviews/addReview`, {
+      const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/reviews/addReview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

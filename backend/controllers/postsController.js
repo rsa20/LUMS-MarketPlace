@@ -171,11 +171,11 @@ const createPost = async (req, res) => {
 };
 
 const editPost = async (req, res) => {
-  console.log("edit image urls: ", req.body.params.imgUrlArray);
+  console.log('edit image urls: ', req.body.params.imgUrlArray);
 
   const postID = req.params.p_id;
   const formData = req.body.params.Post;
-  const imgUrlArray = req.body.params.imgUrlArray
+  const imgUrlArray = req.body.params.imgUrlArray;
   console.log(postID);
   const post = await Post.findById(postID);
   if (post.title != formData.title) {

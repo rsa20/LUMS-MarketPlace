@@ -16,7 +16,7 @@ const ReviewsProfile = () => {
   const revFetcher = async () => {
     try {
       const response = await fetch(
-        `/api/reviews/reviewsByReviewedId/${loggedInUser._id}`
+        `https://good-tan-woodpecker-wrap.cyclic.app/api/reviews/reviewsByReviewedId/${loggedInUser._id}`
       );
       if (!response.ok) {
         console.error(`HTTP error! status: ${response.status}`);

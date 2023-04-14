@@ -3,6 +3,8 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT || 1000;
 const connectDataBase = require('./config/db');
 const http = require('http');
+var cors = require('cors')
+
 
 connectDataBase();
 
@@ -15,6 +17,8 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cors())
 // app.use(express.bodyParser({limit: '50mb'}));
 
 

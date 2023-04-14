@@ -60,7 +60,7 @@ const Viewpost = () => {
     // console.log('seller id: ', sellerId);
     // console.log(`logged in user user e : ${userEmail}`);
     axios
-      .get(`api/posts/userByPost/${sellerId}`)
+      .get(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/userByPost/${sellerId}`)
       .then((res) => {
         // can add res 200 500 404 scnz
         // console.log(res.data.user._id === loggedInUserId);
@@ -120,7 +120,19 @@ const Viewpost = () => {
                   </h1>
                 </div>
                 <div>
-                  <button>Contact</button>
+                  <button>
+                    <a
+                      href={productDetails.sellerProfile}
+                      target='blank'
+                      style={{
+                        textDecoration: 'none',
+                        color: '#fffffa',
+                        fontFamily: 'inherit',
+                      }}
+                    >
+                      Contact
+                    </a>
+                  </button>
                 </div>
                 <div>
                   <p>{productDetails.description}</p>
