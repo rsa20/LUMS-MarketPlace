@@ -5,6 +5,7 @@ const sender_pass = process.env.APP_PASS
 
 const transport = nodemailer.createTransport({
     service :"Gmail",
+    secure:true,
     auth:{
         user: sender_email,
         pass: sender_pass
