@@ -211,7 +211,7 @@ const Editpost = () => {
                 <input
                   type='Text'
                   name='tags'
-                  value={Post.price}
+                  value={Post.tags}
                   placeholder='enter Tags'
                   onChange={handleChange}
                 />
