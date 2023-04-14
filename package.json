@@ -8,7 +8,8 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend/app",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build" : "react-scripts build"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +20,6 @@
     "cloudinary": "^1.35.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "fb-messenger-bot-api": "^4.4.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.3",
     "mongoose-type-email": "^1.1.2",
