@@ -249,9 +249,7 @@ const registerUser = async (req, res) => {
           message: 'Successfully Registered, Please verify your email.',
         });
         console.log("email sending", email, token)
-        nodemailer.sendVerificationEmail(name, email, token).then((response)=>{
-          console.log("sent email :D", response)
-        })
+        nodemailer.sendVerificationEmail(name, email, token)
         console.log("hmmm")
         
       });
