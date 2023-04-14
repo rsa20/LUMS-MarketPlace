@@ -182,10 +182,13 @@ const Header = () => {
               className='search-input'
               onChange={handle}
             />
+            <Link to='/home'>
             <button type='submit' className='search-btn' onClick={handlC}>
+            
               {/* <button type='submit' className='search-btn'> */}
               <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
             </button>
+            </Link>
           </form>
         </div>
         <div className='button-container'>
