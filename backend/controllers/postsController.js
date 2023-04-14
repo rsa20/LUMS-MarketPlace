@@ -39,7 +39,7 @@ const getPostsbyUser = async (req, res) => {
     return res.status(404).send({ message: 'No posts' });
   }
   console.log('Posts sent');
-  return res.status(200).send(userPosts);
+  return res.status(200).send(userPosts.reverse());
 };
 
 const getAllPosts = async (req, res) => {
