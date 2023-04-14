@@ -21,7 +21,7 @@
   color: #c500f7;
 }
 
-.container {
+.profile-header-container {
   /* background-color: #c500f7; */
   max-width: 85%;
   margin: 0 auto;
@@ -32,7 +32,7 @@
   /* background-color: aqua; */
   padding: 1% 0.5%;
   margin-right: 6%;
-  padding: auto 0%;
+  /* padding: auto 0%; */
 }
 
 @media all and (max-width: 450px) {

@@ -7,10 +7,11 @@
   color: #fffffa;
   padding: 2vw 7vw;
   width: 86vw;
-  /* height: 150px; */
   position: relative;
   /* position: fixed; */
   bottom: 0;
+  left: 0;
+  right: 0;
 }
 .footer-inside {
   /* background-color: grey; */

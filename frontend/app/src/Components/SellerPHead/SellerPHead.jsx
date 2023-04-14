@@ -43,24 +43,6 @@ const SellerPHeader = ({ page }) => {
   // Listing Ads
 
   const toSellerposts = async (seller) => {
-
-    console.log("fetch seller posts", seller)
-    
-    let mywish;
-    const sellerID = seller._id
-    await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/getSellerPosts${sellerID}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, 'test');
-        mywish = data;
-        // setwish(data);
-      })
-      .catch((error) => console.log(error));
-    // console.log(wish, 'hmmm');
-    navigate('/wish', { state: { mywish } });
-
-  }
-
     // console.log('fetch seller posts', seller);
     // let mywish;
     // const sellerID = seller._id;
@@ -74,6 +56,7 @@ const SellerPHeader = ({ page }) => {
     //   .catch((error) => console.log(error));
     // // console.log(wish, 'hmmm');
     // navigate('/wish', { state: { mywish } });
+
     navigate('/sellerlistings');
   };
 
@@ -90,7 +73,7 @@ const SellerPHeader = ({ page }) => {
 
     try {
       const response = await fetch(
-        `/api/reviews/reviewsByReviewedId/${reviewedId}`
+        `https://good-tan-woodpecker-wrap.cyclic.app/api/reviews/reviewsByReviewedId/${reviewedId}`
       );
       if (!response.ok) {
         console.error(`HTTP error! status: ${response.status}`);

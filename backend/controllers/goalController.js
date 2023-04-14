@@ -6,6 +6,7 @@ const Reviews = require('../models/reviews');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('../config/nodemailer');
+const { response } = require('express');
 
 // get all goals
 // added by mmoez // it will get eail id and will share all the detalis of the user
@@ -247,7 +248,10 @@ const registerUser = async (req, res) => {
         res.send({
           message: 'Successfully Registered, Please verify your email.',
         });
-        nodemailer.sendVerificationEmail(name, email, token);
+        console.log("email sending", email, token)
+        nodemailer.sendVerificationEmail(name, email, token)
+        console.log("hmmm")
+        
       });
     }
   } catch (err) {

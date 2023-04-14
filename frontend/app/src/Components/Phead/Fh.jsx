@@ -49,7 +49,7 @@ const ProfileHeader = () => {
 
   return (
     <div className='profile-header'>
-      <div className='container'>
+      <div className='profile-header-container'>
         <div
           className='profile-header-btn'
           onClick={() => toViewProfile(userEmail)}

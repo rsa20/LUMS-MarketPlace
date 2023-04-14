@@ -37,13 +37,19 @@ const ImageCarousel = ({ images }) => {
   );
 };
 
-const images = [
-  { id: 1, src: he1, alt: 'Image 1' },
-  { id: 2, src: he2, alt: 'Image 2' },
-  { id: 3, src: he3, alt: 'Image 3' },
-];
+function Carousel(props) {
+  const productDetails = props.productDetails;
+  console.log(productDetails.img_URL[0])
+  let images = []
+  // const images = [
+  //   { id: 1, src: productDetails.img_URL[0], alt: 'Image 1' },
+  //   { id: 2, src: productDetails.img_URL[1], alt: 'Image 2' },
+  //   { id: 3, src: productDetails.img_URL[2], alt: 'Image 3' },
+  // ];
+  for(let i = 0; i < productDetails.img_URL.length; i++){
+    images.push({id:i+1, src:productDetails.img_URL[i], alt: `Image ${i+1}`})
+  }
 
-function Carousel() {
   return (
     <div className='App'>
       <ImageCarousel images={images} />

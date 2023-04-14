@@ -5,6 +5,7 @@ const sender_pass = process.env.APP_PASS
 
 const transport = nodemailer.createTransport({
     service :"Gmail",
+    secure:false,
     auth:{
         user: sender_email,
         pass: sender_pass
@@ -12,6 +13,7 @@ const transport = nodemailer.createTransport({
 })
 
 module.exports.sendVerificationEmail = (user_name, email, token) =>{
+    console.log("bhai bhej rha email", sender_email, email)
     transport.sendMail({
         from: sender_email,
         to: email,
@@ -19,8 +21,8 @@ module.exports.sendVerificationEmail = (user_name, email, token) =>{
         html: `<h1>Email Confirmation</h1>
         <h2>Hello ${user_name}</h2>
         <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-        <a href=http://localhost:${process.env.PORT}/api/goals/verify${token}> Click here</a>
+        <p>https://good-tan-woodpecker-wrap.cyclic.app/api/goals/verify${token}</p>
         </div>`
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err, "errored"))
     
 }
