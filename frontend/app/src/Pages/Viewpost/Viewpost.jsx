@@ -102,7 +102,7 @@ const Viewpost = () => {
               // }}
             >
               <img src={imgshow[0]} alt='' style={{ height: '100%' }} />
-              <Carousel style={{ background: '#ac1616' }} />
+              <Carousel style={{ background: '#ac1616' }} productDetails={productDetails} />
             </div>
           </div>
           <div className='postcm'>
