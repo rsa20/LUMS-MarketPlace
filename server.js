@@ -15,8 +15,17 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, './frontend/app/build')))
 // app.use(express.bodyParser({limit: '50mb'}));
 
+app.get("*", function(_, res){
+    res.sendFile(
+        path.join(__dirname, "./client/build/index.html"),
+        function(err){
+            res.status(500).send(err)
+        }
+    )
+})
 
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/posts', require('./routes/postsRoutes'));
