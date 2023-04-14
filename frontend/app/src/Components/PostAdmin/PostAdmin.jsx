@@ -86,7 +86,7 @@ const PostAdmin = ({
 
   const handleDeleteClick = async (postId) => {
     try {
-      const response = await fetch(`api/posts/deletePost/${postId}`);
+      const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/deletePost/${postId}`);
       const data = await response.json();
       console.log(data.message); // Post successfully deleted from all collections.
       // Add any other necessary logic after successful deletion

@@ -98,7 +98,7 @@ const Header = () => {
     // console.log(productDetails);
     //
     let mywish = [];
-    await fetch(`/api/wishlist/getWishlist/${userID}`)
+    await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/wishlist/getWishlist/${userID}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');

@@ -48,7 +48,7 @@ const SellerPHeader = ({ page }) => {
     
     let mywish;
     const sellerID = seller._id
-    await fetch(`/api/posts/getSellerPosts${sellerID}`)
+    await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/getSellerPosts${sellerID}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
