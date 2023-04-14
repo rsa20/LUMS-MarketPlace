@@ -71,7 +71,7 @@ const UserView = ({
 
   const handleDeleteClick = async (userId) => {
     try {
-      const response = await fetch(`api/goals/deleteUser/${userId}`);
+      const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/goals/deleteUser/${userId}`);
       const data = await response.json();
       console.log(data.message); // Post successfully deleted from all collections.
       // Add any other necessary logic after successful deletion
