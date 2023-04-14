@@ -247,7 +247,9 @@ const registerUser = async (req, res) => {
         res.send({
           message: 'Successfully Registered, Please verify your email.',
         });
+        console.log("email sending", email, token)
         nodemailer.sendVerificationEmail(name, email, token);
+        
       });
     }
   } catch (err) {
