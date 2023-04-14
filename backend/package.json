@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server.js",
+    "start": "node server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend/app",
     "dev": "concurrently \"npm run server\" \"npm run client\""
