@@ -70,7 +70,6 @@
 
 .im {
   transition: transform 0.3s ease-out;
-  background-color: black;
 }
 
 .im:hover {
