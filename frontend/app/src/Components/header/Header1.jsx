@@ -68,7 +68,7 @@ const Header = () => {
     //   .catch((error) => console.log(error));
     // console.log(vsearch, 'hmmm');
 
-    // navigate('/vsea', { state: { myfilter } });
+     navigate('/home');
   };
 
   const handleFilterSubmit = (selectedFilter, priceRange, search) => {
@@ -86,7 +86,7 @@ const Header = () => {
     //   })
     //   .catch((error) => console.log(error));
     // console.log(vsearch, 'hmmm');
-    // navigate('/vsea', { state: { myfilter } });
+    navigate('/home');
   };
 
   const viewWish = async (userID) => {
