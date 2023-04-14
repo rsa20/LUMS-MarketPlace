@@ -3,6 +3,8 @@ const dotenv = require('dotenv').config();
 const port = process.env.PORT || 1000;
 const connectDataBase = require('./config/db');
 const http = require('http');
+var cors = require('cors')
+app.use(cors())
 
 connectDataBase();
 
