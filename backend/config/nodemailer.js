@@ -20,13 +20,15 @@ module.exports.sendVerificationEmail = (user_name, email, token) =>{
         subject: "LUMS Market Place email verification",
         html: `<h1>Email Confirmation</h1>
         <h2>Hello ${user_name}</h2>
-        <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
+        <p>Thank you for registering. Please confirm your email by clicking on the following link</p>
         <a href=https://good-tan-woodpecker-wrap.cyclic.app/api/goals/verify${token}> Click here</a>
         </div>`
-    })
-    .then(
-        console.log("sent")
-    )
-    .catch(err => console.log(err, "errored"))
+    }, function(error, info){
+        if(error){
+            console.log(error);
+        }else{
+            console.log('Email sent: ' + info.response);
+        }
+    });
     
 }
