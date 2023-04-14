@@ -19,7 +19,7 @@ module.exports.sendVerificationEmail = (user_name, email, token) =>{
         html: `<h1>Email Confirmation</h1>
         <h2>Hello ${user_name}</h2>
         <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
-        <a href=http://localhost:${process.env.PORT}/api/goals/verify${token}> Click here</a>
+        <a href=https://good-tan-woodpecker-wrap.cyclic.app/api/goals/verify${token}> Click here</a>
         </div>`
     }).catch(err => console.log(err))
     
