@@ -27,7 +27,7 @@ const Login = (props) => {
 
   const login = async () => {
     axios
-      .post('api/goals/login', user)
+      .post('https://good-tan-woodpecker-wrap.cyclic.app/api/goals/login', user)
       .then((res) => {
         // console.log(res.data, "thi")
         // alert(res.data.message);
