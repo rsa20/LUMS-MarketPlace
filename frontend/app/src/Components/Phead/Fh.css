@@ -30,9 +30,9 @@
 }
 .profile-header-btn {
   /* background-color: aqua; */
-  padding: 14px 0.5%;
+  padding: 1% 0.5%;
   margin-right: 6%;
-  padding: auto 0%;
+  /* padding: auto 0%; */
 }
 
 @media all and (max-width: 450px) {

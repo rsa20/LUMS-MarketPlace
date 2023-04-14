@@ -30,9 +30,9 @@
 }
 .s-profile-header-btn {
   /* background-color: aqua; */
-  padding: 14px 0.5%;
+  padding: 1% 0.5%;
   margin-right: 6%;
-  padding: auto 0%;
+  /* padding: auto 0%; */
 }
 /* .s-profile-header-btn:hover {
   background-color: #1c0040;
@@ -41,7 +41,7 @@
   /* background-color: aqua; */
   padding: 1% 0.5%;
   margin-right: 6%;
-  padding: auto 0%;
+  /* padding: auto 0%; */
   border-bottom: 0.35vw solid #fffffa;
 }
 /* .s-profile-header-btn-active:hover {
