@@ -12,6 +12,7 @@ const transport = nodemailer.createTransport({
 })
 
 module.exports.sendVerificationEmail = (user_name, email, token) =>{
+    console.log("bhai bhej rha email")
     transport.sendMail({
         from: sender_email,
         to: email,
