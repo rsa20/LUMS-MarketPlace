@@ -74,8 +74,8 @@ const SellerPHeader = ({ page }) => {
     //   .catch((error) => console.log(error));
     // // console.log(wish, 'hmmm');
     // navigate('/wish', { state: { mywish } });
-    navigate('/sellerlistings');
-  };
+  //   navigate('/sellerlistings');
+  // };
 
   // AddReviews
   const toAddReviews = (RevieweeId) => {
