@@ -67,3 +67,20 @@
   /* margin-left: 50%; */
   margin-top: 10%;
 }
+
+.im {
+  transition: transform 0.3s ease-out;
+  background-color: black;
+}
+
+.im:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+img {
+  transition: transform 0.2s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
