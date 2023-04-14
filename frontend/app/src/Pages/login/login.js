@@ -27,7 +27,7 @@ const Login = (props) => {
 
   const login = async () => {
     axios
-      .post('api/goals/login', user)
+      .post('https://good-tan-woodpecker-wrap.cyclic.app/api/goals/login', user)
       .then((res) => {
         // console.log(res.data, "thi")
         // alert(res.data.message);
@@ -40,7 +40,7 @@ const Login = (props) => {
 
         // seeing if logged in user is admin
         axios
-          .get('api/admin/getAdmin')
+          .get('https://good-tan-woodpecker-wrap.cyclic.app/api/admin/getAdmin')
           .then((response) => {
             // res.data is admin id here
             // console.log('here', res.data.id);

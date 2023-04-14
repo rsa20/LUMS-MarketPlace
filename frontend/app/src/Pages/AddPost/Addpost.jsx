@@ -82,7 +82,7 @@ const Add = () => {
 
       const responses = await Promise.all(
         formDataArray.map((formData) =>
-          axios.post('api/cloudinary/upload', formData)
+          axios.post('https://good-tan-woodpecker-wrap.cyclic.app/api/cloudinary/upload', formData)
         )
       );
       console.log(responses);
@@ -94,7 +94,7 @@ const Add = () => {
       console.log(imgUrlArray);
       // sending post details to backend
       axios
-        .post('api/posts/createPost', {
+        .post('https://good-tan-woodpecker-wrap.cyclic.app/api/posts/createPost', {
           params: { Post, loggedInUser, imgUrlArray },
         })
         .then((res) => {

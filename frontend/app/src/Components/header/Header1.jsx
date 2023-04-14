@@ -68,7 +68,7 @@ const Header = () => {
     //   .catch((error) => console.log(error));
     // console.log(vsearch, 'hmmm');
 
-    // navigate('/vsea', { state: { myfilter } });
+     navigate('/home');
   };
 
   const handleFilterSubmit = (selectedFilter, priceRange, search) => {
@@ -86,7 +86,7 @@ const Header = () => {
     //   })
     //   .catch((error) => console.log(error));
     // console.log(vsearch, 'hmmm');
-    // navigate('/vsea', { state: { myfilter } });
+    navigate('/home');
   };
 
   const viewWish = async (userID) => {
@@ -98,7 +98,7 @@ const Header = () => {
     // console.log(productDetails);
     //
     let mywish = [];
-    await fetch(`/api/wishlist/getWishlist/${userID}`)
+    await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/wishlist/getWishlist/${userID}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');
@@ -182,10 +182,13 @@ const Header = () => {
               className='search-input'
               onChange={handle}
             />
+            <Link to='/home'>
             <button type='submit' className='search-btn' onClick={handlC}>
+            
               {/* <button type='submit' className='search-btn'> */}
               <FontAwesomeIcon icon={faSearch} style={{ color: '#ffffff' }} />
             </button>
+            </Link>
           </form>
         </div>
         <div className='button-container'>

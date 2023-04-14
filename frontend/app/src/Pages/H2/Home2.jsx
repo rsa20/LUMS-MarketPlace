@@ -105,7 +105,7 @@ const Home = () => {
   // }
   // , []);
   useEffect(() => {
-    fetch('/api/posts/getAllProducts')
+    fetch('https://good-tan-woodpecker-wrap.cyclic.app/api/posts/getAllProducts')
       .then((response) => response.json())
       .then((data) => {
         // console.log(data, "test")

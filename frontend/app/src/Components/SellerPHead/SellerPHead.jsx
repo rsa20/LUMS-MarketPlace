@@ -73,7 +73,7 @@ const SellerPHeader = ({ page }) => {
 
     try {
       const response = await fetch(
-        `/api/reviews/reviewsByReviewedId/${reviewedId}`
+        `https://good-tan-woodpecker-wrap.cyclic.app/api/reviews/reviewsByReviewedId/${reviewedId}`
       );
       if (!response.ok) {
         console.error(`HTTP error! status: ${response.status}`);

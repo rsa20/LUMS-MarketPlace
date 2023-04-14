@@ -60,7 +60,7 @@ const UserView = ({
   console.log('pp', profile_picture, name_);
   const toSellerProfile = () => {
     axios
-      .get(`api/goals/viewProfile/user${id_}`)
+      .get(`https://good-tan-woodpecker-wrap.cyclic.app/api/goals/viewProfile/user${id_}`)
       .then((res) => {
         // console.log(res.data);
         dispatch(setSellerObj({ user: res.data }));

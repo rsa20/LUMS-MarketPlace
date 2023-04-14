@@ -9,7 +9,7 @@ function Chat() {
 
   useEffect(() => {
     // Fetch all messages from the server
-    fetch('/api/messages')
+    fetch('https://good-tan-woodpecker-wrap.cyclic.app/api/messages')
       .then((res) => res.json())
       .then((data) => setMessages(data));
 
