@@ -12,6 +12,7 @@ const Register = () => {
   const [user, setUser] = useState({
     name: '',
     email: '',
+    profile_link: "",
     password: '',
     reEnterPassword: '',
   });
@@ -108,6 +109,18 @@ const Register = () => {
           onChange={handleChange}
         />
         {errors.email && <div className='error'>{errors.email}</div>}
+      </div>
+
+      <div className='register-form-inp'>
+        <h1 className='register-h'>Facebook Messenger Profile Link</h1>
+        <input
+          type='text'
+          name='profile_link'
+          value={user.profile_link}
+          placeholder='Enter profile link'
+          onChange={handleChange}
+        />
+
       </div>
 
       <div className='register-form-inp'>

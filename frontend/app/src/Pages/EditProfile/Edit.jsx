@@ -27,6 +27,7 @@ const Edit = () => {
     id: loggedInUser._id,
     name: loggedInUser.name,
     email: loggedInUser.email,
+    profile_link: loggedInUser.profile_link,
     password: '',
     reEnterPassword: '',
   });
@@ -48,6 +49,7 @@ const Edit = () => {
       id: loggedInUser._id,
       name: '',
       email: '',
+      profile_link: "",
       password: '',
       reEnterPassword: '',
     });
@@ -99,7 +101,7 @@ const Edit = () => {
       console.log(p_img, 'p_img');
 
       axios
-        .put('api/goals/updateProfile', { ...user, p_img: response.data })
+        .put('api/goals/updateProfile', { ...user, p_img: response.data})
         .then((res) => {
           // resdata should be user details user obj in reducer
           const updateSlicer = async () => {
@@ -123,6 +125,7 @@ const Edit = () => {
             id: loggedInUser._id,
             name: '',
             email: '',
+            profile_link: '',
             password: '',
             reEnterPassword: '',
           });
@@ -230,7 +233,16 @@ const Edit = () => {
                   onChange={handleChange}
                 />
                 {errors.email && <span className='error'>{errors.email}</span>}
+                
+                <h1 style={{ fontSize: '110%' }}>Facebook Messenger Profile Link</h1>
 
+                <input
+                  type='text'
+                  name='profile_link'
+                  value={user.profile_link}
+                  // placeholder=' Enter your profile link'
+                  onChange={handleChange}
+                />
                 <h1 style={{ fontSize: '110%' }}>Password</h1>
 
                 <input

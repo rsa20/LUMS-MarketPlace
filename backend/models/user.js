@@ -21,6 +21,7 @@ const user = new Schema({
   profile_picture: { type: String, default: null},
   flag: { type: Boolean, default: false },
   date_created: { type: Date, required: true, default: Date.now },
+  profile_link: {type: String ,required:false, default:""}
 });
 
 user.pre('save', async function (next) {

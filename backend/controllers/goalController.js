@@ -81,7 +81,8 @@ const updateUserProfile = async (req, res) => {
   console.log("received img: ", req.body.p_img)
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
-  user.profile_picture =  req.body.p_img || user.profile_picture
+  user.profile_link = req.body.profile_link|| user.profile_link;
+  user.profile_picture =  req.body.p_img || user.profile_picture;
   if (req.body.password) {
     const hash = await bcrypt.hash(req.body.password, 10);
     user.password = hash;
@@ -216,7 +217,7 @@ const verifyUser = (req, res, next) => {
 const registerUser = async (req, res) => {
   // console.log("call", req.body)
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, profile_link } = req.body;
     const token = jwt.sign({ email: email }, process.env.EMAIL_SECRET);
 
     const getUser = await User.findOne({
@@ -234,6 +235,7 @@ const registerUser = async (req, res) => {
         token: token,
         flag: 0,
         profile_picture: null,
+        profile_link: profile_link,
       });
       // User.insertMany(newUser)
       newUser.save((err) => {
