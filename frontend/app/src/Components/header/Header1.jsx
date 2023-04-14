@@ -153,9 +153,9 @@ const Header = () => {
           <Link to='/home'>
             <img className='im' src={l4} alt='home button' />
           </Link>
-          <Link to='/hello'>
+          <a href={loggedInUser.profile_link} target='blank'>
             <img className='im' src={l3} alt='fuck of' />
-          </Link>
+          </a>
           <Link>
             <img
               onClick={() => viewWish(loggedInUser._id)}

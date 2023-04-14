@@ -43,16 +43,20 @@ const Product = ({ _id, title, img_URL, price }) => {
 
     const data = await response.json();
     console.log(data);
+
     const { _id, title, description, price, user, img_URL } = data.post;
     const state = data.myPost;
     // console.log(data, 'tester')
     // const imageUrls = images.map((image) => image.url);
     const seller = await fetch(`/api/goals/viewProfile/user${user}`);
-    const sellerName = (await seller.json()).name;
+    const si = await seller.json();
+    const sellerName = si.name;
+    const sellerProfileLink = si.profile_link;
 
-    console.log(sellerName, 'seller');
+    // console.log(sellerProfileLink, 'profile link');
+    // console.log(sellerName, 'seller');
+    // console.log(img_URL);
 
-    console.log(img_URL);
     const productDetails = {
       title,
       description,
@@ -62,6 +66,7 @@ const Product = ({ _id, title, img_URL, price }) => {
       user,
       sellerName,
       img_URL: img_URL,
+      sellerProfile: sellerProfileLink,
     };
     console.log(productDetails, 'prod details');
     navigate('/viewpost', { state: { productDetails } });

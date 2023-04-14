@@ -69,7 +69,7 @@ const ProfileHeader = () => {
         </div>
 
         <div className='profile-header-btn'>
-          <Link to='/Viewpost' className='linkk'>
+          <Link to='/listings' className='linkk'>
             My Ads
             {/* <a className='linkk'>My Ads</a> */}
           </Link>

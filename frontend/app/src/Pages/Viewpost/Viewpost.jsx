@@ -120,7 +120,19 @@ const Viewpost = () => {
                   </h1>
                 </div>
                 <div>
-                  <button>Contact</button>
+                  <button>
+                    <a
+                      href={productDetails.sellerProfile}
+                      target='blank'
+                      style={{
+                        textDecoration: 'none',
+                        color: '#fffffa',
+                        fontFamily: 'inherit',
+                      }}
+                    >
+                      Contact
+                    </a>
+                  </button>
                 </div>
                 <div>
                   <p>{productDetails.description}</p>
