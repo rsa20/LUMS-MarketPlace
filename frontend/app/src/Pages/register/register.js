@@ -68,7 +68,7 @@ const Register = () => {
     }
 
     axios
-      .post('/api/goals/register', user)
+      .post('https://good-tan-woodpecker-wrap.cyclic.app/api/goals/register', user)
       .then((res) => {
         alert(res.data.message);
         navigate('/login'); //redirect this to email verification page

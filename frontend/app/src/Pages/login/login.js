@@ -40,7 +40,7 @@ const Login = (props) => {
 
         // seeing if logged in user is admin
         axios
-          .get('api/admin/getAdmin')
+          .get('https://good-tan-woodpecker-wrap.cyclic.app/api/admin/getAdmin')
           .then((response) => {
             // res.data is admin id here
             // console.log('here', res.data.id);

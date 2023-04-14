@@ -24,13 +24,13 @@ const Product = ({ _id, title, img_URL, price }) => {
     console.log({ newID, email });
     if (!isFavorite) {
       const response = await fetch(
-        `/api/wishlist/addtowishlist/product/${newID}/user/${email}`
+        `https://good-tan-woodpecker-wrap.cyclic.app/api/wishlist/addtowishlist/product/${newID}/user/${email}`
       );
       const data = await response.json();
       console.log(data);
     } else if (isFavorite) {
       const response = await fetch(
-        `/api/wishlist/removefromwishlist/product/${newID}/user/${email}`
+        `https://good-tan-woodpecker-wrap.cyclic.app/api/wishlist/removefromwishlist/product/${newID}/user/${email}`
       );
       const data = await response.json();
       console.log(data);
@@ -39,7 +39,7 @@ const Product = ({ _id, title, img_URL, price }) => {
   const handleClick = async (newID, user_id) => {
     console.log(newID, 'asdasdm');
     // console.log(test, "safsafd")
-    const response = await fetch(`/api/posts/product${newID}/${user_id}`);
+    const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/product${newID}/${user_id}`);
 
     const data = await response.json();
     console.log(data);
@@ -48,7 +48,7 @@ const Product = ({ _id, title, img_URL, price }) => {
     const state = data.myPost;
     // console.log(data, 'tester')
     // const imageUrls = images.map((image) => image.url);
-    const seller = await fetch(`/api/goals/viewProfile/user${user}`);
+    const seller = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/goals/viewProfile/user${user}`);
     const si = await seller.json();
     const sellerName = si.name;
     const sellerProfileLink = si.profile_link;
