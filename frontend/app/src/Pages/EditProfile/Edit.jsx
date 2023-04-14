@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Edit.css';
 import axios from 'axios';
-import img from './profile_place.jpg';
+import img from '../SellerViewP/placeholderimg.jpg';
 import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
 import ProfileHeader from '../../Components/Phead/Fh';
@@ -19,6 +19,7 @@ const Edit = () => {
   const loggedInUser = useSelector((state) => state.userObj.userObj);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [imgcheck, setimgcheck] = useState(null);
 
   // console.log(userEmail, 'sjkdfsjkfn');
   // console.log(loggedInUser.email, 'sjkdfsjkfn');
@@ -49,7 +50,7 @@ const Edit = () => {
       id: loggedInUser._id,
       name: '',
       email: '',
-      profile_link: "",
+      profile_link: '',
       password: '',
       reEnterPassword: '',
     });
@@ -57,6 +58,10 @@ const Edit = () => {
   };
   const validate = () => {
     const errors = {};
+
+    if (!imgcheck) {
+      errors.img = 'Image is mandatory!';
+    }
 
     if (!user.name || user.name.trim().length < 4) {
       errors.name = 'Name should be at least 4 characters long';
@@ -101,7 +106,7 @@ const Edit = () => {
       console.log(p_img, 'p_img');
 
       axios
-        .put('api/goals/updateProfile', { ...user, p_img: response.data})
+        .put('api/goals/updateProfile', { ...user, p_img: response.data })
         .then((res) => {
           // resdata should be user details user obj in reducer
           const updateSlicer = async () => {
@@ -149,6 +154,7 @@ const Edit = () => {
       const data = await response.json();
       console.log(data.message); // Post successfully deleted from all collections.
       alert(data.message);
+      navigate('/login');
       // Add any other necessary logic after successful deletion
     } catch (error) {
       console.error(error);
@@ -159,6 +165,7 @@ const Edit = () => {
     setSelectedImage(e.target.files[0]);
     console.log('here i am hello ', selectedImage);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
+    setimgcheck(URL.createObjectURL(e.target.files[0]));
   };
 
   // useEffect(() => {
@@ -179,6 +186,7 @@ const Edit = () => {
                   Edit Profile
                 </h1>
                 <h2 style={{ color: '#1C0040' }}>Change Profile Pic</h2>
+                {errors.img && <span className='error'>{errors.img}</span>}
                 {/* <div
                   className='editp-img-con'
                   // style={{ background: '#000000' }}
@@ -233,8 +241,10 @@ const Edit = () => {
                   onChange={handleChange}
                 />
                 {errors.email && <span className='error'>{errors.email}</span>}
-                
-                <h1 style={{ fontSize: '110%' }}>Facebook Messenger Profile Link</h1>
+
+                <h1 style={{ fontSize: '110%' }}>
+                  Facebook Messenger Profile Link
+                </h1>
 
                 <input
                   type='text'

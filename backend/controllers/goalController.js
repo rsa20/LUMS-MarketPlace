@@ -77,12 +77,12 @@ const updateUserProfile = async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
-  console.log("req.body: ", req.body)
-  console.log("received img: ", req.body.p_img)
+  console.log('req.body: ', req.body);
+  console.log('received img: ', req.body.p_img);
   user.name = req.body.name || user.name;
   user.email = req.body.email || user.email;
-  user.profile_link = req.body.profile_link|| user.profile_link;
-  user.profile_picture =  req.body.p_img || user.profile_picture;
+  user.profile_link = req.body.profile_link || user.profile_link;
+  user.profile_picture = req.body.p_img || user.profile_picture;
   if (req.body.password) {
     const hash = await bcrypt.hash(req.body.password, 10);
     user.password = hash;
@@ -287,7 +287,7 @@ const deleteUser = async (req, res) => {
         $or: [{ reviewer: userId }, { reviewed: userId }],
       });
     }
-
+    console.log('here');
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (err) {
     console.error(err);

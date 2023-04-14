@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import img from './img.jpg';
+// import img from './img.jpg';
+import img from '../SellerViewP/placeholderimg.jpg';
 import './Viewp.css';
 import Header from '../../Components/header/Header1';
 import Footer from '../../Components/Footer/Footer';
