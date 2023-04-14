@@ -12,7 +12,7 @@ const transport = nodemailer.createTransport({
 })
 
 module.exports.sendVerificationEmail = (user_name, email, token) =>{
-    console.log("bhai bhej rha email")
+    console.log("bhai bhej rha email", sender_email, email)
     transport.sendMail({
         from: sender_email,
         to: email,
@@ -22,6 +22,6 @@ module.exports.sendVerificationEmail = (user_name, email, token) =>{
         <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
         <a href=https://good-tan-woodpecker-wrap.cyclic.app/api/goals/verify${token}> Click here</a>
         </div>`
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err, "errored"))
     
 }
