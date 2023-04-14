@@ -13,7 +13,7 @@ const PostsViewAdmin = () => {
   const [adminId, setAdminId] = useState('');
   useEffect(() => {
     axios
-      .get('api/admin/getAdmin')
+      .get('https://good-tan-woodpecker-wrap.cyclic.app/api/admin/getAdmin')
       .then((response) => {
         if (response.status === 200) {
           // console.log('Admin', response.data);
@@ -29,7 +29,7 @@ const PostsViewAdmin = () => {
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch('/api/posts/allProductsWithUserName')
+    fetch('https://good-tan-woodpecker-wrap.cyclic.app/api/posts/allProductsWithUserName')
       .then((response) => response.json())
       .then((data) => {
         // console.log(data, "test")

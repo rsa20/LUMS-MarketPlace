@@ -79,7 +79,7 @@ const Editpost = () => {
 
       const responses = await Promise.all(
         formDataArray.map((formData) =>
-          axios.post('api/cloudinary/upload', formData)
+          axios.post('https://good-tan-woodpecker-wrap.cyclic.app/api/cloudinary/upload', formData)
         )
       );
       console.log(responses);
@@ -90,7 +90,7 @@ const Editpost = () => {
 
       console.log(imgUrlArray);
       axios
-        .put(`api/posts/editpost/${productDetails._id}`, { params: { Post, imgUrlArray } })
+        .put(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/editpost/${productDetails._id}`, { params: { Post, imgUrlArray } })
         .then((res) => {
           alert('post updated');
         })

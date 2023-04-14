@@ -27,7 +27,7 @@ const SellerViewP = () => {
   useEffect(() => {
     const getInfoRP = async (userId) => {
       try {
-        const response = await fetch(`api/goals/infoRP/${userId}`);
+        const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/goals/infoRP/${userId}`);
         const data = await response.json();
         return data;
       } catch (error) {

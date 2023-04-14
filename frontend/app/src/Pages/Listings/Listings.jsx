@@ -12,7 +12,7 @@ const Listings = () => {
   const loggedInUserId = useSelector((state) => state.userObj.userObj)._id;
 
   useEffect(() => {
-    fetch(`/api/posts/getSellerPosts${loggedInUserId}`)
+    fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/posts/getSellerPosts${loggedInUserId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'test');

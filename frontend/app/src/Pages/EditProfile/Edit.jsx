@@ -100,19 +100,19 @@ const Edit = () => {
 
     console.log('img selected', form_data);
     try {
-      const response = await axios.post('api/cloudinary/upload', form_data);
+      const response = await axios.post('https://good-tan-woodpecker-wrap.cyclic.app/api/cloudinary/upload', form_data);
       console.log('hello', response.data);
       setp(response.data);
       console.log(p_img, 'p_img');
 
       axios
-        .put('api/goals/updateProfile', { ...user, p_img: response.data })
+        .put('https://good-tan-woodpecker-wrap.cyclic.app/api/goals/updateProfile', { ...user, p_img: response.data })
         .then((res) => {
           // resdata should be user details user obj in reducer
           const updateSlicer = async () => {
             try {
               const response = await fetch(
-                `api/goals/viewProfile/user${loggedInUser._id}`
+                `https://good-tan-woodpecker-wrap.cyclic.app/api/goals/viewProfile/user${loggedInUser._id}`
               );
               if (!response.ok) {
                 console.error(`HTTP error! status: ${response.status}`);
@@ -150,7 +150,7 @@ const Edit = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`api/goals/deleteUser/${loggedInUser._id}`);
+      const response = await fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/goals/deleteUser/${loggedInUser._id}`);
       const data = await response.json();
       console.log(data.message); // Post successfully deleted from all collections.
       alert(data.message);

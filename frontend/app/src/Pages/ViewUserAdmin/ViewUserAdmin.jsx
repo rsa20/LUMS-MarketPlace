@@ -13,7 +13,7 @@ const ViewUserAdmin = () => {
   const [adminId, setAdminId] = useState('');
   useEffect(() => {
     axios
-      .get('api/admin/getAdmin')
+      .get('https://good-tan-woodpecker-wrap.cyclic.app/api/admin/getAdmin')
       .then((response) => {
         if (response.status === 200) {
           console.log('Admin', response.data);
@@ -29,7 +29,7 @@ const ViewUserAdmin = () => {
 
   const [userArray, setUserArray] = useState([]);
   useEffect(() => {
-    fetch(`/api/admin/allUsers${'64203f221e53cea886b6eccf'}`)
+    fetch(`https://good-tan-woodpecker-wrap.cyclic.app/api/admin/allUsers${'64203f221e53cea886b6eccf'}`)
       .then((res) => {
         if (!res.ok) {
           console.error(res.status);
